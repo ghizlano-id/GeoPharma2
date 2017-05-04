@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Test;
+import com.ensa.gestionPharmacie.entity.TestFils;
 
 @Repository
 public class TestDaoImpl implements TestDao {
@@ -20,6 +21,11 @@ public class TestDaoImpl implements TestDao {
 		
 		List<Test> allTest = getSessionFactory().getCurrentSession().createQuery("from Test as t").list();
 		return allTest;
+	}
+	@Transactional
+	public void add(TestFils tf){
+		getSessionFactory().getCurrentSession().save(tf);
+		
 	}
 
 	public SessionFactory getSessionFactory() {

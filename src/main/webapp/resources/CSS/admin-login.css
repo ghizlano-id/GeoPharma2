@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+body{
+		margin: 0;
+		background-image: url("/resources/img/pharmacie_image.jpeg");
+		background-position: 50% 50%;
+	}
+	form{
+		margin-top: 10%;
+		margin-left: 35%;
+		height: 200px;
+		width:300px;
+		background-color: #eee;
+		padding: 60px;
+		border-radius: 20px;
+	}
+	input{
+		height: 40px;
+		width: 280px;
+		outline:none; 
+		border: none;
+		color:gray;
+		font-style: verdana;
+		font-size: 16px;
+		text-indent:30px;
+	}
+	input[type="submit"]{
+		color:white;
+		background-color: #78AB46;
+		cursor: pointer;
+		font-weight: bold;
+	}
+	input[type="password"]{
+		background-image:url(key.png); 
+		background-repeat: no-repeat; 
+		background-position: 0% 5%;	
+		background-position: 2% 50%;
+	}
+	input[type="email"]{
+		background-image:url(at.png); 
+		background-repeat: no-repeat; 
+		background-position: 0% 5%;	
+		background-position: 2% 50%;
+	}
