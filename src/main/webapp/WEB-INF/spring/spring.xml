@@ -31,7 +31,6 @@
         <property name="url" value="jdbc:mysql://localhost:3306/gestion-pharmacie"/>
         <property name="username" value="root"/>
         <property name="password" value="ghizlane"/>
-
     </bean>	
     
     <bean id="sessionFactory"
