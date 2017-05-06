@@ -1,7 +1,7 @@
 @CHARSET "ISO-8859-1";
 body{
 		margin: 0;
-		background-image: url("/resources/img/pharmacie_image.jpeg");
+		background-image: url("../img/pharmacie_image.jpeg");
 		background-position: 50% 50%;
 	}
 	form{
