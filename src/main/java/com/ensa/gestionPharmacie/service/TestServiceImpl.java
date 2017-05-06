@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.TestDao;
+import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
 
@@ -19,10 +20,20 @@ public class TestServiceImpl implements TestService{
 
 		return testDao.getAllTest();
 	}
+	public List<Admin> getAllAdmins() {
+
+		return testDao.getAllAdmins();
+	}
 	public void add(TestFils tf){
 		testDao.add(tf);
 		
 	}
+	public void addP(Admin a){
+		testDao.addP(a);
+		
+	}
+	
+	
 /////////////////////////////////////////
 	public TestDao getTestDao() {
 		return testDao;

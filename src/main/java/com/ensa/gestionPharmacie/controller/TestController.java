@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
 import com.ensa.gestionPharmacie.service.TestService;
@@ -21,21 +22,37 @@ public class TestController {
 	public ModelAndView index(){
 		
 		ModelAndView model =new ModelAndView();
-		model.setViewName("index");
 		
 		List<Test> allTest = TestService.getAllTest();
 		model.addObject("allTest", allTest);
 		
+		/*List<Admin> allAdmin = TestService.getAllAdmins();
+		model.addObject("allAdmin", allAdmin);
+		for(int i=0;i<allAdmin.size();i++)
+			System.out.println(allAdmin.get(i));*/
+		
+		model.setViewName("index");
 		return model;
 	}
-	@RequestMapping("/fuck")
+	
+	@RequestMapping("/add")
 	public ModelAndView index2(){
 		
 		ModelAndView model =new ModelAndView();
+		
 		TestFils test=new TestFils();
-		test.setName("houyam");
-		test.setNickname("hoy");
+		test.setName("zineb");
+		test.setNickname("zin");
 		TestService.add(test);
+		//------------Admin------------
+		Admin admin=new Admin();
+		admin.setCIN("EE112233");
+		admin.setEmail("ghizo.com");
+		admin.setNom("id");
+		admin.setPrenom("ghizo");
+		admin.setTel("061234");
+		admin.setPassword("aaa");
+		TestService.addP(admin);
 		
 		model.setViewName("index");
 		
