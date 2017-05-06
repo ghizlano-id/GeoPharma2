@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.TestDao;
 import com.ensa.gestionPharmacie.entity.Test;
+import com.ensa.gestionPharmacie.entity.TestFils;
 
 @Service
 public class TestServiceImpl implements TestService{
@@ -18,7 +19,11 @@ public class TestServiceImpl implements TestService{
 
 		return testDao.getAllTest();
 	}
-
+	public void add(TestFils tf){
+		testDao.add(tf);
+		
+	}
+/////////////////////////////////////////
 	public TestDao getTestDao() {
 		return testDao;
 	}
