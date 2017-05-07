@@ -9,8 +9,11 @@ public class PharmacienAcceuilController {
 	
 	@RequestMapping("/pharmacien_acceuil")
 	public ModelAndView login(){
+		
 		ModelAndView model=new ModelAndView();
+		
 		 	model.setViewName("pharmacien-acceuil");
+		 	
 		 return model;
 	}
 

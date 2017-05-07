@@ -1,8 +1,6 @@
 package com.ensa.gestionPharmacie.dao;
 
-
 import java.util.List;
-
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,38 +9,25 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Test;
-import com.ensa.gestionPharmacie.entity.TestFils;
 
 @Repository
-public class TestDaoImpl implements TestDao {
-
+public class AdminDaoImp implements AdminDao{
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
 	@Transactional
-	public List<Test> getAllTest() {
+	public boolean estAdmin(String email, String password) {
+		List<Admin> list=getSessionFactory().getCurrentSession().
+							createQuery("from Admin as a where a.email='"+email+"' and a.password='"+password+"'").list();
 		
-		List<Test> allTest = getSessionFactory().getCurrentSession().createQuery("from Test as t").list();
-		return allTest;
-	}
-	@Transactional
-	public List<Admin> getAllAdmins() {
-		
-		List<Admin> allAdmin = getSessionFactory().getCurrentSession().createQuery("from Admin as t ").list();
-		return allAdmin;
-	}
-	@Transactional
-	public void add(TestFils tf){
-		getSessionFactory().getCurrentSession().save(tf);
-		
-	}
-	@Transactional
-	public void addP(Admin a){
-		getSessionFactory().getCurrentSession().save(a);
-		
+		if(list!=null && list.size()>0)
+			return true;
+		else 
+			return false;
 	}
 	
-
+	//////////////////////////
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -50,7 +35,5 @@ public class TestDaoImpl implements TestDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-	
-	
 	
 }

@@ -16,7 +16,7 @@ body{
 	input{
 		height: 40px;
 		width: 280px;
-		outline:none; 
+		outline-color:#eee;
 		border: none;
 		color:gray;
 		font-style: verdana;
@@ -32,12 +32,10 @@ body{
 	input[type="password"]{
 		background-image:url("../img/key.png"); 
 		background-repeat: no-repeat; 
-		background-position: 0% 5%;	
 		background-position: 2% 50%;
 	}
 	input[type="email"]{
 		background-image:url("../img/at.png"); 
 		background-repeat: no-repeat; 
-		background-position: 0% 5%;	
 		background-position: 2% 50%;
 	}
