@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Admin;
+import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
 
@@ -31,6 +32,12 @@ public class TestDaoImpl implements TestDao {
 		return allAdmin;
 	}
 	@Transactional
+	public 	List<Pharmacien> getAllPharmaciens() {
+		
+		List<Pharmacien> allPharmacien = getSessionFactory().getCurrentSession().createQuery("from Pharmacien as t ").list();
+		return allPharmacien;
+	}
+	@Transactional
 	public void add(TestFils tf){
 		getSessionFactory().getCurrentSession().save(tf);
 		
@@ -38,6 +45,11 @@ public class TestDaoImpl implements TestDao {
 	@Transactional
 	public void addP(Admin a){
 		getSessionFactory().getCurrentSession().save(a);
+		
+	}
+	@Transactional
+	public void addPh(Pharmacien p){
+		getSessionFactory().getCurrentSession().save(p);
 		
 	}
 	

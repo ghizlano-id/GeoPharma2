@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.TestDao;
 import com.ensa.gestionPharmacie.entity.Admin;
+import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
 
@@ -24,12 +25,20 @@ public class TestServiceImpl implements TestService{
 
 		return testDao.getAllAdmins();
 	}
+    public List<Pharmacien> getAllPharmaciens() {
+
+			return testDao.getAllPharmaciens();
+	}
 	public void add(TestFils tf){
 		testDao.add(tf);
 		
 	}
 	public void addP(Admin a){
 		testDao.addP(a);
+		
+	}
+	public void addPh(Pharmacien p){
+		testDao.addPh(p);
 		
 	}
 	

@@ -2,14 +2,17 @@ package com.ensa.gestionPharmacie.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.gestionPharmacie.entity.Admin;
+import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
+
 import com.ensa.gestionPharmacie.service.TestService;
 
 @Controller
@@ -17,6 +20,8 @@ public class TestController {
 
 	@Autowired
 	private TestService TestService;
+
+
 	
 	@RequestMapping("/")
 	public ModelAndView index(){
@@ -53,6 +58,17 @@ public class TestController {
 		admin.setTel("061234");
 		admin.setPassword("aaa");
 		TestService.addP(admin);
+		//------------Pharmacien---------------
+		
+		Pharmacien ph= new Pharmacien() ; 
+		ph.setCIN("EE722745");
+		ph.setEmail("nassi@luv2eat.com");
+		ph.setNom("Barakat");
+		ph.setPrenom("Nassima");
+		ph.setPassword("toto");
+		ph.setTel("06701487");
+		TestService.addPh(ph);
+ 	
 		
 		model.setViewName("index");
 		

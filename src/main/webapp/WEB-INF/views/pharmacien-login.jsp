@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"  >
 
 <html>
@@ -18,22 +19,28 @@
 </head>
 
 <body>
+<form:form   action="login" method="post"    >
 	<div class="login-form">
 
 		<div class="form-group ">
-			<input type="text" class="saisi" placeholder="Username "
-				id="UserName"> <i class="fa fa-user"></i>
+			<form:input path="email" class="saisi" placeholder="Username " id="UserName" name="login"/>
+			
 		</div>
 		<div class="form-group">
-			<input type="password" class="saisi" placeholder="Password"
-				id="Passwod"> <i class="fa fa-lock"></i>
+			<form:password path="password" class="saisi" placeholder="Password" id="Passwod" name="pwd"/>
+				
 		</div>
 
 		<a class="link" href="#">Lost your password?</a>
-		<button type="button" class="btn">Log in</button>
+	 <a href="http://localhost:8080/gestion-pharmacie/test">
+            <input type="submit" value="Log in" class="btn"/>
+        
+				
+			
+					</button>
 
 
 	</div>
-
+     </form:form>
 </body>
 </html>
