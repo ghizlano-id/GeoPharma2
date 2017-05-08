@@ -1,10 +1,15 @@
 package com.ensa.gestionPharmacie.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,8 +26,35 @@ public class Pharmacie {
 	@JoinColumn(name="id")
 	private Pharmacien pharmacien;
 	
+	@ManyToMany
+	@JoinTable(name="pharmacie_medicament",joinColumns={@JoinColumn(name="idPharma")},
+			inverseJoinColumns={@JoinColumn(name="nom")}
+			)
+	private List<Medicament> medicaments = new ArrayList<Medicament>() ; 
 	
+	
+
 	//Getters and setters
+	
+	public int getIdPharma() {
+		return idPharma;
+	}
+	public void setIdPharma(int idPharma) {
+		this.idPharma = idPharma;
+	}
+	public Pharmacien getPharmacien() {
+		return pharmacien;
+	}
+	public void setPharmacien(Pharmacien pharmacien) {
+		this.pharmacien = pharmacien;
+	}
+	public List<Medicament> getMedicaments() {
+		return medicaments;
+	}
+	public void setMedicaments(List<Medicament> medicaments) {
+		this.medicaments = medicaments;
+	}
+	
 	public String getName() {
 		return name;
 	}

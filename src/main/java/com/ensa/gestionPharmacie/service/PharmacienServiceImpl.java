@@ -1,10 +1,13 @@
 package com.ensa.gestionPharmacie.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
+
 import com.ensa.gestionPharmacie.dao.PharmacienDao;
-import com.ensa.gestionPharmacie.entity.Medicament;
+
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 
 
 @Service
@@ -33,12 +36,6 @@ public class PharmacienServiceImpl implements PharmacienService {
 	}
 
 
-	@Override
-	public void AjouterMed(Medicament m) {
-		
-		 pharmacienDao.AjouterMed(m);
-	}
 
-	
 	
 }

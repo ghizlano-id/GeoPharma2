@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
+import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
 
 
@@ -24,6 +26,9 @@ public class PharmacienController {
 
 @Autowired
   private  PharmacienService pharmacienService; 
+   
+@Autowired
+ private MedicamentService medicamentService ; 
 	
   //------------------getters & setters ---------------
 	public PharmacienService getPharmacienService() {
@@ -122,7 +127,7 @@ public class PharmacienController {
 	@RequestMapping(value="/ajouter", method=RequestMethod.POST)
     public ModelAndView login4(@ModelAttribute("medicament") Medicament medicament)
     {   
-		pharmacienService.AjouterMed(medicament);
+		medicamentService.AjouterMed(medicament);
 		
    
 	   return new ModelAndView("index"); 
@@ -136,33 +141,57 @@ public class PharmacienController {
 		 	
 		 return model;
 	}
-	/*
-	@RequestMapping("/ajouter_med")
-	public ModelAndView login6(){
-		ModelAndView model=new ModelAndView();
-		 	model.setViewName("ajouter-medicament");
-		 return model;
-	}
+	//-------------------------------Test pharmacie-medicament--------------------
 	
-	*/
-
-	//-----------------------medicament---------------------
-       
-	@RequestMapping("/ajoutm")
-	public ModelAndView ajout(){
-		ModelAndView model=new ModelAndView();
+		/*@RequestMapping("/p_m")
+		public ModelAndView index3(){
+			
+			ModelAndView model =new ModelAndView();
+			
+		Pharmacie ph=new Pharmacie() ; 
+		Pharmacie ph2=new Pharmacie() ; 
+		Pharmacie ph3=new Pharmacie() ; 
+		ph.setName("a");
+		ph2.setName("b");
+		ph3.setName("c");
+		Medicament m= new Medicament() ; 
+		Medicament m2= new Medicament() ; 
+		Medicament m3= new Medicament() ; 
+		Medicament m4= new Medicament() ; 
+		m.setNom("aaaa");
+		m2.setNom("bbbb");
+		m3.setNom("cccc");
+		m4.setNom("dddd");
 		
-		Medicament m = new Medicament() ; 
-		m.setNom("Doliprane");
-		m.setPrix(20);
-		m.setDescription("Douleur et Fievre");
-		m.setPhoto("pas de photo");
-		pharmacienService.AjouterMed(m);
+		ph.getMedicaments().add(m)  ; 
+		ph.getMedicaments().add(m2)  ;
+		ph.getMedicaments().add(m3)  ;
 		
-		 	model.setViewName("index");
-		 return model;
-	}
-  
+		ph2.getMedicaments().add(m2)  ;
+		ph2.getMedicaments().add(m3)  ;
+		ph3.getMedicaments().add(m4)  ;
+		
+		
+		
+		medicamentService.AjouterMed(m);
+		medicamentService.AjouterMed(m2);
+		medicamentService.AjouterMed(m3);
+		medicamentService.AjouterMed(m4);
+		
+		pharmacienService.AjouterPh(ph);
+		pharmacienService.AjouterPh(ph2);
+		pharmacienService.AjouterPh(ph3);
+		
+		
+			
+			model.setViewName("index");
+			return model;
+		}
+		*/
+		
+		
+		
+	
 }
 
 
