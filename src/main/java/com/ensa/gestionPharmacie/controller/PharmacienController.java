@@ -1,10 +1,5 @@
 package com.ensa.gestionPharmacie.controller;
 
-
-
-
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -130,7 +125,7 @@ public class PharmacienController {
 		pharmacienService.AjouterMed(medicament);
 		
    
-	   return new ModelAndView("ajouter-medicament"); 
+	   return new ModelAndView("index"); 
     }
 	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)

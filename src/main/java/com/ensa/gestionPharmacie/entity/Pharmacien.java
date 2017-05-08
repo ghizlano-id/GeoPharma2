@@ -1,11 +1,6 @@
 package com.ensa.gestionPharmacie.entity;
 
 import javax.persistence.Entity;
-
-	
-	
-
-
 import javax.persistence.OneToOne;
 
 @Entity
