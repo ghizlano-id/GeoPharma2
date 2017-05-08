@@ -2,13 +2,20 @@ package com.ensa.gestionPharmacie.entity;
 
 import javax.persistence.Entity;
 
+	
+	
+
+
+import javax.persistence.OneToOne;
+
 @Entity
-public class Pharmacien extends Personne {
-	
+public class Pharmacien extends Personne{
 	private String password;
-	
-	
-	//---------Getters and setters
+	@OneToOne(mappedBy="pharmacien")
+	private Pharmacie pharmacie;
+
+	//----------------Getters and setters-------------
+
 	public String getPassword() {
 		return password;
 	}
@@ -16,6 +23,7 @@ public class Pharmacien extends Personne {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 	@Override
 	public String toString() {
@@ -25,6 +33,5 @@ public class Pharmacien extends Personne {
 
 
 	
-	
-	
+
 }

@@ -51,11 +51,11 @@ public class TestController {
 		TestService.add(test);
 		//------------Admin------------
 		Admin admin=new Admin();
-		admin.setCIN("EE112233");
-		admin.setEmail("ghizo.com");
-		admin.setNom("id");
-		admin.setPrenom("ghizo");
-		admin.setTel("061234");
+		admin.setCIN("EE556677");
+		admin.setEmail("ghizlane.id@gmail.com");
+		admin.setNom("el idrissi");
+		admin.setPrenom("ghizlane");
+		admin.setTel("0699196616");
 		admin.setPassword("aaa");
 		TestService.addP(admin);
 		//------------Pharmacien---------------
@@ -69,6 +69,9 @@ public class TestController {
 		ph.setTel("06701487");
 		TestService.addPh(ph);
  	
+
+		TestService.addP(admin);
+
 		
 		model.setViewName("index");
 		
