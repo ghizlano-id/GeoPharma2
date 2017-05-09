@@ -2,12 +2,14 @@ package com.ensa.gestionPharmacie.dao;
 
 import java.util.List;
 
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 
@@ -39,6 +41,22 @@ public class PharmacienDaoImpl implements PharmacienDao{
 		  else
 		return false;
 	}
+
+	
+	@Transactional
+	 public void ajouter(Pharmacien pharmacien){
+		getSessionFactory().getCurrentSession().save(pharmacien);
+		}
+	
+	@Transactional
+	public Pharmacien getPharmacien(String CIN) {
+		Pharmacien pharmacien=new Pharmacien();
+		
+		pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
+		
+		return pharmacien;
+	}
+
 
 	
 

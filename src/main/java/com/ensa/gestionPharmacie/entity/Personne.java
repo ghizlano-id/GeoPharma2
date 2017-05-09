@@ -15,14 +15,15 @@ import org.hibernate.annotations.ValueGenerationType;
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS) 
 public class Personne {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
-	private int id;
+	private String CIN;
+	/*@GeneratedValue(strategy = GenerationType.TABLE)
+	private int id;*/
 	@Column
 	private String nom;
 	private String prenom;
 	private String tel;
 	private String email;
-	private String CIN;
+	
 	
 	//--------Getters and Setters------------
 	public String getNom() {

@@ -25,7 +25,6 @@ public class MedicamentServiceImpl implements MedicamentService {
 		this.medicamentDao = medicamentDao;
 	} 
 	
-	@Override
 	public void AjouterMed(Medicament m) {
 		
 		 medicamentDao.AjouterMed(m);
