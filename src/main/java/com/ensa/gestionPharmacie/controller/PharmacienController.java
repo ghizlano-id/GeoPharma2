@@ -125,8 +125,11 @@ public class PharmacienController {
 	//----------------------Ajouter medicament-----------------------
 	
 	@RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public ModelAndView login4(@ModelAttribute("medicament") Medicament medicament)
+    public ModelAndView login4(@ModelAttribute("medicament") Medicament medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
     {   
+		
+		//System.out.println(pharmacies.getName());
+		
 		medicamentService.AjouterMed(medicament);
 		
    

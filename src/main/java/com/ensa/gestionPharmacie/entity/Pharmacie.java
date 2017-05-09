@@ -28,7 +28,7 @@ public class Pharmacie {
 	
 	@ManyToMany
 	@JoinTable(name="pharmacie_medicament",joinColumns={@JoinColumn(name="idPharma")},
-			inverseJoinColumns={@JoinColumn(name="nom")}
+			inverseJoinColumns={@JoinColumn(name="idMed")}
 			)
 	private List<Medicament> medicaments = new ArrayList<Medicament>() ; 
 	

@@ -46,8 +46,17 @@
       	
       </td>
   	</tr>
-  	  	<tr>
-  		<td></td>
+  	  	<tr> <!--  
+  	         <td class="champ">Pharmacies</td>
+  	          
+  	       <td>         <ul>
+  	          <f:select path="pharmacies">
+                <f:option value="samsung">SAMSUNG</f:option>
+                <f:option value="nokia">NOKIA</f:option>
+                <f:option selected="selected" value="htc">HTC</f:option>
+                <f:option value="iphone">IPHONE</f:option>
+            </f:select>  
+          </ul></td>  -->
 
       <td>
       	<input type="submit" value="Ajouter"/>
