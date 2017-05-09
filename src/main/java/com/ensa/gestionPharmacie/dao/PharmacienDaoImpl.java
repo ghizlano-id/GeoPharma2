@@ -45,7 +45,17 @@ public class PharmacienDaoImpl implements PharmacienDao{
 	
 	@Transactional
 	 public void ajouter(Pharmacien pharmacien){
-		getSessionFactory().getCurrentSession().save(pharmacien);}
+		getSessionFactory().getCurrentSession().save(pharmacien);
+		}
+	
+	@Transactional
+	public Pharmacien getPharmacien(String CIN) {
+		Pharmacien pharmacien=new Pharmacien();
+		
+		pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
+		
+		return pharmacien;
+	}
 
 
 	

@@ -3,6 +3,7 @@ package com.ensa.gestionPharmacie.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,13 +18,15 @@ public class Pharmacie {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idPharma;
+	
 	private String name;
 	private String adresse;
 	private double x;
 	private double y;
+	@Column(nullable = false)
 	private boolean estGarde;
 	@OneToOne
-	@JoinColumn(name="id")
+	@JoinColumn(name="CIN")
 	private Pharmacien pharmacien;
 	
 	@ManyToMany

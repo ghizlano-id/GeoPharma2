@@ -5,6 +5,7 @@ import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.AdminService;
+import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private PharmacienService pharmacienService;
+	@Autowired
+	private PharmacieService pharmacieService;
 	
 	
 	//----------------Getters and setters (for injection)------------------
@@ -61,7 +64,7 @@ public class AdminController {
 		if(adminService.estAdmin(admin.getEmail(), admin.getPassword()))
 			model.setViewName("admin-acceuil");
 		else
-			model.setViewName("index");
+			model.setViewName("redirect:/admin");
 			return model;
 	}
 	
@@ -78,32 +81,39 @@ public class AdminController {
 	
     @RequestMapping(value="/ajouter1",method = RequestMethod.POST)
     public ModelAndView ajoutPharmacien(@ModelAttribute("pharmacien")Pharmacien pharmacien){
-    	//ModelAndView model=new ModelAndView();
     	
     	 pharmacienService.ajouter(pharmacien);
     	 
     	 Pharmacie pharmacie=new Pharmacie();
-    	 System.out.println(pharmacien.getCIN());
     	 String CIN=pharmacien.getCIN();
     	 
+    	 System.out.println(pharmacien.getCIN());
     	 	
     	return new ModelAndView("redirect:/ajout-pharmacie/"+CIN,"command",pharmacie);
     }
     //--------------------------------------------------------
     @RequestMapping(value="/ajout-pharmacie/{CIN}",method=RequestMethod.GET)
-	public ModelAndView ajout2(@PathVariable("CIN") String CIN){
-		//ModelAndView model=new ModelAndView();
-		Pharmacie pharmacie=new Pharmacie();
-				 return new ModelAndView("ajout-pharmacie","command",pharmacie);
+	public ModelAndView ajout2(@PathVariable("CIN") String CIN,RedirectAttributes redirectAttrs){
+		
+		redirectAttrs.addFlashAttribute("cin", CIN);
+		
+				 return new ModelAndView("redirect:/ajout-pharmacie");
+	}
+    @RequestMapping(value="/ajout-pharmacie",method=RequestMethod.GET)
+	public ModelAndView ajout2(@ModelAttribute("cin") String cin){
+    	Pharmacie pharmacie=new Pharmacie();
+		ModelAndView model=new  ModelAndView("ajout-pharmacie","command",pharmacie);
+		model.addObject("cin", cin);
+		
+				 return model;
 	}
 	
     @RequestMapping(value="/ajouter2",method = RequestMethod.POST)
-    public ModelAndView ajoutPharmacie(@ModelAttribute("pharmacie")Pharmacie pharmacie,@RequestParam("var") String var){
+    public ModelAndView ajoutPharmacie(@ModelAttribute("pharmacie")Pharmacie pharmacie,@RequestParam("var") String CIN){
     	ModelAndView model=new ModelAndView();
-    	
-    	// pharmacienService.ajouter(pharmacie);
-    	//System.out.println(pharmacien.getCIN());
-    	System.out.println(var);
+    	 pharmacie.setPharmacien(pharmacienService.getPharmacien(CIN));
+    	 pharmacieService.ajouter(pharmacie);
+    	System.out.println(CIN);
     	model.setViewName("redirect:/ajout-pharmacie/");
     	return model;
     }

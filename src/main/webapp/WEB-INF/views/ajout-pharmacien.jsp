@@ -30,7 +30,11 @@
         <td><form:input path="CIN" name="CIN"/></td>
      </tr>
      <tr>
-       <td>	<input type="submit" value="Save" /><br/></td>
+        <td>Tel :</td>
+        <td><form:input path="tel" name="tel"/></td>
+     </tr>
+     <tr>
+       <td>	<input type="submit" value="next" /><br/></td>
      </tr>
     </table>
     </fieldset>

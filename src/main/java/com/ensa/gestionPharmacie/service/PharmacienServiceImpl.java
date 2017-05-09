@@ -34,5 +34,8 @@ public class PharmacienServiceImpl implements PharmacienService {
 	public void ajouter(Pharmacien pharmacien){
 		pharmacienDao.ajouter(pharmacien);
 	}
+	public Pharmacien getPharmacien(String CIN) {
+		return pharmacienDao.getPharmacien(CIN);
+	}
 	
 }

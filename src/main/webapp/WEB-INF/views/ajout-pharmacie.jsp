@@ -31,7 +31,7 @@
      </tr>
      
      <tr>
-       <td>	<input type="hidden" name="var" value="CIN" /><br/></td>
+       <td>	<input type="hidden" name="var" value="${cin}" /><br/></td>
      </tr>
   	 
   	 <tr>
