@@ -1,7 +1,13 @@
 package com.ensa.gestionPharmacie.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Medicament {
@@ -12,8 +18,22 @@ public class Medicament {
 	private String description ; 
 	private String photo ;
 	
+	@ManyToMany
+	@JoinTable(name="pharmacie_medicament",joinColumns={@JoinColumn(name="nom")},
+			inverseJoinColumns={@JoinColumn(name="idPharma")})
+	private List<Pharmacie> pharmacies = new ArrayList<Pharmacie>() ; 
+	
+	
+	
+	
 //---------------------getters & setters --------------------------------------	
 	
+	public List<Pharmacie> getPharmacies() {
+		return pharmacies;
+	}
+	public void setPharmacies(List<Pharmacie> pharmacies) {
+		this.pharmacies = pharmacies;
+	}
 	public String getNom() {
 		return nom;
 	}
