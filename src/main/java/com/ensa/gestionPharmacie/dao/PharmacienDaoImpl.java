@@ -2,6 +2,7 @@ package com.ensa.gestionPharmacie.dao;
 
 import java.util.List;
 
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -47,5 +48,10 @@ public class PharmacienDaoImpl implements PharmacienDao{
 		getSessionFactory().getCurrentSession().save(m);
 		
 	}
+	@Transactional
+	 public void ajouter(Pharmacien pharmacien){
+		getSessionFactory().getCurrentSession().save(pharmacien);
+	 }
+
 	
 }
