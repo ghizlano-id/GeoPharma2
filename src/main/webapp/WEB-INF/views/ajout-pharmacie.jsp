@@ -9,7 +9,8 @@
 <title>Ajout pharmacie</title>
 </head>
 <body>
-	<form:form action="ajouter2" method="POST" command="pharmacie">
+	<c:url value="/ajouter2" var="url"/>
+	<form:form action="${url}" method="post" command="pharmacie">
    <fieldset>
     <legend>Pharmacie</legend>
    <table>
@@ -31,7 +32,7 @@
      </tr>
      
      <tr>
-       <td>	<input type="hidden" name="var" value="${cin}" /><br/></td>
+       <td>	<input type="hidden" name="cinAttrribute" value="${cin}" /><br/></td>
      </tr>
   	 
   	 <tr>
