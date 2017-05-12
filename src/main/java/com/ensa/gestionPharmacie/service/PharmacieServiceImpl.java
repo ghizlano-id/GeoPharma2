@@ -1,5 +1,7 @@
 package com.ensa.gestionPharmacie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,14 @@ public class PharmacieServiceImpl implements PharmacieService{
 	///////////////////////////////////////////////////
 	public void ajouter(Pharmacie pharmacie) {
 		pharmacieDao.ajouer(pharmacie);
+	}
+
+	public List<Pharmacie> allPharmacie() {
+		return pharmacieDao.allPharmacie();
+	}
+
+	public void supprimer(int idPharma) {
+		pharmacieDao.supprimer(idPharma);
 	}
 
 }

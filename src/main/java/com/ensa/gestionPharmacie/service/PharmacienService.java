@@ -10,6 +10,7 @@ public interface PharmacienService {
 	 
 	 void ajouter(Pharmacien pharmacien);
 	 Pharmacien getPharmacien(String CIN);
+	 void supprimer(String CIN);
 
 		
 }

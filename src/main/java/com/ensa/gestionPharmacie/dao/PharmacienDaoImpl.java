@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 
@@ -55,6 +56,12 @@ public class PharmacienDaoImpl implements PharmacienDao{
 		pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
 		
 		return pharmacien;
+	}
+	@Transactional
+	public void supprimer(String CIN) {
+		Pharmacien pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
+		getSessionFactory().getCurrentSession().delete(pharmacien);
+		
 	}
 
 

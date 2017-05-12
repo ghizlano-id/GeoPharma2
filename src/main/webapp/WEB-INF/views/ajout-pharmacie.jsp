@@ -61,8 +61,9 @@
 	</style>
 </head>
 <body>
-   <div>
-	<form:form action="ajouter2" method="POST" command="pharmacie">
+<div>
+  <c:url value="/ajouter2" var="url"/>
+  <form:form action="${url}" method="post" command="pharmacie">
    <fieldset>
     <legend>Pharmacie</legend>
    <table>
@@ -85,6 +86,8 @@
      <tr>
   	   <td></td>
        <td>	<input type="submit" value="enregistrer" id="nexto"/></td>
+
+       <td>	<input type="hidden" name="cinAttrribute" value="${cin}" /><br/></td>
      </tr>
      <tr>
        <td>	<input type="hidden" name="var" value="${cin}" /><br/></td>

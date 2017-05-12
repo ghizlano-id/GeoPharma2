@@ -37,5 +37,8 @@ public class PharmacienServiceImpl implements PharmacienService {
 	public Pharmacien getPharmacien(String CIN) {
 		return pharmacienDao.getPharmacien(CIN);
 	}
+	public void supprimer(String CIN) {
+		pharmacienDao.supprimer(CIN);		
+	}
 	
 }
