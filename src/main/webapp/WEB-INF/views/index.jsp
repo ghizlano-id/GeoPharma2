@@ -10,6 +10,10 @@
 		${test.name} <br>
 	</c:forEach>
 
+<c:forEach var="test" items="${listph}" >
+		${test.name} <br>
+	</c:forEach>
+
 
 
 

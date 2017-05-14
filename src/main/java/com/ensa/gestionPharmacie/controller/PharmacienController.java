@@ -1,9 +1,13 @@
 package com.ensa.gestionPharmacie.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -13,6 +17,7 @@ import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.MedicamentService;
+import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
 
 
@@ -26,6 +31,7 @@ public class PharmacienController {
 
 @Autowired
   private  PharmacienService pharmacienService; 
+
    
 @Autowired
  private MedicamentService medicamentService ; 
@@ -128,7 +134,7 @@ public class PharmacienController {
     public ModelAndView login4(@ModelAttribute("medicament") Medicament medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
     {   
 		
-		//System.out.println(pharmacies.getName());
+	
 		
 		medicamentService.AjouterMed(medicament);
 		
@@ -141,6 +147,14 @@ public class PharmacienController {
 		 
 		Medicament medicament= new Medicament() ; 
 		ModelAndView model=new ModelAndView("ajouter-medicament","command",medicament);
+	/*	
+		List<Pharmacie> l=pharmacieService.AllPharmacie() ; 
+		List<String> l2= new ArrayList<String>() ; 
+		for(Pharmacie p : l)
+		{
+			l2.add(p.getName()) ; 
+		}
+		model.addObject("listph", l2) ;*/
 		 	
 		 return model;
 	}

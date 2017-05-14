@@ -1,17 +1,22 @@
 package com.ensa.gestionPharmacie.entity;
 
+
 import java.util.ArrayList;
+
 import java.util.List;
+
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class Pharmacie {
@@ -29,15 +34,29 @@ public class Pharmacie {
 	@JoinColumn(name="CIN")
 	private Pharmacien pharmacien;
 	
-	@ManyToMany
-	@JoinTable(name="pharmacie_medicament",joinColumns={@JoinColumn(name="idPharma")},
-			inverseJoinColumns={@JoinColumn(name="idMed")}
-			)
-	private List<Medicament> medicaments = new ArrayList<Medicament>() ; 
+	@OneToMany(mappedBy="pharmacie")
+	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ; 
 	
 	
 
 	//Getters and setters
+	
+	/*@OneToMany(targetEntity=pharmacie_medicament.class , mappedBy="pharmacie" , cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	public List<pharmacie_medicament> getPharmacie_qt() {
+		return pharmacie_qt;
+	}
+	public void setPharmacie_qt(List<pharmacie_medicament> pharmacies) {
+		this.pharmacie_qt = pharmacies;
+	}
+	*/
+	
+	public List<Pharmacie_medicament> getPharmacie_qt() {
+		return pharmacie_qt;
+	}
+	public void setPharmacie_qt(List<Pharmacie_medicament> pharmacies) {
+		this.pharmacie_qt = pharmacies;
+	}
+	
 	
 	public int getIdPharma() {
 		return idPharma;
@@ -51,12 +70,7 @@ public class Pharmacie {
 	public void setPharmacien(Pharmacien pharmacien) {
 		this.pharmacien = pharmacien;
 	}
-	public List<Medicament> getMedicaments() {
-		return medicaments;
-	}
-	public void setMedicaments(List<Medicament> medicaments) {
-		this.medicaments = medicaments;
-	}
+
 	
 	public String getName() {
 		return name;

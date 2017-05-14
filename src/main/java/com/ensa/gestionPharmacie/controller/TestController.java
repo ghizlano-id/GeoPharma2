@@ -14,7 +14,7 @@ import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
-
+import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.TestService;
 
 @Controller
@@ -32,6 +32,7 @@ public class TestController {
 		
 		List<Test> allTest = TestService.getAllTest();
 		model.addObject("allTest", allTest);
+
 		
 		/*List<Admin> allAdmin = TestService.getAllAdmins();
 		model.addObject("allAdmin", allAdmin);

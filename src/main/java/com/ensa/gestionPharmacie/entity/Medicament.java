@@ -4,50 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+
+
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+
+
+import javax.persistence.OneToMany;
 
 @Entity
-public class Medicament {
-	
+public class Medicament{
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int idMed ; 
-
 	private String nom ; 
-	private double prix ; 
-	private String description ; 
-	private String photo ;
+	private double prix  ; 
+	private String designation ; 
+	private String photo ; 
+	@OneToMany(mappedBy="medicament")
+	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ;
 	
-	@ManyToMany
-	@JoinTable(name="pharmacie_medicament",joinColumns={@JoinColumn(name="idMed")},
-			inverseJoinColumns={@JoinColumn(name="idPharma")})
-	private List<Pharmacie> pharmacies = new ArrayList<Pharmacie>() ; 
+//-------------------------getters & setters ----------------------------
 	
-	
-	
-	
-//---------------------getters & setters --------------------------------------	
-	
-	
-	
-	public int getIdMed() {
-		return idMed;
-	}
-	public void setIdMed(int idMed) {
-		this.idMed = idMed;
-	}
-	
-	public List<Pharmacie> getPharmacies() {
-		return pharmacies;
-	}
-	public void setPharmacies(List<Pharmacie> pharmacies) {
-		this.pharmacies = pharmacies;
-	}
 	public String getNom() {
 		return nom;
 	}
@@ -60,11 +35,11 @@ public class Medicament {
 	public void setPrix(double prix) {
 		this.prix = prix;
 	}
-	public String getDescription() {
-		return description;
+	public String getDesignation() {
+		return designation;
 	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 	public String getPhoto() {
 		return photo;
@@ -72,31 +47,15 @@ public class Medicament {
 	public void setPhoto(String photo) {
 		this.photo = photo;
 	}
-
-// ----------------------Constructor----------------------------------------
-	
-
-	public Medicament() {
-		super();
-		// TODO Auto-generated constructor stub
+	public List<Pharmacie_medicament> getPharmacie_qt() {
+		return pharmacie_qt;
+	}
+	public void setPharmacie_qt(List<Pharmacie_medicament> pharmacie_qt) {
+		this.pharmacie_qt = pharmacie_qt;
 	}
 	
+//---------------------------Constructors----------------------------------------------	
 
-	public Medicament(int idMed, String nom, double prix, String description, String photo, List<Pharmacie> pharmacies) {
-	super();
-	this.idMed = idMed;
-	this.nom = nom;
-	this.prix = prix;
-	this.description = description;
-	this.photo = photo;
-	this.pharmacies = pharmacies;
-}
-	@Override
-	public String toString() {
-		return "Medicament [nom=" + nom +  ", prix=" + prix + ", description=" + description + ", photo=" + photo + "]";
-	} 
-	
-	
 	
 	
 }
