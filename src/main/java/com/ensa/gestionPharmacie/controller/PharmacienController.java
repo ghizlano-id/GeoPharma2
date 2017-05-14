@@ -15,9 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
+import com.ensa.gestionPharmacie.service.Pharmacie_medicamentService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
 
 
@@ -34,11 +36,43 @@ public class PharmacienController {
 
    
 @Autowired
+private  Pharmacie_medicamentService pmd; 
+
+@Autowired
  private MedicamentService medicamentService ; 
+
+@Autowired
+private PharmacieService pharmacieService ; 
 	
   //------------------getters & setters ---------------
+
+
 	public PharmacienService getPharmacienService() {
 		return pharmacienService;
+	}
+
+
+
+	public MedicamentService getMedicamentService() {
+		return medicamentService;
+	}
+
+
+
+	public void setMedicamentService(MedicamentService medicamentService) {
+		this.medicamentService = medicamentService;
+	}
+
+
+
+	public PharmacieService getPharmacieService() {
+		return pharmacieService;
+	}
+
+
+
+	public void setPharmacieService(PharmacieService pharmacieService) {
+		this.pharmacieService = pharmacieService;
 	}
 
 
@@ -107,9 +141,15 @@ public class PharmacienController {
     public ModelAndView login(@ModelAttribute("pharmacien") Pharmacien pharmacien)
     {   
 		ModelAndView model=new ModelAndView();
-      if(pharmacienService.estPharmacien(pharmacien.getEmail(), pharmacien.getPassword()))
+		String id=pharmacienService.estPharmacien(pharmacien.getEmail(), pharmacien.getPassword()) ;
+		int pharmacie_id=0 ;
+		
+      if(id!="empty")
         
       {  
+    	  pharmacie_id=pharmacieService.getId(id) ;
+    	    System.out.println(pharmacie_id);
+    	  model.addObject("id", pharmacie_id) ; 
 	 	model.setViewName("pharmacien-acceuil");
     	  
     	  return model ; }
@@ -130,31 +170,33 @@ public class PharmacienController {
 
 	//----------------------Ajouter medicament-----------------------
 	
-	@RequestMapping(value="/ajouter", method=RequestMethod.POST)
-    public ModelAndView login4(@ModelAttribute("medicament") Medicament medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
+	@RequestMapping(value="/ajouter/{id}", method=RequestMethod.POST)
+    public ModelAndView login4(@PathVariable("id") int id,@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
     {   
+		Pharmacie p= new Pharmacie() ; 
+		p.setIdPharma(id);
 		
+		pharmacie_medicament.setPharmacie(p);
 	
-		
-		medicamentService.AjouterMed(medicament);
-		
-   
+		pmd.Ajouter(pharmacie_medicament);
+        System.out.println("ok");
 	   return new ModelAndView("index"); 
     }
 	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)
-	public ModelAndView login5(){
+	public ModelAndView login5(int id){
+		 System.out.println(id);
+		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
 		 
-		Medicament medicament= new Medicament() ; 
-		ModelAndView model=new ModelAndView("ajouter-medicament","command",medicament);
-	/*	
-		List<Pharmacie> l=pharmacieService.AllPharmacie() ; 
+      ModelAndView model=new ModelAndView("ajouter-medicament","command",pharmacie_medicament);
+		model.addObject("id", id) ;
+		List<Medicament> l=medicamentService.All() ; 
 		List<String> l2= new ArrayList<String>() ; 
-		for(Pharmacie p : l)
+		for(Medicament m : l)
 		{
-			l2.add(p.getName()) ; 
+			l2.add(m.getNom()) ; 
 		}
-		model.addObject("listph", l2) ;*/
+		model.addObject("listmed", l2) ;
 		 	
 		 return model;
 	}

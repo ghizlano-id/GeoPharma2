@@ -17,35 +17,28 @@
 </head>
 
 <body>
-<f:form action="ajouter" method="post" command="medicament">
+<f:form action="ajouter/${id} " method="post" command="pharmacie_medicament">
   <table cellpadding="15px">
   	<tr>
   		<td class="champ">Nom de Médicament</td>
 
       <td>
   
-      	<f:input path="nom"/>
+   <f:select  path="medicament.nom">
+    <f:options items="${listmed}"></f:options>
+    </f:select>
       	
       </td>
   	</tr>
 
   	  	<tr>
-  		<td class="champ">Prix de Médicament</td>
+  		<td class="champ">Quantité de Médicament</td>
 
       <td>
-      	<f:input path="prix"/>
+      	<f:input path="quantite"/>
       	
       </td>
-  	</tr>
-
-  	  	<tr>
-  		<td class="champ">Description de Médicament</td>
-
-      <td>
-      	<f:input path="description"/>
-      	
-      </td>
-  	</tr>
+ 
   	  	<tr> 
   	        
   	          <td></td>

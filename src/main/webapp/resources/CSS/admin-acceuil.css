@@ -1,0 +1,77 @@
+/***********************Page acceuil admin*****************/
+ body{
+  	margin:0;
+  	background-color: #eee;
+  }
+  #div-top{
+  	height:40%;
+  	width: 100%;
+  	background-color: #78AB46;
+  	font-weight: bolder;
+  	font-size:24pt;
+  	color:White;
+  	
+  }
+  #div-body{
+  	height: 60%;
+  	width: 100%;
+  }
+  .titre{
+    display:inline-block;
+    text-indent: 10px;
+  }
+  #dcnx{
+  	outline: none;
+  	color:white;
+  	text-decoration:none;
+  	font-weight: bolder;
+  	background-color: #73A343;
+  	border:1px solid #70A300;
+  	border-radius:10px;
+  	cursor: pointer;
+  	margin-left:600px;
+  	margin-top: 10px;
+  	margin-bottom: 20px;
+  	height: 40px;
+  }
+  #dcnx:before{
+  	content: "\2716";
+  	margin-right: 2px;
+  }
+  #dcnx:hover{
+    text-decoration: underline;
+  }
+  .icon1{
+    background-image: url("../img/ajouter.png");
+    background-repeat:no-repeat;
+    background-position:40% 30%;
+    height: 70%;
+    }
+    .icon2{
+    background-image: url("../img/supprimer.jpg");
+    background-repeat:no-repeat;
+    background-position:40% 0%;
+    height: 70%;
+    }
+    .icon{
+    height: 70%;
+    }
+  .choix{
+  	display: inline-block;
+  	margin-left: 40px;
+  	margin-top: 30px;
+  	height: 200px;
+  	width: 200px;
+  	background-color: white;
+  	text-align: center;
+  }
+  .ligne2{
+  	margin-left: 20%;
+    }
+    a{
+     text-decoration: none;
+     color:#78AB46;
+    }
+    a:hover{
+     text-decoration: underline;
+    }

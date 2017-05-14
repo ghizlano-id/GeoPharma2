@@ -7,39 +7,94 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Ajout pharmacie</title>
+	<style type="text/css">
+		body{
+		margin: 0;
+	   }
+	   legend{
+	   	   font-family:verdana, arial, sans-serif; 
+		   font-size:14pt; 
+		   font-weight:bold; 
+		   color:white; 
+		   margin:10px; 
+		   padding:5px 10px 5px 10px; 
+		   background-color:#AAAAAA; 
+		   border-radius:4px; 
+	   }
+	   fieldset{ 
+		   margin:10px; 
+		   border:none; 
+		   background-color:#eee; 
+		   border-radius:10px; 
+		   padding:20px; 
+		} 
+	   div{
+	   margin-left:30%;
+	   margin-top:10%;
+	   height:400px;
+	   width:400px;
+	   }
+	   .field{
+	   height: 30px;
+	   outline-color:#78AB46; 
+	   border:1px solid grey;
+	   border-radius: 5px;
+	   }
+	   input[type="submit"]{
+	   	color:white;
+		background-color: #78AB46;
+		cursor: pointer;
+		font-weight: bold;
+		height:30px;
+		width:90px;
+		border:none;
+	    border-radius: 5px;
+		}
+		form{
+		 background-color: #fff;
+		}
+		.leftColumn{
+		color:grey;
+		text-align: right;
+		width: 100px;
+		}
+	</style>
 </head>
 <body>
-	<form:form action="ajouter2" method="POST" command="pharmacie">
+<div>
+  <c:url value="/ajouter2" var="url"/>
+  <form:form action="${url}" method="post" command="pharmacie">
    <fieldset>
     <legend>Pharmacie</legend>
    <table>
      <tr>
-        <td>Nom :</td>
-        <td><form:input path="name"/></td>
+        <td class="leftColumn">Nom :</td>
+        <td><form:input path="name" class="field" /></td>
      </tr>
       <tr>
-        <td>adresse :</td>
-        <td><form:input path="adresse"/></td>
+        <td class="leftColumn">adresse :</td>
+        <td><form:input path="adresse" class="field" /></td>
      </tr>
       <tr>
-        <td>Longitude :</td>
-        <td><form:input path="x"/></td>
+        <td class="leftColumn">Longitude :</td>
+        <td><form:input path="x" class="field" /></td>
      </tr>
       <tr>
-        <td>Latitude :</td>
-        <td><form:input path="y"/></td>
+        <td class="leftColumn">Latitude :</td>
+        <td><form:input path="y" class="field"/></td>
      </tr>
-     
+     <tr>
+  	   <td></td>
+       <td>	<input type="submit" value="enregistrer" id="nexto"/></td>
+
+       <td>	<input type="hidden" name="cinAttrribute" value="${cin}" /><br/></td>
+     </tr>
      <tr>
        <td>	<input type="hidden" name="var" value="${cin}" /><br/></td>
-     </tr>
-  	 
-  	 <tr>
-       <td>	<input type="submit" value="Save" /><br/></td>
      </tr>
     </table>
     </fieldset>
  </form:form>
-
+</div>
 </body>
 </html>

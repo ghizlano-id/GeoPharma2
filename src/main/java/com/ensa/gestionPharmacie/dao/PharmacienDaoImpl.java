@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 
@@ -32,14 +33,14 @@ public class PharmacienDaoImpl implements PharmacienDao{
 	
 
 	@Transactional
-	public boolean estPharmacien(String email , String password) {
+	public String estPharmacien(String email , String password) {
 	
 		
 		List<Pharmacien> allPh = getSessionFactory().getCurrentSession().createQuery("from Pharmacien as t where t.email='"+email+"' and t.password='"+password+"' ").list();
-		  if(allPh!=null && allPh.size()>0 )
-		 return true ; 
+		  if(allPh!=null && allPh.size()==1 )
+		 return allPh.get(0).getCIN() ; 
 		  else
-		return false;
+		return "empty";
 	}
 
 	
@@ -55,6 +56,12 @@ public class PharmacienDaoImpl implements PharmacienDao{
 		pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
 		
 		return pharmacien;
+	}
+	@Transactional
+	public void supprimer(String CIN) {
+		Pharmacien pharmacien=(Pharmacien) getSessionFactory().getCurrentSession().get(Pharmacien.class,CIN);
+		getSessionFactory().getCurrentSession().delete(pharmacien);
+		
 	}
 
 

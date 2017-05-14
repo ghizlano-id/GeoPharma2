@@ -25,7 +25,7 @@ public class PharmacienServiceImpl implements PharmacienService {
 
 
 	
-	public boolean estPharmacien(String email, String password) {
+	public String estPharmacien(String email, String password) {
 		
 		return pharmacienDao.estPharmacien(email, password) ; 
 	}
@@ -36,6 +36,9 @@ public class PharmacienServiceImpl implements PharmacienService {
 	}
 	public Pharmacien getPharmacien(String CIN) {
 		return pharmacienDao.getPharmacien(CIN);
+	}
+	public void supprimer(String CIN) {
+		pharmacienDao.supprimer(CIN);		
 	}
 	
 }

@@ -1,6 +1,7 @@
 package com.ensa.gestionPharmacie.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -30,7 +31,22 @@ public class PharmacieDaoImpl implements PharmacieDao{
 	public void ajouer(Pharmacie pharmacie) {
 		getSessionFactory().getCurrentSession().save(pharmacie);
 	}
+	@Transactional
+	public List<Pharmacie> allPharmacie() {
+		List<Pharmacie> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p").list();
+		return list;
+	}
+	@Transactional
+	public void supprimer(int idPharma) {
+		Pharmacie pharmacie=(Pharmacie) getSessionFactory().getCurrentSession().get(Pharmacie.class,idPharma);
+		getSessionFactory().getCurrentSession().delete(pharmacie);
+	}
 	
-
+ ////////////////////////////////
+	@Transactional
+	public int getId(String id) {
+	List<Pharmacie> list= getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p where p.pharmacien.CIN='"+id+"'").list();
+		return list.get(0).getIdPharma();
+	}
 
 }

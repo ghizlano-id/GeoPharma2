@@ -28,4 +28,18 @@ public class PharmacieServiceImpl implements PharmacieService{
 		pharmacieDao.ajouer(pharmacie);
 	}
 
+	public List<Pharmacie> allPharmacie() {
+		return pharmacieDao.allPharmacie();
+	}
+
+	public void supprimer(int idPharma) {
+		pharmacieDao.supprimer(idPharma);
+	}
+	   public int getId(String id) 
+	   {
+		   
+		   
+		 return  pharmacieDao.getId(id) ; 
+		   
+	   }
 }

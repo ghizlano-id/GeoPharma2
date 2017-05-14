@@ -20,7 +20,7 @@
 		
 		<section>
 			  <div id="div1">
-                    <a href="#">
+                     <a href="<c:url value="/add_med?id=${id}"/>">
                      <button type="button" class="btn" >
                       
 					<img src="<c:url value="/resources/img/ajouter.png"/>" width="70" height="90">
