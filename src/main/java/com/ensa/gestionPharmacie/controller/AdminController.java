@@ -1,5 +1,25 @@
+
 package com.ensa.gestionPharmacie.controller;
 
+
+
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
@@ -7,20 +27,6 @@ import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.AdminService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 
@@ -40,7 +46,7 @@ public class AdminController {
 
 
 
-	
+
 
 	//-------------------------------------------------------
 	@RequestMapping(value="/admin",method = RequestMethod.GET)
@@ -62,9 +68,9 @@ public class AdminController {
 	//-----------------------Ajout pharmacien/pharmacie-----------------------
 	@RequestMapping(value="/ajout-pharmacien",method=RequestMethod.GET)
 	public ModelAndView ajout1(){
-		
+
 		Pharmacien pharmacien=new Pharmacien();
-		
+
 		return new ModelAndView("ajout-pharmacien","command",pharmacien);
 	}
 
@@ -80,7 +86,7 @@ public class AdminController {
 
 		return new ModelAndView("redirect:/ajout-pharmacie/"+CIN,"command",pharmacie);
 	}
-	
+
 	//--------------------------------------------------------
 	@RequestMapping(value="/ajout-pharmacie/{CIN}",method=RequestMethod.GET)
 	public ModelAndView ajout2(@PathVariable("CIN") String CIN,RedirectAttributes redirectAttrs){
@@ -110,29 +116,57 @@ public class AdminController {
 	public ModelAndView affiche(){
 		ModelAndView model=new ModelAndView();
 		model.setViewName("infos");
-		
+
 		return model;
-		
+
 	}
 	//---------------------Supprimer une pharmacie-----------------
-	  @RequestMapping(value="/supprimer-pharmacie")
-	  public ModelAndView supprimer(){
-		  ModelAndView model =new ModelAndView();
-		  List<Pharmacie> allpharmacie=pharmacieService.allPharmacie();
-		  model.addObject("pharmacies", allpharmacie);
-		  model.setViewName("supprimer-pharmacie");
-		  
-		   return model;
+	@RequestMapping(value="/supprimer-pharmacie")
+	public ModelAndView supprimer(){
+		ModelAndView model =new ModelAndView();
+		List<Pharmacie> allpharmacie=pharmacieService.allPharmacie();
+		model.addObject("pharmacies", allpharmacie);
+		model.setViewName("supprimer-pharmacie");
+
+		return model;
 	}
-	  @RequestMapping(value="/suppression")
-	  public ModelAndView supprimer(int idPharma,String CIN){
-		  ModelAndView model =new ModelAndView();
-		  pharmacieService.supprimer(idPharma);
-		  pharmacienService.supprimer(CIN);
-		  model.setViewName("redirect:/supprimer-pharmacie");
-		  
-		   return model;
+	@RequestMapping(value="/suppression")
+	public ModelAndView supprimer(int idPharma,String CIN){
+		ModelAndView model =new ModelAndView();
+		pharmacieService.supprimer(idPharma);
+		pharmacienService.supprimer(CIN);
+		model.setViewName("redirect:/supprimer-pharmacie");
+
+		return model;
 	}
+	//----------------Phrmacie de garde-----------
+	@RequestMapping(value="/pharmacies-de-garde")
+	public ModelAndView afficher(){
+		ModelAndView model=new ModelAndView();
+		model.setViewName("pharmacies-garde");
+
+		return model;
+
+	}
+	@RequestMapping(value="/pharmacies-garde",method = RequestMethod.POST)
+	@ResponseBody
+	public   Pharmacien getPharmacies(HttpServletRequest request, HttpServletResponse response){
+		/*List<Pharmacie> list=pharmacieService.allPharmacie();
+
+		return list;*/
+		Pharmacien pharmacien=new Pharmacien();
+			pharmacien.setCIN("EE543");
+			pharmacien.setEmail("ghizo@mail.com");
+			pharmacien.setNom("ghizo");
+			pharmacien.setPassword("aaa");
+			
+			return pharmacien;
+
+	}
+
+
+
+
 
 	//----------------Getters and setters (for injection)------------------
 	public AdminService getAdminService() {
