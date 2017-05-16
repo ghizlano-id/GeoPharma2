@@ -149,8 +149,8 @@ public class AdminController {
 
 	}
 	@RequestMapping(value="/pharmacies-garde",method = RequestMethod.POST)
-	@ResponseBody
-	public   Pharmacien getPharmacies(HttpServletRequest request, HttpServletResponse response){
+	
+	public  @ResponseBody Pharmacien getPharmacies(){
 		/*List<Pharmacie> list=pharmacieService.allPharmacie();
 
 		return list;*/
