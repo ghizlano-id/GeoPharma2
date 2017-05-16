@@ -142,15 +142,16 @@ public class AdminController {
 	//----------------Phrmacie de garde-----------
 	@RequestMapping(value="/pharmacies-de-garde")
 	public ModelAndView afficher(){
+		
 		ModelAndView model=new ModelAndView();
 		model.setViewName("pharmacies-garde");
 
 		return model;
 
 	}
-	@RequestMapping(value="/pharmacies-garde",method = RequestMethod.POST)
-	@ResponseBody
-	public   Pharmacien getPharmacies(HttpServletRequest request, HttpServletResponse response){
+	
+	@RequestMapping(value="/pharmacies-garde",method = RequestMethod.GET)
+	public  @ResponseBody Pharmacien getPharmacies(HttpServletRequest request, HttpServletResponse response){
 		/*List<Pharmacie> list=pharmacieService.allPharmacie();
 
 		return list;*/
@@ -163,9 +164,6 @@ public class AdminController {
 			return pharmacien;
 
 	}
-
-
-
 
 
 	//----------------Getters and setters (for injection)------------------
