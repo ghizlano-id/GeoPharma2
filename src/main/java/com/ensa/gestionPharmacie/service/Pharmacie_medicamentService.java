@@ -4,5 +4,7 @@ import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 
 public interface Pharmacie_medicamentService {
 
-	void Ajouter(Pharmacie_medicament pm) ; 
+	int Ajouter(Pharmacie_medicament pm) ; 
+ public void update(Pharmacie_medicament pm)  ; 
+	
 }

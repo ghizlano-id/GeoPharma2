@@ -1,8 +1,8 @@
 @CHARSET "ISO-8859-1";
 body {
   background-image: url("../img/backg.jpeg") ; 
-margin-top: 200px ; 
-margin-left: 500px ; 
+margin-top:150px ; 
+margin-left: 450px ; 
 background-position: 50% 50%  ;
 }
 
