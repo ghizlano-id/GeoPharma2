@@ -178,9 +178,12 @@ private PharmacieService pharmacieService ;
 		
 		pharmacie_medicament.setPharmacie(p);
 	
-		pmd.Ajouter(pharmacie_medicament);
-        System.out.println("ok");
-	   return new ModelAndView("index"); 
+		int i=pmd.Ajouter(pharmacie_medicament);
+		if(i==1)
+		{   System.out.println("ok");
+	   return new ModelAndView("index"); }
+		else
+			return new ModelAndView("infos") ;
     }
 	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)
@@ -248,7 +251,43 @@ private PharmacieService pharmacieService ;
 		}
 		*/
 		
+ //------------------------Update Medicament ------------------------------------
+	
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public ModelAndView update(int id){
+	
 		
+		 System.out.println(id);
+		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
+		 
+     ModelAndView model=new ModelAndView("update-medicament","command",pharmacie_medicament);
+     model.addObject("id", id) ;
+     
+ 	List<Medicament> l=medicamentService.All() ; 
+	List<String> l2= new ArrayList<String>() ; 
+	for(Medicament m : l)
+	{
+		l2.add(m.getNom()) ; 
+	}
+		 model.addObject("listmed", l2) ;
+		
+		 	
+		 return model;
+	}
+	
+	@RequestMapping(value="/update2/{id}", method=RequestMethod.POST)
+    public ModelAndView update2(@PathVariable("id") int id,@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament)
+    {   
+		Pharmacie p= new Pharmacie() ; 
+		p.setIdPharma(id);
+		pharmacie_medicament.setPharmacie(p);
+		pmd.update(pharmacie_medicament);
+      System.out.println(pharmacie_medicament.getQuantite()+" "+pharmacie_medicament.getMedicament().getNom()+" "+pharmacie_medicament.getPharmacie().getIdPharma());
+     
+      	 return new ModelAndView("index") ; 
+	    
+    }
+	
 		
 	
 }

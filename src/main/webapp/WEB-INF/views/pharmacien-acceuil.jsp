@@ -28,7 +28,7 @@
                        </button>  
                        </a>
 
-                   <a href="#">
+                   <a href="<c:url value="/update?id=${id}"/>">
 				<button type="button" class="btn" ><img src="<c:url value="/resources/img/ajouter-m.jpg"/>" width="70" height="90">
 				<p>Mettre à jour un médicament</p></button></a>
                    

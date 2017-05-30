@@ -22,12 +22,21 @@ public class Pharmacie_medicamentServiceImpl  implements Pharmacie_medicamentSer
 	} 
 	
 
-	public void Ajouter(Pharmacie_medicament pm) 
+	public int Ajouter(Pharmacie_medicament pm) 
 	{
 		
-		pmd.Ajouter(pm);
+	 return	pmd.Ajouter(pm);
 		
 	}
+	
+//------------------------------------------------
+	
+	public void update(Pharmacie_medicament pm) 
+	{
+		pmd.update(pm);
+		
+	}
+	
 	
 }
 
