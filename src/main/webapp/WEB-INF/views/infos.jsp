@@ -8,5 +8,17 @@
 </head>
 <body>
 	<p> les informations que vous avez saisi sont :</p>
+	<%@ page import="java.util.List" %>
+	<%@ page  import="java.util.Set" %>
+	<%
+	Set<String> idMeds=(Set<String>)request.getSession().getAttribute("idMeds") ; 
+	
+	if(idMeds!=null){
+		for(String med :idMeds){
+	%>
+   <p><%=med %></p>
+
+
+	 <%} }%>
 </body>
 </html>
