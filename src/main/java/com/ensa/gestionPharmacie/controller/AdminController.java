@@ -1,9 +1,6 @@
 
 package com.ensa.gestionPharmacie.controller;
 
-
-
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +24,6 @@ import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.AdminService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
-
-
-
-
-
-
 
 @Controller
 public class AdminController {
@@ -144,7 +135,7 @@ public class AdminController {
 	public ModelAndView afficher(){
 		
 		ModelAndView model=new ModelAndView();
-		model.setViewName("pharmacies-garde");
+		model.setViewName("map");
 
 		return model;
 
@@ -152,18 +143,18 @@ public class AdminController {
 
 	
 	@RequestMapping(value="/pharmacies-garde",method = RequestMethod.GET)
-	public  @ResponseBody Pharmacien getPharmacies(HttpServletRequest request, HttpServletResponse response){
+	public  @ResponseBody List<Pharmacie> getPharmacies(HttpServletRequest request, HttpServletResponse response){
 
-		/*List<Pharmacie> list=pharmacieService.allPharmacie();
+		List<Pharmacie> list=pharmacieService.allPharmacie();
 
-		return list;*/
-		Pharmacien pharmacien=new Pharmacien();
+		return list;
+		/*Pharmacien pharmacien=new Pharmacien();
 			pharmacien.setCIN("EE543");
 			pharmacien.setEmail("ghizo@mail.com");
 			pharmacien.setNom("ghizo");
 			pharmacien.setPassword("aaa");
 			
-			return pharmacien;
+			return pharmacien;*/
 
 	}
 

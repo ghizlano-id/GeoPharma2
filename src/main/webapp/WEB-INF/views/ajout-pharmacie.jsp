@@ -76,11 +76,11 @@
         <td><form:input path="adresse" class="field" /></td>
      </tr>
       <tr>
-        <td class="leftColumn">Longitude :</td>
+        <td class="leftColumn">Latitude :</td> 
         <td><form:input path="x" class="field" /></td>
      </tr>
       <tr>
-        <td class="leftColumn">Latitude :</td>
+        <td class="leftColumn">Longitude :</td>
         <td><form:input path="y" class="field"/></td>
      </tr>
      <tr>

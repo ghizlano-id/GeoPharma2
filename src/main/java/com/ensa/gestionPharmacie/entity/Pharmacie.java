@@ -17,13 +17,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Pharmacie {
 	@Id
+	@JsonIgnore
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idPharma;
-	
 	private String name;
 	private String adresse;
 	private double x;
@@ -31,9 +33,11 @@ public class Pharmacie {
 	@Column(nullable = false)
 	private boolean estGarde;
 	@OneToOne
+	@JsonIgnore
 	@JoinColumn(name="CIN")
 	private Pharmacien pharmacien;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="pharmacie")
 	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ; 
 	
