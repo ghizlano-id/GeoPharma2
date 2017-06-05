@@ -32,12 +32,6 @@ public class TestController {
 		
 		List<Test> allTest = TestService.getAllTest();
 		model.addObject("allTest", allTest);
-
-		
-		/*List<Admin> allAdmin = TestService.getAllAdmins();
-		model.addObject("allAdmin", allAdmin);
-		for(int i=0;i<allAdmin.size();i++)
-			System.out.println(allAdmin.get(i));*/
 		
 		model.setViewName("index");
 		return model;

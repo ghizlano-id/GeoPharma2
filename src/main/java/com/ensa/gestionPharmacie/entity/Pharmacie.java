@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import java.util.List;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -39,8 +39,10 @@ public class Pharmacie {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="pharmacie")
-	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ; 
-	
+	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ;
+	@JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="pharmacie")
+	private List<Commande> commandes= new ArrayList<Commande>();
 	
 
 	//Getters and setters

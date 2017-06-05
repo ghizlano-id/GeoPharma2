@@ -8,6 +8,7 @@ public interface MedicamentDao {
 
 	 void AjouterMed(Medicament m); 
 	 List<Medicament> All() ; 
+	 Medicament getMedicament(String nomM);
 	
 	
 }

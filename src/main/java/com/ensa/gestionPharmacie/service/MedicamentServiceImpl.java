@@ -37,5 +37,10 @@ public class MedicamentServiceImpl implements MedicamentService {
 		
 		return medicamentDao.All() ; 
 	}
+
+	public Medicament getMedicament(String nomM) {
+		
+		return medicamentDao.getMedicament(nomM);
+	}
 	
 }

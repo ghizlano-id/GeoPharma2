@@ -18,7 +18,7 @@ $(document).ready(function(){
             };
 
             infoWindowo.setPosition(pos);
-            infoWindowo.setContent('hi');
+            infoWindowo.setContent('My location');
             map.setCenter(pos);
           }, function() {
             handleLocationError(true, infoWindowo, map.getCenter());
