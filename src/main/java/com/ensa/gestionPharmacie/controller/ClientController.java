@@ -24,50 +24,92 @@ import com.ensa.gestionPharmacie.service.MedicamentService;
 public class ClientController {
 
 	@Autowired
-	 private MedicamentService medicamentService ; 
-	
-	
-	
+	private MedicamentService medicamentService ; 
+
+
+
 	@RequestMapping("/acceuil")
-	public ModelAndView login2(){
+	public ModelAndView login2(HttpServletRequest req){
 		ModelAndView model=new ModelAndView();
-		 	model.setViewName("acceuil");
-		 return model;
+		model.setViewName("acceuil");
+		//Create session   --------------->
+				HttpSession session =req.getSession(true); 
+				Set<String> idMeds= new HashSet<String>() ; 
+				session.setAttribute("idMeds", idMeds); //<--------------------
+		return model;
 	}
+
 	
-	
-	@RequestMapping("/commander")
-	public ModelAndView login(String id,HttpServletRequest req){
+	@RequestMapping("/commander")  //1
+	public ModelAndView login(HttpServletRequest req){ //??id
 		ModelAndView model=new ModelAndView();
-		  boolean t=true ; 
-		 	model.setViewName("commande");
+		model.setViewName("commande");
+		//Get all medicament that are available
 		List<Medicament> l=medicamentService.All() ;  	
 		model.addObject("listmed", l) ;
-		HttpSession session =req.getSession(); 
-		if(id==null){
+		//Create session
+		/*HttpSession session =req.getSession(true); 
 		Set<String> idMeds= new HashSet<String>() ; 
-		session.setAttribute("idMeds", idMeds);}
+		session.setAttribute("idMeds", idMeds);*/
+		return model;
+	}
+	@RequestMapping(value="/ajoutPanier/{id}",method = RequestMethod.POST) //2
+	public void login(@PathVariable("id") String id ,HttpServletRequest req){
+		
+		HttpSession session =req.getSession(); 
+		@SuppressWarnings("unchecked")
+		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
+			idMeds.add(id) ;
+		
+	}
+	
+	/*@RequestMapping("/commander/{id}") !!!!2
+	public ModelAndView login(@PathVariable("id") String id ,HttpServletRequest req){ //??id
+		ModelAndView model=new ModelAndView();
+		
+		HttpSession session =req.getSession(); 
+		@SuppressWarnings("unchecked")
+		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
+			idMeds.add(id) ;
+		
+			model.setViewName("redirect:/commander");
+		return model;
+	}*/
+	
+	
+	/*@RequestMapping("/commander/{id}")  
+	public ModelAndView login(@PathVariable("id") String id,HttpServletRequest req){ //??id
+		ModelAndView model=new ModelAndView();
+		boolean t=true ; 
+		model.setViewName("commande");
+		//Get all medicament that are available
+		List<Medicament> l=medicamentService.All() ;  	
+		model.addObject("listmed", l) ;
+		//Create session
+		HttpSession session =req.getSession(t); 
+		if(id==null){
+			Set<String> idMeds= new HashSet<String>() ; 
+			session.setAttribute("idMeds", idMeds);}
 		else{
+			@SuppressWarnings("unchecked")
 			Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ; 
-		
+
 			idMeds.add(id) ; 
-			session.setAttribute("idMeds", idMeds);
-			
-			
+			//session.setAttribute("idMeds", idMeds);
 		}
-		
-		 return model;
+
+		return model;
 	}
 
-
-	@RequestMapping("/getpanier")
+	//Ghizlane
+	/*@RequestMapping("/getpanier")
 	public ModelAndView login(){
 		ModelAndView model=new ModelAndView();
 		 	model.setViewName("infos");
 		 return model;
-	}
-	
+	}*/
 
-	
-	
+
+
+
 }

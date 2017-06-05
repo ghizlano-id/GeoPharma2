@@ -1,6 +1,12 @@
 package com.ensa.gestionPharmacie.entity;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Client  extends Personne{
@@ -8,6 +14,8 @@ public class Client  extends Personne{
 	private String adresse ; 
 	private double x ;
 	private double y ;
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="client")
+	private List<Commande> commandes= new ArrayList<Commande>();
 
 	
 //--------------getters & setters ------------------------------------------

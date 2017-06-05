@@ -3,6 +3,7 @@ package com.ensa.gestionPharmacie.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 
 
@@ -20,7 +21,8 @@ public class Medicament{
 	private String photo ; 
 	@OneToMany(mappedBy="medicament")
 	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ;
-	
+	@OneToMany(cascade=CascadeType.ALL,mappedBy="medicament")
+	private List<Commande> commandes= new ArrayList<Commande>();
 //-------------------------getters & setters ----------------------------
 	
 	public String getNom() {

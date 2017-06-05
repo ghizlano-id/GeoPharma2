@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 
 
@@ -43,5 +44,13 @@ public class MedicamentDaoImpl implements MedicamentDao{
 		
 		
 	 }
+	@Transactional
+	public Medicament getMedicament(String nomM) {
+		Medicament medicament=new Medicament();
+
+		medicament=(Medicament) getSessionFactory().getCurrentSession().get(Medicament.class,nomM);
+
+		return medicament;
+	}
 	
 }
