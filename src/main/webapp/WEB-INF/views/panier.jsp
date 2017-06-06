@@ -145,11 +145,17 @@
 		     	<td class="medicament"><c:out value="${medicament.prix}"/></td>
 		     	<td class="medicament"><a href="annuler?nom=${medicament.nom}" >X Annuler</a> </td>
 		     	<td><button class="b">annuler</button><input type="hidden" class="monM" value="<c:out value="${medicament.nom}"/>"/></td>
-		     	<td><button class="c">confirmer</button></td>
+		     	<td><button class="c">confirmer</button><input type="hidden" class="monM" value="<c:out value="${medicament.nom}"/>"/></td>
+		     	
+		     	<td class="dst">disatance:<span></span></td>
 		     </tr>
 	     </c:forEach>
 	   </table>
 	 </div>
+	 <div id="distance"></div>
+	 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew">
+		
+	</script>
 	 
 </body>
 </html>

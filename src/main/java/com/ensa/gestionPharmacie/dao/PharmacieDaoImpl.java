@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 
 @Repository
 public class PharmacieDaoImpl implements PharmacieDao{
@@ -47,6 +48,15 @@ public class PharmacieDaoImpl implements PharmacieDao{
 	public int getId(String id) {
 	List<Pharmacie> list= getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p where p.pharmacien.CIN='"+id+"'").list();
 		return list.get(0).getIdPharma();
+	}
+	@Transactional
+	public List<Pharmacie> getPharmacies(List<Pharmacie_medicament> list) {
+		List<Pharmacie> listPharmacies= new ArrayList<Pharmacie>();
+		 for(Pharmacie_medicament p:list){
+			 Pharmacie pharmacie=(Pharmacie) getSessionFactory().getCurrentSession().get(Pharmacie.class,p.getPharmacie().getIdPharma());
+			 listPharmacies.add(pharmacie);
+		 }
+		return listPharmacies;
 	}
 
 }

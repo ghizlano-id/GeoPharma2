@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ensa.gestionPharmacie.dao.Pharmacie_medicamentDao;
 import com.ensa.gestionPharmacie.entity.Client;
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.service.AdminService;
 import com.ensa.gestionPharmacie.service.ClientService;
 import com.ensa.gestionPharmacie.service.MedicamentService;
+import com.ensa.gestionPharmacie.service.PharmacieService;
 
 @Controller
 public class PanierController {
@@ -34,6 +38,10 @@ public class PanierController {
 	private ClientService clientService;
 	@Autowired
 	private MedicamentService medicamentService;
+	@Autowired
+	private PharmacieService pharmacieService;
+	@Autowired
+	private Pharmacie_medicamentDao pmDao;
 
 	
 	/*@RequestMapping(value="/info",method = RequestMethod.GET)
@@ -80,11 +88,25 @@ public class PanierController {
 		return new ModelAndView("infos");
 		
 	}
+	
 	@RequestMapping(value="/distance",method = RequestMethod.GET)
 	public ModelAndView distance(){
 		
 		return new ModelAndView("distance");
 		
+	}
+	//***********Verifier l'affichage de list of Pharmacie_medicament
+	@RequestMapping(value="/pharmacies-madicament/{idMedica}",method = RequestMethod.GET)
+	public  @ResponseBody List<Pharmacie> getPharmacies(@PathVariable("idMedica") String idMedica,HttpServletRequest request, HttpServletResponse response){
+		
+		//String idMedica="doliprane";
+		List<Pharmacie_medicament> list=pmDao.getPharmacies_medicament(idMedica);
+		for(Pharmacie_medicament p:list){
+			System.out.println(p.getPharmacie().getName());
+		}
+
+		List<Pharmacie> listPharmacie=pharmacieService.getPharmacies(list);
+		return listPharmacie;
 	}
 	
 	/*@RequestMapping(value="/coordonnees",method = RequestMethod.POST)

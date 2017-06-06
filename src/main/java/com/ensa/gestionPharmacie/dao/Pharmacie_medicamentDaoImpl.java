@@ -69,6 +69,12 @@ public class Pharmacie_medicamentDaoImpl implements Pharmacie_medicamentDao  {
 			phm.setQuantite(phm.getQuantite()+pm.getQuantite());
 			// getSessionFactory().getCurrentSession().update(pm);
 		}
+		@Transactional
+		public List<Pharmacie_medicament> getPharmacies_medicament(String idMedica) {
+			List<Pharmacie_medicament> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie_medicament as p where p.medicament.nom='"+idMedica+"'").list();
+			
+			return list;
+		}
 		
 
 	
