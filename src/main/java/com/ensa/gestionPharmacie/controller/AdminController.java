@@ -158,6 +158,36 @@ public class AdminController {
 			return pharmacien;*/
 
 	}
+
+
+	
+	
+	
+	//----------------Toutes les Phrmacies-----------
+		@RequestMapping(value="/pharmacies")
+		public ModelAndView afficher2(){
+			
+			ModelAndView model=new ModelAndView();
+			model.setViewName("allph-map");
+
+			return model;
+
+		}
+
+		
+		@RequestMapping(value="/pharmacies-all",method = RequestMethod.GET)
+		public  @ResponseBody List<Pharmacie> getPharmacies2(HttpServletRequest request, HttpServletResponse response){
+
+			List<Pharmacie> list=pharmacieService.allPharmacie();
+
+			return list;
+			
+
+		}
+
+	
+	
+
 	
 
 	//----------------Getters and setters (for injection)------------------
