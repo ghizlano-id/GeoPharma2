@@ -65,24 +65,7 @@ public class ClientController {
 			idMeds.add(id) ;
 		
 	}
-/*	@RequestMapping(value="/testt",method = RequestMethod.GET) //2
-	public void login5(){
-		
-		System.out.println("heey");
-	
-		
-	}
-	*/
-	@RequestMapping(value = "/testt", method = RequestMethod.GET)
-	public @ResponseBody String Submit(@RequestParam("name") String name) {
-	    
-		
-		System.out.println(name);
-		
-		
-	 return name ;
-	}
-	
+
 	
 	
 	
