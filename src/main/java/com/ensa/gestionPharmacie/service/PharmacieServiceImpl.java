@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.PharmacieDao;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 
 @Service
 public class PharmacieServiceImpl implements PharmacieService{
@@ -42,4 +43,9 @@ public class PharmacieServiceImpl implements PharmacieService{
 		 return  pharmacieDao.getId(id) ; 
 		   
 	   }
+
+	public List<Pharmacie> getPharmacies(List<Pharmacie_medicament> list) {
+		List<Pharmacie> listPharmacies=pharmacieDao.getPharmacies(list);
+		return listPharmacies;
+	}
 }
