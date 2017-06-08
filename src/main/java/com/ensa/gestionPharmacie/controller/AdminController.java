@@ -185,7 +185,14 @@ public class AdminController {
 
 		}
 
-	
+		@RequestMapping("/test")
+		public ModelAndView logi(){
+			ModelAndView model=new ModelAndView();
+			model.setViewName("test");
+
+			return model;
+		}
+
 	
 
 	
