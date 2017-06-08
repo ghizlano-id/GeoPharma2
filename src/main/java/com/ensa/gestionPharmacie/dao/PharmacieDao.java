@@ -14,6 +14,7 @@ public interface PharmacieDao {
 	public List<Pharmacie> getPharmacies(List<Pharmacie_medicament> list);
 	public void supprimer(int idPharma);
     public int getId(String id) ; 
+    Pharmacie getPharmacie(double x,double y);
 
 
 }

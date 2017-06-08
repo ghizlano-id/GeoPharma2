@@ -48,4 +48,9 @@ public class PharmacieServiceImpl implements PharmacieService{
 		List<Pharmacie> listPharmacies=pharmacieDao.getPharmacies(list);
 		return listPharmacies;
 	}
+
+	public Pharmacie getPharmacie(double x, double y) {
+		return pharmacieDao.getPharmacie(x, y);
+		
+	}
 }

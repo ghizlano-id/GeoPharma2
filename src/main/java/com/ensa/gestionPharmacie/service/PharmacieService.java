@@ -13,6 +13,7 @@ public interface PharmacieService {
 	public List<Pharmacie> allPharmacie();
 	public List<Pharmacie> getPharmacies(List<Pharmacie_medicament> list);
 	public void supprimer(int idPharma);
-	   public int getId(String id) ; 
+	public int getId(String id) ; 
+	public Pharmacie getPharmacie(double x,double y);
 
 }
