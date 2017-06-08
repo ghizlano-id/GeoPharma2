@@ -16,6 +16,9 @@ var outputDiv = document.getElementById('distance');
 		var latClient =$('#lat').val();
 		var lngClient =$('#lng').val();
 		var idMedica = $(this).parent().children(".monM").val();
+		var lato;
+		var lngo;
+		
 		var _this  = $(this);
 		$.ajax({
 			type: "GET",
@@ -25,6 +28,7 @@ var outputDiv = document.getElementById('distance');
 			cache: false,
 			success: function(response){
 				var origin1 = new google.maps.LatLng(latClient,lngClient);
+				var responsesCoord=response;
 
 				//Remplir la tab de destination depuis json
 				var destinations = new Array();
@@ -64,21 +68,44 @@ var outputDiv = document.getElementById('distance');
 								outputDiv.innerHTML += 'A to  B: ' + results[j].distance.text + ' in ' +
 								results[j].duration.text + ' dist: --->'+distances[j]+'<br>';
 							}
+							outputDiv.innerHTML +='-------------<br>'
 						}
-						
-						$(_this).parents("tr").children(".dst").children("span").html("<span>"+min(distances)+"</span>");
+						var indt=min(distances);
+						lato=responsesCoord[indt].x;
+						lngo=responsesCoord[indt].y;
+						$(_this).parents("tr").children(".dst").children("span").html("<span>"+min(distances)+"  x="+lato+",y="+responsesCoord[indt].y+"</span>");
+					
+						//call function ajax 2
+						callAjaxAgain(lato,lngo);
 					}
 					else{
-						alert('Error was: ' + status);
+						alert('Error was:1' + status);
 					}
 				}
+				
 
-
-			},
+			}, //*fin call ajax 1
 			error: function(){      
 				alert('Error while request..');
 			}
 		});
+	function callAjaxAgain(lato,lngo){
+		console.log(lngo);
+		$.ajax({
+				type: "POST",
+				 data: {"lato": lato, "lngo": lngo},
+				url: "http://localhost:8080/gestionPharmacie/ajoutPharmacieProche",
+				cache: false,
+				
+/*			success: function(response){
+				alert('Save it :)');
+			},
+			error: function(){      
+				alert('Error while request ajax ajoutPharmacieProche ');
+		}*/
+		});
+	}
+	
 	});
 	
 	function min(distances){
@@ -90,7 +117,7 @@ var outputDiv = document.getElementById('distance');
 				ind=iter; //probleme !!!!!
 			}
 		}
-		return ind+" "+mind;
+		return ind;
 	}
 
 });

@@ -2,6 +2,7 @@ package com.ensa.gestionPharmacie.controller;
 
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -52,20 +53,29 @@ public class PanierController {
 	}*/
 	@RequestMapping(value="/monPanier",method = RequestMethod.GET)
 	public ModelAndView panier(HttpServletRequest req){
+		
+		
 		Client client=new Client();
+		ModelAndView model=new ModelAndView("panier","command",client);
 		HttpSession session =req.getSession(); 
 		Set<Medicament> medicaments= new HashSet<Medicament>() ;
 		Medicament medicament=new Medicament();
+		//Liste de pharmacie les plus proches ????
+		List<Pharmacie> prochesPharmacies=new ArrayList<Pharmacie>();//***
+		//model.addObject("prochesPharmacies",prochesPharmacies);//*********
+		req.setAttribute("prochesPharmacies",prochesPharmacies);
+		//Récuperer la liste des medicament ajoutés au panier
 		@SuppressWarnings("unchecked")
 		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
-		
+		//Récuperer la liste des medicament depuis la base via idMeds*
 		Iterator<String> med = idMeds.iterator();
 	    while(med.hasNext()){
 	    	medicament=medicamentService.getMedicament(med.next());
 	    	medicaments.add(medicament);
 	    	}
 	    session.setAttribute("medicaments", medicaments);
-		return new ModelAndView("panier","command",client);
+	    
+		return model;
 		
 	}
 	@RequestMapping(value="/annuler") //!!!!!!!
@@ -99,14 +109,22 @@ public class PanierController {
 	@RequestMapping(value="/pharmacies-madicament/{idMedica}",method = RequestMethod.GET)
 	public  @ResponseBody List<Pharmacie> getPharmacies(@PathVariable("idMedica") String idMedica,HttpServletRequest request, HttpServletResponse response){
 		
-		//String idMedica="doliprane";
+		//String idMedica
 		List<Pharmacie_medicament> list=pmDao.getPharmacies_medicament(idMedica);
-		for(Pharmacie_medicament p:list){
-			System.out.println(p.getPharmacie().getName());
-		}
 
 		List<Pharmacie> listPharmacie=pharmacieService.getPharmacies(list);
 		return listPharmacie;
+	}
+	@RequestMapping(value="/ajoutPharmacieProche",method = RequestMethod.POST) //2
+	public void login(@RequestParam("lato") Double x ,@RequestParam("lngo") Double y,HttpServletRequest req){
+		
+		Pharmacie pharmacie=pharmacieService.getPharmacie(x,y);
+		//@SuppressWarnings("unchecked")
+		// getPharmacie(x,y)
+		//List<Pharmacie> prochesPharmacies=(List<Pharmacie>)req.getAttribute("prochesPharmacies") ;
+		//prochesPharmacies.add(pharmacie) ;
+		System.out.println(x+" "+y);
+		
 	}
 	
 	/*@RequestMapping(value="/coordonnees",method = RequestMethod.POST)
