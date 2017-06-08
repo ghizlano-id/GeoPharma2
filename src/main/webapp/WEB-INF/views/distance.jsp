@@ -63,33 +63,27 @@
          unitSystem: google.maps.UnitSystem.METRIC
        }, callback);
 
+  
      function callback(response, status) {
     	 if (status == 'OK') {
     		 var outputDiv = document.getElementById('info');
+    		 var output = document.getElementById('test');
     		 var originList = response.originAddresses;
              var destinationList = response.destinationAddresses;
-             
+             var res="" ; 
     		 for (var i = 0; i < originList.length; i++) {
                  var results = response.rows[i].elements;
                  for (var j = 0; j < results.length; j++) {
                    outputDiv.innerHTML += 'A to  B: ' + results[j].distance.text + ' in ' +
                        results[j].duration.text + '<br>';
+                     
+                       
+                 
                  }
                }
-    		 /*ar outputDiv = document.getElementById('info');
-             outputDiv.innerHTML = '';
-    		    var origins = response.originAddresses;
-    		    var destinations = response.destinationAddresses;
-				for (var i = 0; i < origins.length; i++) {
-    		      var results = response.rows[i].elements;
-    		      for (var j = 0; j < results.length; j++) {
-    		        var element = results[j];
-    		        var distance = element.distance.text;
-    		        var duration = element.duration.text;
-    		        var from = origins[i];
-    		        var to = destinations[j];
-    		      }
-    		    }*/
+
+    		 
+    	
     		  }
     	 else{
     		 alert('Error was: ' + status);
@@ -101,15 +95,15 @@
 	        infoWindow.setPosition(pos);
 	        infoWindow.setContent(browserHasGeolocation ?
 	                              'Error: The Geolocation service failed.' :
-	                              'Error: Your browser doesn\'t support geolocation.');
-	      }
+	                              'Error: Your browser doesn\'t support geolocation.');}
+	
  </script>
 </head>
 <body>
 		
 		<div id="map"></div>
 		<div id="info"></div>
-	
+	      <div id="test"></div>
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		
 	</script>
