@@ -5,7 +5,7 @@ $(document).ready(function(){
 		var nomM =  $(this).parent().children( ".monM" ).val();
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:8080/gestionPharmacie/annuler/nom="+nomM,
+			url: "http://localhost:8080/gestionPharmacie/annuler?nom="+nomM,
 			cache: false,
 		});
 	});
@@ -84,11 +84,11 @@ var outputDiv = document.getElementById('distance');
 				}
 				
 
-			}, //*fin call ajax 1
+			}, 
 			error: function(){      
 				alert('Error while request..');
 			}
-		});
+		});//*fin call ajax 1
 	function callAjaxAgain(lato,lngo){
 		console.log(lngo);
 		$.ajax({
