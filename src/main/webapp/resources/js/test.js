@@ -1,5 +1,86 @@
 $(document).ready(function(){
  
+	
+
+	
+	 var directionsService ;
+
+	   var directionsDisplay;
+	  var map,geocoder ;
+	window.initMap = function() {
+		
+		
+		  directionsService = new google.maps.DirectionsService();
+		    directionsDisplay = new google.maps.DirectionsRenderer();
+		  /*emplacement par défaut de la carte (j'ai mis Paris)*/
+		    var maison = new google.maps.LatLng(31.634494, -8.060885999999982);
+		  
+		  /*option par défaut de la carte*/
+		    var myOptions = {
+		      zoom:6,
+		      
+		      center: maison
+		    }
+		  /*creation de la map*/
+		    map = new google.maps.Map(document.getElementById("divMap"), myOptions);
+		  /*connexion de la map + le panneau de l'itinéraire*/
+		    directionsDisplay.setMap(map);
+		    directionsDisplay.setPanel(document.getElementById("divRoute"));
+		  /*intialise le geocoder pour localiser les adresses */
+		  geocoder = new google.maps.Geocoder();
+		
+		
+	}
+
+	
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	$('#chercher').on('click',function()
+	  {
+		  /*test si les variables sont bien initialisés */
+			 var or =31.6319717+","+(-8.05328970000005) ; 
+		     var dest=31.6348423+"," +(-8.05794370000001) ;
+		     var a=31.6355319+","+(-8.064115000000015)  ;
+		     
+		 	var waypts = [];
+
+		 	for (var i = 1; i < rs_final.length; i++) {
+		 	  waypts.push({
+		 	     location:new google.maps.LatLng(rs_final[i][0], rs_final[i][1]),
+		 	     stopover:true
+		 	  });}
+		     
+		    var request = {
+		       origin: rs_final[0][0],
+		       destination: rs_final[0][1] ,
+             waypoints:waypts,
+
+		        travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
+
+
+		    };
+			/*appel à l'API pour tracer l'itinéraire*/
+		    directionsService.route(request, function(response, status) {
+		      if (status == google.maps.DirectionsStatus.OK) {
+		        directionsDisplay.setDirections(response);
+		      }
+		    });
+
+
+
+
+
+
+		  
+			
+		  });
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+
+	
+	var outputDiv = document.getElementById('s');
 $('#b').on('click',function(){ 
 
 	
@@ -14,7 +95,7 @@ $('#b').on('click',function(){
 			success: function(response){
 				
 				
-				 var result =new array() ;
+				 var result =new Array() ;
 				//Remplir la tab de destination depuis json
 				var destinations = new Array();
 				for (var i = 0; i < response.length; i++) {
@@ -40,35 +121,41 @@ $('#b').on('click',function(){
 
 				function callback(response, status) {
 					if (status == 'OK') {
-						 var coord = new array() ; 
+						
+						
+						
+						 var coord = new Array() ; 
 
-//						var outputDiv = document.getElementById('distance');
+//						
 						var originList = response.originAddresses;
 						var destinationList = response.destinationAddresses;
 						var distances=new Array();
-						var id;
+						//var id;
 
 						for (var i = 0; i < originList.length; i++) {
 							var results = response.rows[i].elements;
 							for (var j = 0; j<results.length;j++) {
-								id="medi";
-								str=results[j].distance.text.split(" ");
+								
+							str=results[j].distance.text.split(" ");
 								str[0]= str[0].replace(",",".");
 								distances[j]=parseFloat(str[0]);
-								coord[i*(originList.length)+j]=distance[j] ;
+								coord[i*(originList.length)+j]=distances[j] ;
 							
 							}
 						}
-						/*for(var i=0 ; i<coord.length;i++)
-						$(_this).parents("div").html("<span>"+coord[i]+"</span>");*/
 						
-						$(_this).parents("div").children("span").html("<span>heeey</span>");	
-						
-						
-						var map = new Map();		
+						 /* var res="" ; 
 						for(var i=0 ; i<coord.length;i++)
+							 res+="<span>"+coord[i]+"</span><br/>";
+						$(_this).parents("div").html(res);
+						*/
+					
+						
+						
+							var map = new Map();		
+						for(var i=0 ; i<destinations.length;i++)
 					{
-							 for(var j=0 ; j<coord.length;j++)
+							 for(var j=0 ; j<destinations.length;j++)
 								 if(i!=j)
 									 {
 								var s=i+"-"+j;
@@ -78,12 +165,13 @@ $('#b').on('click',function(){
 									 }
 							
 					}
-						/*for (var [key, value] of map) 
-							$(_this).parents("div").html("<span>"+key+"->"+value+"</span>");	*/
+						
+						
+							//$(_this).parents("div").html(res);	
 						
 						
 						
-				/*		var tab =new array() ;
+					var tab =new Array() ;
 					var i=0 ; 
 					for (var [key, value] of map) 
 						{
@@ -91,61 +179,162 @@ $('#b').on('click',function(){
 						if(i==n-1)
 						break ; 
 						else
-						{	tab[i]=value ;
-						i++ ; }
+						{	
+							tab[i]=parseFloat(value) ;
+						   i++ ;
+						   
+						}
+						
 						}
 						var m=min(tab) ;
-						result[0]=getKey(m,map) ; 
 						
-			var s=result.split("-") ; 
-			var first=s[0] ; 
+						
+						var temp="" ;
+						result[0]=getKey(m,map) ;
+						
+							
+						i=0
+						for (var [key, value] of map) 
+						{
+							if(i<n-1)
+							{	map.delete(key) ;
+							   i++ ;
+							}
+						}
+						
+						res=""; 
+						for (var [key, value] of map) 
+							res+="<span>"+key+"->"+value+"</span><br/>";
+						res+="<span> la valeur de "+m+"  est  "+result[0]+"</span><br/>" ; 
+						//$(_this).parents("div").html(res);
+						
+			var first=result[0].split("-")[0] ; 
 			var f=first ; 
-			var last =s[1] ; 
-			i=0 ; 
-			
+			var last =result[0].split("-")[1] ; 
+			i=1 ; 
+			var c=0 ; 
+			var k=result[0] ; 
+			var last2="" ; 
+			var first2="" ; 
+			var a="" ; 
+			var b="" ; 
 			while(result.length<n)	
 			{		
 				var min2=1000000000  ;
-				var k ; 
-				i++;	
-				c=0 ; 
+				
+					
+				
+				
+				
 				for(var [key, value] of map) 
 					{
-				
-			    var last2=key.split("-")[1] ; 
-                var first2=key.split("-")[0] ;
+					c=0 ; 
+			     last2=key.split("-")[1] ; 
+                 first2=key.split("-")[0] ;
                 for(var j=0 ; j<result.length ; j++)
-                {
-                if(result[j].split("-")[0]==last2)
+                {	
+               var temp1=result[j].split("-")[0] ;
+                var temp2=result[j].split("-")[1] ;
+                if(temp1==last2)
                 c++  ;
-                if(result[j].split("-")[1]==last2)
+                if(temp2==last2)
                 c++  ;
+                
+                
                 }
                 
-				if(firs2==last && first!=last2 && f!=last2 && c<2)
+				if(first2.localeCompare(last)==0  && first.localeCompare(last2)!=0  && f.localeCompare(last2)!=0 && c<2)
 					{
-					if(value<min2)
+					if(value<=min2)
 						{min2=value ;
 				 	   k=key ; 
+				 	   a=first2 ; 
+				 	   b=last2 ; 
 						}
 					}
-				if(fisrt2==last && f==last2)
-				if(result.length==n-1)
+				if(first2.localeCompare(last)==0  && f.localeCompare(last2)==0 && result.length==n-1)
+				
 				{
 					min2=value ; 
 				    k=key ;
+				    a=first2 ; 
+				 	   b=last2 ;
 				    
 				}		
 					}	
-						
+					
+				
 			result[i]=k ;
+			 i++ ; 
 			
-			
-			var first=first2 ; 
-			var last =last2 ; 
+			first=a ; 
+			 last =b ; 
 						
 			}	
-				*/		
+				
+				for(var t=0 ; t<result.length;t++)
+					res+="<span>"+result[t]+" "+"</span>";  
+				//$(_this).parents("div").html(res);	
+				
+			// stocker les adresses suivants le plus cours chemins
+				
+				var fin = new Array()  ; 
+				
+				fin[0]= destinations[parseInt(result[0].split("-")[0])]; 
+				fin[1]= destinations[parseInt(result[0].split("-")[1])]; 
+				
+				for(var j=1 ; j<result.length ; j++ )
+					fin[j+1]=destinations[parseInt(result[j].split("-")[1])] ; 
+				 
+				
+				res+="<br/>" ;
+				for(var t=0 ; t<fin.length;t++)
+					 
+					res+="<span>"+fin[t]+" "+"</span><br/>";
+
+			
+				//$(_this).parents("div").html(res);
+				
+				
+				
+				
+     ////////////////////////////////////////////////////////////////////////////////////////				
+				
+				
+				  /*test si les variables sont bien initialisés */
+				 var or =31.6319717+","+(-8.05328970000005) ; 
+			     var dest=31.6348423+"," +(-8.05794370000001) ;
+			     var a=31.6355319+","+(-8.064115000000015)  ;
+			     
+			 	var waypts = [];
+
+			 	for (var i = 1; i < fin.length-1; i++) {
+			 	  waypts.push({
+			 	     location:fin[i],
+			 	     stopover:true
+			 	  });}
+			     
+			    var request = {
+			       origin: fin[0],
+			       destination: fin[0] ,
+	             waypoints:waypts,
+
+			        travelMode:'WALKING'//google.maps.DirectionsTravelMode[choixMode]
+
+
+			    };
+				/*appel à l'API pour tracer l'itinéraire*/
+			    directionsService.route(request, function(response, status) {
+			      if (status == google.maps.DirectionsStatus.OK) {
+			        directionsDisplay.setDirections(response);
+			      }
+			    });
+
+	///////////////////////////////////////////////////////////////////////////////////////////			
+				
+				
+				
+				  
 					}
 					else{
 						alert('Error was: ' + status);
@@ -177,7 +366,7 @@ function min(distances){
 	 
 	 for (var [key, value] of map) 
 	 {
-		 if(val==value)
+		 if(value==val)
 			 return key ; 
 		
 		 

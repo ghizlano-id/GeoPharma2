@@ -11,9 +11,11 @@
 <body>
 
  <div>
-<button id="b">chercher</button>
- <span></span>
+<button id="b">chercher</button><br/>
+ <span id="s"></span>
 </div>
-
+	 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew">
+		
+	</script>
 </body>
 </html>

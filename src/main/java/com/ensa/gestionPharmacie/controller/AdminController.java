@@ -192,6 +192,15 @@ public class AdminController {
 
 			return model;
 		}
+		
+		
+		@RequestMapping("/test1")
+		public ModelAndView logii(){
+			ModelAndView model=new ModelAndView();
+			model.setViewName("test1");
+
+			return model;
+		}
 
 	
 
