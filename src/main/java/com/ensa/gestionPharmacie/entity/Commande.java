@@ -2,12 +2,15 @@ package com.ensa.gestionPharmacie.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Commande {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private int idCmd;
 	private int quantite;
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -17,6 +20,18 @@ public class Commande {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Pharmacie pharmacie;
 	
+	public Medicament getMedicament() {
+		return medicament;
+	}
+	public void setMedicament(Medicament medicament) {
+		this.medicament = medicament;
+	}
+	public Pharmacie getPharmacie() {
+		return pharmacie;
+	}
+	public void setPharmacie(Pharmacie pharmacie) {
+		this.pharmacie = pharmacie;
+	}
 	public int getIdCmd() {
 		return idCmd;
 	}

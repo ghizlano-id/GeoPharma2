@@ -50,7 +50,7 @@ public class PharmacieServiceImpl implements PharmacieService{
 	}
 
 	public Pharmacie getPharmacie(double x, double y) {
-		return pharmacieDao.getPharmacie(x, y);
+		return pharmacieDao.getPharmacie(x,y);
 		
 	}
 }

@@ -5,29 +5,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ensa.gestionPharmacie.entity.Client;
+import com.ensa.gestionPharmacie.entity.Commande;
 
 @Repository
-public class ClientDaoImp implements ClientDao{
+public class CommandeDaoImpl implements CommandeDao{
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
-
 	@Transactional
-	public void ajouterClient(Client client) {
-		getSessionFactory().getCurrentSession().save(client);
+	public void ajouter(Commande commande) {
+		sessionFactory.getCurrentSession().save(commande);
 
 	}
-	@Transactional
-	public boolean existeClient(String CIN) {
-		Client client=(Client)getSessionFactory().getCurrentSession().get(Client.class,CIN);
-		if(client==null)
-			return false;
-		else
-			return true;
-	}
-
 
 	//////////////////////////
 	public SessionFactory getSessionFactory() {
@@ -37,8 +27,5 @@ public class ClientDaoImp implements ClientDao{
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
-
-
-
 
 }

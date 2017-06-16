@@ -24,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.gestionPharmacie.dao.Pharmacie_medicamentDao;
 import com.ensa.gestionPharmacie.entity.Client;
+import com.ensa.gestionPharmacie.entity.Commande;
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.service.AdminService;
 import com.ensa.gestionPharmacie.service.ClientService;
+import com.ensa.gestionPharmacie.service.CommandeService;
 import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
 
@@ -43,6 +45,8 @@ public class PanierController {
 	private PharmacieService pharmacieService;
 	@Autowired
 	private Pharmacie_medicamentDao pmDao;
+	@Autowired
+	private CommandeService commandeServie;
 
 	
 	/*@RequestMapping(value="/info",method = RequestMethod.GET)
@@ -63,7 +67,7 @@ public class PanierController {
 		//Liste de pharmacie les plus proches ????
 		List<Pharmacie> prochesPharmacies=new ArrayList<Pharmacie>();//***
 		//model.addObject("prochesPharmacies",prochesPharmacies);//*********
-		req.setAttribute("prochesPharmacies",prochesPharmacies);
+		session.setAttribute("prochesPharmacies",prochesPharmacies);
 		//Récuperer la liste des medicament ajoutés au panier
 		@SuppressWarnings("unchecked")
 		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
@@ -80,6 +84,7 @@ public class PanierController {
 	}
 	@RequestMapping(value="/annuler") //!!!!!!!
 	public ModelAndView annuler(@RequestParam("nom") String nomM,HttpServletRequest req){
+		
 		ModelAndView model =new ModelAndView();
 		HttpSession session =req.getSession();
 		@SuppressWarnings("unchecked")
@@ -92,9 +97,31 @@ public class PanierController {
 		return model;
 	}
 	@RequestMapping(value="/ajouterClient",method = RequestMethod.POST)
-	public ModelAndView AjouterClient(@ModelAttribute("client")Client client){
+	public ModelAndView AjouterClient(@ModelAttribute("client")Client client,HttpServletRequest req){
 		
+		HttpSession session=req.getSession();
+		@SuppressWarnings("unchecked")
+		List<Pharmacie> prochesPharmacies=(List<Pharmacie>) session.getAttribute("prochesPharmacies");
+		@SuppressWarnings("unchecked")
+		Set<Medicament> medicaments = (Set<Medicament>)session.getAttribute("medicaments");
+	    
+		Commande commande =new Commande();
+		
+		//Ajouter Client
 		clientService.ajouterClient(client);
+		
+		int i=0;
+		Iterator<Medicament> med = medicaments.iterator();
+	    while(med.hasNext()){
+			commande.setClient(client);
+			commande.setQuantite(1);
+			commande.setMedicament(med.next());
+			commande.setPharmacie(prochesPharmacies.get(i));
+			//Ajouter commande
+		    commandeServie.ajouter(commande);
+			i++;
+		}
+	    
 		return new ModelAndView("infos");
 		
 	}
@@ -118,11 +145,17 @@ public class PanierController {
 	@RequestMapping(value="/ajoutPharmacieProche",method = RequestMethod.POST) //2
 	public void login(@RequestParam("lato") Double x ,@RequestParam("lngo") Double y,HttpServletRequest req){
 		
-		Pharmacie pharmacie=pharmacieService.getPharmacie(x,y);
-		//@SuppressWarnings("unchecked")
-		// getPharmacie(x,y)
-		//List<Pharmacie> prochesPharmacies=(List<Pharmacie>)req.getAttribute("prochesPharmacies") ;
-		//prochesPharmacies.add(pharmacie) ;
+		Pharmacie pharmacie=pharmacieService.getPharmacie((double)x,(double)y);
+		HttpSession session =req.getSession();
+		@SuppressWarnings("unchecked")
+		List<Pharmacie> prochesPharmacies=(List<Pharmacie>)session.getAttribute("prochesPharmacies") ;
+		prochesPharmacies.add(pharmacie) ;
+		Iterator<Pharmacie> med = prochesPharmacies.iterator();
+	    while(med.hasNext()){
+	    	System.out.println(med.next().getName());
+	    	}
+    	System.out.println("*************");
+
 		System.out.println(x+" "+y);
 		
 	}

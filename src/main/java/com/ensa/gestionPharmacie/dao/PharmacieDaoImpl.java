@@ -60,7 +60,7 @@ public class PharmacieDaoImpl implements PharmacieDao{
 	}
 	@Transactional
 	public Pharmacie getPharmacie(double x, double y) {
-		List<Pharmacie> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p where p.x='"+x+"' p.y='"+y+"'").list();
+		List<Pharmacie> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p where p.x="+x+" and p.y="+y).list();
 		return list.get(0);
 	}
 
