@@ -204,7 +204,23 @@ public class AdminController {
 
 		}
 
-	
+		@RequestMapping("/test")
+		public ModelAndView logi(){
+			ModelAndView model=new ModelAndView();
+			model.setViewName("test");
+
+			return model;
+		}
+		
+		
+		@RequestMapping("/test1")
+		public ModelAndView logii(){
+			ModelAndView model=new ModelAndView();
+			model.setViewName("test1");
+
+			return model;
+		}
+
 	
 
 	
