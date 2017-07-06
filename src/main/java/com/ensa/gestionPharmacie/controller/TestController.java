@@ -1,42 +1,49 @@
 package com.ensa.gestionPharmacie.controller;
 
+import java.util.HashSet;
 import java.util.List;
-
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ensa.gestionPharmacie.entity.Admin;
 import com.ensa.gestionPharmacie.entity.Medicament;
-import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
-import com.ensa.gestionPharmacie.entity.Test;
 import com.ensa.gestionPharmacie.entity.TestFils;
-import com.ensa.gestionPharmacie.service.PharmacieService;
+import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.TestService;
+
 
 @Controller
 public class TestController {
 
 	@Autowired
-	private TestService TestService;
+	private TestService testService;
+	@Autowired
+	private MedicamentService ms;
 
 
 	
-	@RequestMapping("/")
-	public ModelAndView index(){
-		
-		ModelAndView model =new ModelAndView();
-		
-		List<Test> allTest = TestService.getAllTest();
-		model.addObject("allTest", allTest);
-		
-		model.setViewName("index");
-		return model;
+	public TestService getTestService() {
+		return testService;
 	}
-	
+
+	public void setTestService(TestService testService) {
+		this.testService = testService;
+	}
+
+	public MedicamentService getMs() {
+		return ms;
+	}
+
+	public void setMs(MedicamentService ms) {
+		this.ms = ms;
+	}
+
 	@RequestMapping("/add")
 	public ModelAndView index2(){
 		
@@ -45,7 +52,7 @@ public class TestController {
 		TestFils test=new TestFils();
 		test.setName("zineb");
 		test.setNickname("zin");
-		TestService.add(test);
+		testService.add(test);
 		//------------Admin------------
 		Admin admin=new Admin();
 		admin.setCIN("EE556677");
@@ -54,7 +61,7 @@ public class TestController {
 		admin.setPrenom("ghizlane");
 		admin.setTel("0699196616");
 		admin.setPassword("aaa");
-		TestService.addP(admin);
+		testService.addP(admin);
 		//------------Pharmacien---------------
 		
 		Pharmacien ph= new Pharmacien() ; 
@@ -64,15 +71,23 @@ public class TestController {
 		ph.setPrenom("Nassima");
 		ph.setPassword("toto");
 		ph.setTel("06701487");
-		TestService.addPh(ph);
+		testService.addPh(ph);
  	
 
-		TestService.addP(admin);
+		testService.addP(admin);
 
 		
 		model.setViewName("index");
 		
 		return model;
+	}
+	
+	@RequestMapping("/dispo")
+	public @ResponseBody Set<Medicament> afficher(){
+		Set<Medicament> medica=ms.AllMedicamentDisp();
+		for(Medicament med:medica)
+			System.out.println(med.getNom()); 
+		return medica;
 	}
 	
 }

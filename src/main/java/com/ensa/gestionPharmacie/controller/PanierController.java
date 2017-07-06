@@ -2,7 +2,6 @@ package com.ensa.gestionPharmacie.controller;
 
 
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -28,7 +27,6 @@ import com.ensa.gestionPharmacie.entity.Commande;
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
-import com.ensa.gestionPharmacie.service.AdminService;
 import com.ensa.gestionPharmacie.service.ClientService;
 import com.ensa.gestionPharmacie.service.CommandeService;
 import com.ensa.gestionPharmacie.service.MedicamentService;
@@ -65,7 +63,7 @@ public class PanierController {
 		Set<Medicament> medicaments= new HashSet<Medicament>() ;
 		Medicament medicament=new Medicament();
 		//Liste de pharmacie les plus proches ????
-		List<Pharmacie> prochesPharmacies=new ArrayList<Pharmacie>();//***
+		Set<Pharmacie> prochesPharmacies=new HashSet<Pharmacie>();//***
 		//model.addObject("prochesPharmacies",prochesPharmacies);//*********
 		session.setAttribute("prochesPharmacies",prochesPharmacies);
 		//Récuperer la liste des medicament ajoutés au panier
@@ -85,23 +83,23 @@ public class PanierController {
 	@RequestMapping(value="/annuler") //!!!!!!!
 	public ModelAndView annuler(@RequestParam("nom") String nomM,HttpServletRequest req){
 		
-		ModelAndView model =new ModelAndView();
 		HttpSession session =req.getSession();
 		@SuppressWarnings("unchecked")
 		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
-			
-		idMeds.remove(nomM);
 		
-		model.setViewName("redirect:/monPanier");
+		System.out.println(nomM);
+		idMeds.remove(nomM);
+		System.out.println("done !");
 
-		return model;
+		return new ModelAndView("redirect:/monPanier");
+		
 	}
 	@RequestMapping(value="/ajouterClient",method = RequestMethod.POST)
-	public ModelAndView AjouterClient(@ModelAttribute("client")Client client,HttpServletRequest req){
+	public ModelAndView AjouterClient(@ModelAttribute("client")Client client,double x,double y,HttpServletRequest req){
 		
 		HttpSession session=req.getSession();
 		@SuppressWarnings("unchecked")
-		List<Pharmacie> prochesPharmacies=(List<Pharmacie>) session.getAttribute("prochesPharmacies");
+		Set<Pharmacie> prochesPharmacies=(Set<Pharmacie>) session.getAttribute("prochesPharmacies");
 		@SuppressWarnings("unchecked")
 		Set<Medicament> medicaments = (Set<Medicament>)session.getAttribute("medicaments");
 	    
@@ -110,16 +108,19 @@ public class PanierController {
 		//Ajouter Client
 		clientService.ajouterClient(client);
 		
-		int i=0;
+//		int i=0;
 		Iterator<Medicament> med = medicaments.iterator();
+		Iterator<Pharmacie> pharm = prochesPharmacies.iterator();
 	    while(med.hasNext()){
 			commande.setClient(client);
+			commande.setLongitude(y);
+			commande.setLaltitude(x);
 			commande.setQuantite(1);
 			commande.setMedicament(med.next());
-			commande.setPharmacie(prochesPharmacies.get(i));
+			commande.setPharmacie(pharm.next());
 			//Ajouter commande
 		    commandeServie.ajouter(commande);
-			i++;
+//			i++;
 		}
 	    
 		return new ModelAndView("infos");
@@ -148,11 +149,12 @@ public class PanierController {
 		Pharmacie pharmacie=pharmacieService.getPharmacie((double)x,(double)y);
 		HttpSession session =req.getSession();
 		@SuppressWarnings("unchecked")
-		List<Pharmacie> prochesPharmacies=(List<Pharmacie>)session.getAttribute("prochesPharmacies") ;
+		Set<Pharmacie> prochesPharmacies=(Set<Pharmacie>)session.getAttribute("prochesPharmacies") ;
 		prochesPharmacies.add(pharmacie) ;
-		Iterator<Pharmacie> med = prochesPharmacies.iterator();
-	    while(med.hasNext()){
-	    	System.out.println(med.next().getName());
+		Iterator<Pharmacie> pharma = prochesPharmacies.iterator();
+		System.out.println("******New*******");
+	    while(pharma.hasNext()){
+	    	System.out.println(pharma.next().getName());
 	    	}
     	System.out.println("*************");
 

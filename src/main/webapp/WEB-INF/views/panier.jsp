@@ -86,6 +86,35 @@
 		padding: 6px;
 		}
 	</style>
+	<script type="text/javascript">
+		function t(){
+			var idMedica="doliprane";
+			$.ajax({
+				type: "GET",
+				url: "http://localhost:8080/gestionPharmacie/pharmacies-madicament/"+idMedica,
+				contentType: "application/json",
+				dataType: 'json',
+				cache: false,
+				success: function(response){
+					
+					var responsesCoord=response;
+					var tab="<table><th>Nom</th><th>Prixo</th>";
+
+					for (var i = 0; i < response.length; i++) {
+					tab+= "<tr><td>"+response[i].name+"</td><td>"+response[i].adresse+"</td></tr>";
+					}
+					tab+="</table>";
+					$('#listeProduit').html(tab);
+					alert("done");
+					},
+					error: function(){      
+					alert('Error while request..');
+				}
+
+				});
+			}
+	</script>
+	
 </head>
 <body>
 	<div id="div-top">GeoPharma GN</div>
@@ -115,12 +144,12 @@
 	   		</tr>
 	   		<tr>
 	   		 <td class="leftColumn">Laltitude</td>
-	   		 <td><form:input path="x" class="field" id="lat"/></td>
+	   		 <td><input name="x" class="field" id="lat"/></td>
 	   		</tr>
 	   		<tr>
 	   		 <td class="leftColumn">Longitude</td>
-	   		 <td><form:input path="y" class="field" id="lng"/></td>
-	   		 <td><button onclick="getLocation()">Get Coordinates</button></td>
+	   		 <td><input name="y" class="field" id="lng"/></td>
+<!-- 	   		 <td><button onclick="getLocation()">Get Coordinates</button></td> -->
 	   		</tr>
 	   		<tr>
 	   		 <td></td>
@@ -152,7 +181,9 @@
 	     </c:forEach>
 	   </table>
 	 </div>
-	 <div id="distance"></div>
+	 <div id="listeProduit"></div>
+	 <button onClick="t()" >click</button>
+	 <div id="distance" ></div>
 	 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew">
 		
 	</script>

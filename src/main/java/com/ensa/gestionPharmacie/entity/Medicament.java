@@ -12,6 +12,8 @@ import javax.persistence.Id;
 
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Medicament{
 	@Id
@@ -19,8 +21,10 @@ public class Medicament{
 	private double prix  ; 
 	private String designation ; 
 	private String photo ; 
+	@JsonIgnore
 	@OneToMany(mappedBy="medicament")
 	private List<Pharmacie_medicament> pharmacie_qt = new ArrayList<Pharmacie_medicament>() ;
+	@JsonIgnore
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="medicament")
 	private List<Commande> commandes= new ArrayList<Commande>();
 //-------------------------getters & setters ----------------------------

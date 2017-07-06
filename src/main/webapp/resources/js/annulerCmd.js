@@ -9,10 +9,40 @@ $(document).ready(function(){
 			cache: false,
 		});
 	});
+	//-------------get commands----------- (ghizlane) 04/07/2017
+
+	$( window ).load(function() {
+		var idMedica="doliprane";
+		$.ajax({
+			type: "GET",
+			url: "http://localhost:8080/gestionPharmacie/pharmacies-madicament/"+idMedica,
+			contentType: "application/json",
+			dataType: 'json',
+			cache: false,
+			success: function(response){
+				
+				var responsesCoord=response;
+				var tab="<table><tr><th>Nom</th><th>Prix</th></tr>";
+				var m="lailo";
+				for (var i = 0; i < response.length; i++) {
+				tab+= "<tr><td>"+response[i].name+"</td><td>"+response[i].adresse+
+				"</td><td><button class="+m+" onClick=\"t()\">annuler</button></td></tr>";
+				}
+				tab+="</table>";
+				$('#listeProduit').html(tab);
+				
+				},
+				error: function(){      
+				alert('Error while request..');
+			}
+
+			});
+		});
 	//-----------confirmer------------
 var outputDiv = document.getElementById('distance');
 
-	$('.c').on('click',function(){//?????? a suivre   
+	$('.c').on('click',function(){ 
+		
 		var latClient =$('#lat').val();
 		var lngClient =$('#lng').val();
 		var idMedica = $(this).parent().children(".monM").val();
@@ -74,7 +104,7 @@ var outputDiv = document.getElementById('distance');
 						lato=responsesCoord[indt].x;
 						lngo=responsesCoord[indt].y;
 						$(_this).parents("tr").children(".dst").children("span").html("<span>"+min(distances)+"  x="+lato+",y="+responsesCoord[indt].y+"</span>");
-					
+						$(_this).hide();
 						//call function ajax 2
 						callAjaxAgain(lato,lngo);
 					}

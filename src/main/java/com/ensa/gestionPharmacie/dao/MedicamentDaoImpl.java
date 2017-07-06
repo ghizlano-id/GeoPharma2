@@ -1,6 +1,8 @@
 package com.ensa.gestionPharmacie.dao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,14 @@ public class MedicamentDaoImpl implements MedicamentDao{
 		medicament=(Medicament) getSessionFactory().getCurrentSession().get(Medicament.class,nomM);
 
 		return medicament;
+	}
+	@Transactional
+	public Set<Medicament> AllMedicamentDisp() {
+		String q="select m from Medicament  m  JOIN m.pharmacie_qt mq where mq.quantite!=0";
+		List<Medicament> liste= getSessionFactory().getCurrentSession().createQuery(q).list();
+		Set<Medicament> medicaments= new HashSet<Medicament>();
+		medicaments.addAll(liste);
+		return medicaments;
 	}
 	
 }
