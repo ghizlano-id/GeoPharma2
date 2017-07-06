@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -141,7 +142,7 @@ private PharmacieService pharmacieService ;
 	*/
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-    public ModelAndView login(@ModelAttribute("pharmacien") Pharmacien pharmacien)
+    public ModelAndView login(@ModelAttribute("pharmacien") Pharmacien pharmacien, HttpServletRequest req)
     {   
 		ModelAndView model=new ModelAndView();
 		String id=pharmacienService.estPharmacien(pharmacien.getEmail(), pharmacien.getPassword()) ;
@@ -149,9 +150,12 @@ private PharmacieService pharmacieService ;
 		
       if(id!="empty")
         
-      {  
+      {   // HttpSession session = req.getSession()   ;
+                
     	  pharmacie_id=pharmacieService.getId(id) ;
     	    System.out.println(pharmacie_id);
+    	  //  session.setAttribute("idd", pharmacie_id);
+    	
     	  model.addObject("id", pharmacie_id) ; 
 	 	model.setViewName("pharmacien-acceuil");
     	  
@@ -189,9 +193,37 @@ private PharmacieService pharmacieService ;
 			return new ModelAndView("infos") ;
     }
 	
+	//////////////////////////////////////////////////////////////////////////////
+	// en utilisant les sessions
+	
+	/*@RequestMapping(value="/ajout", method=RequestMethod.POST)
+    public ModelAndView loginn(@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament,HttpServletRequest req) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
+    {   
+		Pharmacie p= new Pharmacie() ; 
+		HttpSession session=req.getSession() ;
+		String id=(String) session.getAttribute("idd") ;
+		System.out.println(id);
+		int id2=Integer.parseInt(id) ;
+		p.setIdPharma(id2);
+		
+		pharmacie_medicament.setPharmacie(p);
+	
+		int i=pmd.Ajouter(pharmacie_medicament);
+		if(i==1)
+		{   System.out.println("ok");
+	   return new ModelAndView("index"); }
+		else
+			return new ModelAndView("infos") ;
+    }
+	*/
+	
+	//////////////////////////////////////////////////////////////////////////////////////
+	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)
-	public ModelAndView login5(int id){
-		 System.out.println(id);
+	public ModelAndView login5(int id){  //int id
+		
+		
+		// System.out.println(id);
 		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
 		 
       ModelAndView model=new ModelAndView("ajouter-medicament","command",pharmacie_medicament);

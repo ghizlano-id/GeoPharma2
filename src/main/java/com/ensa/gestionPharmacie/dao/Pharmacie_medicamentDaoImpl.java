@@ -1,5 +1,6 @@
 package com.ensa.gestionPharmacie.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -74,6 +75,16 @@ public class Pharmacie_medicamentDaoImpl implements Pharmacie_medicamentDao  {
 			List<Pharmacie_medicament> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie_medicament as p where p.medicament.nom='"+idMedica+"'").list();
 			
 			return list;
+		}
+		@Transactional
+		public List<Pharmacie> getPharm_med(String idMedica) {
+			List<Pharmacie_medicament> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie_medicament as p where p.medicament.nom='"+idMedica+"' and p.quantite > 0").list();
+			List<Pharmacie> l= new ArrayList<Pharmacie>() ; 
+			for(Pharmacie_medicament p : list)
+				l.add(p.getPharmacie()) ; 
+			
+			
+			return l;
 		}
 		
 		

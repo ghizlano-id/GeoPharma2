@@ -38,16 +38,23 @@
 		}
 </style>
 <script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/map.js"></script>
+<script src="resources/js/map2.js"></script>
 </head>
 <body>
 
 	
 	<div id="div-top">GeoPharma GN</div>
 	<div id="div-center">
-		<div id="menu"></div>
+		<div id="menu">
+
+		</div>
 		<div id="map"></div>
+		<div id="res">	<button id="b">afficher l'itineraire de la pharmacie la plus proche</button></div>
+	
+		
 	</div>
+	
+	
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		

@@ -5,7 +5,7 @@
 
 <html>
 	<head>
-		<meta charset="UTF-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<link href="<c:url value="/resources/CSS/pharmacien-acceuil.css" />" rel="stylesheet">
 	</head>
 	<body>
@@ -38,7 +38,7 @@
                </div>
 				
                    <div id="div2">
-                   <a href="#">
+                   <a href="<c:url value="/test1?id=${id}"/>">
 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/ambulance.png"/>" width="70" height="90"><p>Livraison des médicament</p></button>
                      </a>
                     

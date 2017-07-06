@@ -6,86 +6,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="<c:url value="/resources/CSS/update.css"/>" rel="stylesheet">
 <title>Ajout</title>
-	<style type="text/css">
-		body{
-		margin: 0;
-	   }
-	   legend{
-	   	   font-family:verdana, arial, sans-serif; 
-		   font-size:14pt; 
-		   font-weight:bold; 
-		   color:white; 
-		   margin:10px; 
-		   padding:5px 10px 5px 10px; 
-		   background-color:#AAAAAA; 
-		   border-radius:4px; 
-	   }
-	   fieldset{ 
-		   margin:10px; 
-		   border:none; 
-		   background-color:#eee; 
-		   border-radius:10px; 
-		   padding:20px; 
-		} 
-	   div{
-	   margin-left:30%;
-	   margin-top:10%;
-	   height:400px;
-	   width:400px;
-	   }
-	   .field{
-	   height: 30px;
-	   outline-color:#78AB46; 
-	   border:1px solid grey;
-	   border-radius: 5px;
-	   }
-	   input[type="submit"]{
-	   	color:white;
-		background-color: #78AB46;
-		cursor: pointer;
-		font-weight: bold;
-		height:30px;
-		width:80px;
-		border:none;
-	    border-radius: 5px;
-		}
-		form{
-		 background-color: #fff;
-		}
-		.leftColumn{
-		color:grey;
-		text-align: right;
-		width: 100px;
-		}
-		
-	   
-	</style>
+	
 </head>
 
 <body>
 <div>
+
+   <div id="top">Modifier un médicament</div>
+
+       <div id="form"> 
+
  <form:form method="POST" action="update2/${id}" command="pharmacie_medicament"> 
-   <fieldset>
-    <legend>Update Médicament</legend>
-   <table>
+
+   
+   <table cellpadding="15px">
       <tr>
-        <td class="leftColumn">Nom du médicament</td>
-        <td>           <form:select  path="medicament.nom"  class="field">
-    <form:options items="${listmed}"></form:options>
+        <td class="champ">Nom du médicament</td>
+        <td>          
+         <form:select  path="medicament.nom"  class="field">
+    <form:options items="${listmed}" class="select"></form:options>
     </form:select></td>
      </tr>
       <tr>
-        <td class="leftColumn" >Quantité ajoutée</td>
-        <td><form:input path="quantite" class="field"/></td>
+        <td class="champ" >Quantité ajoutée</td>
+        <td><form:input path="quantite" class="select"/></td>
      </tr>
      <tr>
        <td></td>
-       <td>	<input type="submit" value="Update" id="nexto"/></td>
+       <td>	<input type="submit" value="Update"  id="btn"></td>
      </tr>
     </table>
-    </fieldset>
+  
  </form:form>
+ </div>
  </div>
 </body>
 </html>

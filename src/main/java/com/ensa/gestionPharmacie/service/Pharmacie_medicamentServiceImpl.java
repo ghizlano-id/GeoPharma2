@@ -1,9 +1,12 @@
 package com.ensa.gestionPharmacie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.Pharmacie_medicamentDao;
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 
 @Service
@@ -35,6 +38,12 @@ public class Pharmacie_medicamentServiceImpl  implements Pharmacie_medicamentSer
 	{
 		pmd.update(pm);
 		
+	}
+
+
+	public List<Pharmacie> getPharm_med(String med) {
+		// TODO Auto-generated method stub
+		return pmd.getPharm_med(med) ; 
 	}
 	
 	

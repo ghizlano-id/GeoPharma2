@@ -170,13 +170,13 @@ $('#b').on('click',function(){
 							//$(_this).parents("div").html(res);	
 						
 						
-						
+						// Pour calculer la distance min entre le pharmacien et les clients
 					var tab =new Array() ;
 					var i=0 ; 
 					for (var [key, value] of map) 
 						{
 						
-						if(i==n-1)
+						if(i==n-1)// n-1 le nombre de client  (0-1,0-2,0-3,0-4) ici n=5 --> n-1 client ... 0 est l'indice de la pharmacie
 						break ; 
 						else
 						{	
@@ -192,7 +192,7 @@ $('#b').on('click',function(){
 						var temp="" ;
 						result[0]=getKey(m,map) ;
 						
-							
+						// supprimer les autres distance entre le client et le pharmacien apres avoir determine la distance min
 						i=0
 						for (var [key, value] of map) 
 						{
