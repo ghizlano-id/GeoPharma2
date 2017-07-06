@@ -13,6 +13,8 @@ public class Commande {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private int idCmd;
 	private int quantite;
+	private double longitude;
+	private double laltitude;
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Client client;
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -49,5 +51,17 @@ public class Commande {
 	}
 	public void setClient(Client client) {
 		this.client = client;
+	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLaltitude() {
+		return laltitude;
+	}
+	public void setLaltitude(double laltitude) {
+		this.laltitude = laltitude;
 	}
 }

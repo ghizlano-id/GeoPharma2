@@ -30,8 +30,13 @@ public class ClientController {
 	private MedicamentService medicamentService ; 
 
 
+	/* page acceuil boostrap (ghizlane)*/
+	@RequestMapping(value="/")
+	public ModelAndView acceuil(){
+		return new ModelAndView("PageAcceuil");
+	}
 
-	@RequestMapping("/acceuil")
+	@RequestMapping(value="/acceuil")
 	public ModelAndView login2(HttpServletRequest req){
 		ModelAndView model=new ModelAndView();
 		model.setViewName("acceuil");
@@ -55,6 +60,15 @@ public class ClientController {
 		Set<String> idMeds= new HashSet<String>() ; 
 		session.setAttribute("idMeds", idMeds);*/
 		return model;
+	}
+	/* list of product (ghizlane) boostrap*/
+	@RequestMapping("/listeMedicaments")
+	public ModelAndView afficher(){
+		ModelAndView model=new ModelAndView("listeProduits");
+		Set<Medicament> medicaments=medicamentService.AllMedicamentDisp();  	
+		model.addObject("listemedicament",medicaments) ;
+		return model;
+		
 	}
 	@RequestMapping(value="/ajoutPanier/{id}",method = RequestMethod.POST) //2
 	public void login(@PathVariable("id") String id ,HttpServletRequest req){

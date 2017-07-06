@@ -1,6 +1,7 @@
 package com.ensa.gestionPharmacie.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,11 @@ public class MedicamentServiceImpl implements MedicamentService {
 	public Medicament getMedicament(String nomM) {
 		
 		return medicamentDao.getMedicament(nomM);
+	}
+
+	public Set<Medicament> AllMedicamentDisp() {
+		
+		return medicamentDao.AllMedicamentDisp();
 	}
 	
 }

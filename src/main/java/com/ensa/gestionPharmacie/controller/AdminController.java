@@ -42,41 +42,60 @@ public class AdminController {
 
 	//-------------------------------------------------------
 	@RequestMapping(value="/admin",method = RequestMethod.GET)
-	public ModelAndView login(){
-		//ModelAndView model=new ModelAndView();
-		return new ModelAndView("admin-login","command",new Admin());
+	public ModelAndView login(@RequestParam(value="erreur",required=false) String erreur){
+		ModelAndView model = new ModelAndView("admin-login","command",new Admin());
+		if(erreur!=null && !erreur.equals("") ){
+			model.addObject("erreur", erreur);
+		}
+		return model;
 	}
-
+	@RequestMapping(value="/PageAcceuilAdmin",method = RequestMethod.GET)  
+	public ModelAndView adminAcceuil(){  
+		ModelAndView model=new ModelAndView("admin-acceuil");
+		
+		return model;
+	}
+	
 	@RequestMapping(value="/PageAcceuilAdmin",method = RequestMethod.POST)  
 	public ModelAndView save(@ModelAttribute("admin") Admin admin){  
 		ModelAndView model=new ModelAndView();
 		if(adminService.estAdmin(admin.getEmail(), admin.getPassword()))
 			model.setViewName("admin-acceuil");
-		else
+		else{
+			model.addObject("erreur", "email ou mot de pass invalid");
 			model.setViewName("redirect:/admin");
+			}
 		return model;
 	}
 
 	//-----------------------Ajout pharmacien/pharmacie-----------------------
 	@RequestMapping(value="/ajout-pharmacien",method=RequestMethod.GET)
-	public ModelAndView ajout1(){
+	public ModelAndView ajout1(@RequestParam(value="erreur",required=false) String erreur){
+		ModelAndView model = new ModelAndView("ajout-pharmacien","command",new Pharmacien());
+		
+		if(erreur!=null && !erreur.equals("") ){
+			model.addObject("erreur", erreur);
+		}
 
-		Pharmacien pharmacien=new Pharmacien();
-
-		return new ModelAndView("ajout-pharmacien","command",pharmacien);
+		return model;
 	}
 
 	@RequestMapping(value="/ajouter1",method = RequestMethod.POST)
 	public ModelAndView ajoutPharmacien(@ModelAttribute("pharmacien")Pharmacien pharmacien){
-
+		
+		if(pharmacienService.getPharmacien(pharmacien.getCIN())!=null){ //existe
+			ModelAndView model=new ModelAndView();
+			model.addObject("erreur","Pharmacien existe deja !");
+			model.setViewName("redirect:/ajout-pharmacien");
+			return model;
+		}
+		else{
 		pharmacienService.ajouter(pharmacien);
 
 		Pharmacie pharmacie=new Pharmacie();
 		String CIN=pharmacien.getCIN();
 
-		System.out.println(pharmacien.getCIN());
-
-		return new ModelAndView("redirect:/ajout-pharmacie/"+CIN,"command",pharmacie);
+		return new ModelAndView("redirect:/ajout-pharmacie/"+CIN,"command",pharmacie);}
 	}
 
 	//--------------------------------------------------------
