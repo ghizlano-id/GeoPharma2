@@ -7,8 +7,7 @@
 <head>
 <title></title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<c:url value="/resources/CSS/commande.css" />"
-	rel="stylesheet">
+<link href="<c:url value="/resources/CSS/commande.css" />" rel="stylesheet">
 <script src="resources/js/jquery.min.js"></script>
   <script src="resources/js/panier.js"></script>
   

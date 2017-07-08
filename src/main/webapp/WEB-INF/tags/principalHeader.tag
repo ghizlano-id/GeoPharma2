@@ -26,7 +26,7 @@
 		      </li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
-		      <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>  Mon panier</a></li>
+		      <li><a href="<c:url value="/monPanier2"/>"><span class="glyphicon glyphicon-shopping-cart"></span>  Mon panier</a></li>
 		    </ul>
 		  </div>
 		</nav>

@@ -4,8 +4,11 @@
 <!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=harset=UTF-8">
 <title>Medicaments</title>
+<script src="resources/js/jquery.min.js"></script>
+  <script src="resources/js/panier.js"></script>
+  
 	<script type="text/javascript">
 		function t(){
 			alert("done");
@@ -39,8 +42,8 @@
                 <div class="space-ten"></div>
                 <div class="btn-ground text-center">
                 	<input type="hidden" class="idMedica" value="${medicament.nom}"/>
-                    <button type="button" onClick="t()" class="btn btn-primary a"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i class="fa fa-search"></i> Quick View</button>
+                    <button type="button" class="btn btn-primary a"><i class="fa fa-shopping-cart"></i> Ajouter au panier</button>
+<!--                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#product_view"><i class="fa fa-search"></i> Quick View</button> -->
                 </div>
                 <div class="space-ten"></div>
               </div>
