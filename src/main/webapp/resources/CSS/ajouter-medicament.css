@@ -14,7 +14,8 @@ background-position: 100% 0%  ;
 font-weight: bold;
 font-size: 20px ; 
 color: #609f6b ;  
-
+padding:15px  ;
+ padding-left:10px ;  
 width: 100% ; 
 
 }
@@ -22,7 +23,7 @@ width: 100% ;
 	  width: 100% ; 
 	  height:100px ; 
 	font : sans-serif;
-	color : #73a343 ; 
+	color :  #78AB46  ; /* #73a343*/
 	font-size: 70px ; 
 	text-align: center;
 	
@@ -39,15 +40,15 @@ width: 100% ;
 
 background-color: #eee ; 
 
-margin-top: 180px ; 
-margin-left: 620px  ;
+margin-top: 90px ; 
+margin-left: 540px  ;
 
 }
 
 footer{
 	width:100%;
 	height:80px;
-	background-color:#78AB46;
+	background-color:  #548426 !important;
 	color:white;
 	font:10pt verdana;
 	text-align: center;
@@ -74,6 +75,7 @@ color: white;
 	background-color:white ; 
 	border-color:black ; 
 	 font-style: normal;
+	  margin-right:25px ; 
     
 	
 }

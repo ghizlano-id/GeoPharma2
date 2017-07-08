@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -153,6 +154,13 @@ private PharmacieService pharmacieService ;
 		 return model;
 	}
 
+	@RequestMapping("/loginph")
+	public ModelAndView loginph(){
+		ModelAndView model=new ModelAndView();
+		 	model.setViewName("pharmacien-acceuil");
+		 return model;
+	}
+
 	/*
 	@RequestMapping(value = "/test")
 	public String someMethod(@RequestParam(value="login", required=false) String l ,@RequestParam(value="pwd", required=false) String p,Model model) {
@@ -219,18 +227,23 @@ private PharmacieService pharmacieService ;
     	  model.addObject("id", pharmacie_id) ; 
 	 	model.setViewName("pharmacien-acceuil");
     	  
-    	  return model ; }
+    	  }
       
       else 
       {    
-      	 return new ModelAndView("index") ; }
-	    
+    	  model.addObject("erreur", "email ou mot de pass invalid");
+		model.setViewName("redirect:/pharmacien"); }
+      
+      return model ;
+	   
     }
 	
 	@RequestMapping(value="/pharmacien",method=RequestMethod.GET)
-	public ModelAndView login(){
+	public ModelAndView login(@RequestParam(value="erreur",required=false) String erreur){
 		ModelAndView model=new ModelAndView("pharmacien-login","command",new Pharmacien());
-		 	
+		if(erreur!=null && !erreur.equals("") ){
+			model.addObject("erreur", erreur);
+		}
 		 return model;
 	}
 	

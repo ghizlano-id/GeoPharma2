@@ -1,46 +1,51 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>  
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"  >
-
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>  
+<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
-
-
-<link rel='stylesheet prefetch'
-	href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
-
-<link href="<c:url value="/resources/CSS/pharmacien-login.css" />" rel="stylesheet">
-
-
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Login</title>
+	<link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="<c:url value="/resources/CSS/admin-login.css" />" rel="stylesheet">
 </head>
 
 <body>
-<form:form   action="login" method="post"    >
-	<div class="login-form">
-
-		<div class="form-group ">
-			<form:input path="email" class="saisi" placeholder="Username " id="UserName" name="login"/>
-			
+<%-- 	<form:form action="PageAcceuilAdmin" method="POST" > --%>
+<%-- 		<form:input type="email" path="email" placeholder="email"/><br/><br/> --%>
+<%-- 		<form:password path="password" placeholder="Mot de passe" /><br/><br/><br/> --%>
+<!-- 		<input type="submit" value="SE CONNECTER" /><br/> -->
+<%--    </form:form> --%>
+<div class="container">
+    <div class="row vertical-offset-100">
+    	<div class="col-md-4 col-md-offset-4">
+    		<div class="panel panel-default">
+			  	<div class="panel-heading">
+			    	<h3 class="panel-title">Please sign in</h3>
+			 	</div>
+			  	<div class="panel-body">
+			    	<form:form action="login" method="POST" >
+                    <fieldset>
+                    	<c:if test="${!empty erreur }">
+			    			<div class="alert alert-danger">${erreur }</div>
+			    		</c:if>
+			    	  	<div class="input-group">
+			    	  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+			    		    <form:input path="email" class="form-control" placeholder="E-mail" name="login" type="text" />
+			    		</div>
+			    		<div class="input-group">
+			    			<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+			    			<form:input path="password" class="form-control" placeholder="Password" name="pwd" type="password"/>
+			    		</div>
+			    		<input class="btn btn-lg btn-success btn-block btn-login" type="submit" value="Login">
+			    	</fieldset>
+			      	</form:form>
+			    </div>
+			</div>
 		</div>
-		<div class="form-group">
-			<form:password path="password" class="saisi" placeholder="Password" id="Passwod" name="pwd"/>
-				
-		</div>
-
-		<a class="link" href="#">Lost your password?</a>
-	 <a href="http://localhost:8080/gestion-pharmacie/test">
-            <input type="submit" value="Log in" class="btn"/>
-        
-				
-			
-					</button>
-
-
 	</div>
-     </form:form>
+</div>
+</body>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib prefix="headerPharmacien" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -9,16 +10,17 @@
 		<link href="<c:url value="/resources/CSS/pharmacien-acceuil.css" />" rel="stylesheet">
 	</head>
 	<body>
-		<header> 
+<%-- 		<header>  --%>
 
-		<div id="ph">ParmaGeo GN</div>
-		<a href="http://www.google.com">
-         <button type="button" class="bttn" >Déconnexion</button>
-             </a>
-		</header>
+<!-- 		<div id="ph">ParmaGeo GN</div> -->
+<!-- 		<a href="http://www.google.com"> -->
+<!--          <button type="button" class="bttn" >Déconnexion</button> -->
+<!--              </a> -->
+<%-- 		</header> --%>
+		<headerPharmacien:headerPharmacien />
 		<footer>&copy; Tous droits réservés</footer>
 		
-		<section>
+		<section id="sec">
 			  <div id="div1">
                      <a href="<c:url value="/add_med"/>">  <!-- ?id=${id} -->
                      <button type="button" class="btn" >

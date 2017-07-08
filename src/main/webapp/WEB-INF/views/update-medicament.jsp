@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
+ <%@ taglib prefix="headerPharmacien" tagdir="/WEB-INF/tags" %>
+
 <!DOCTYPE html >
 <html>
 <head>
@@ -12,6 +14,8 @@
 </head>
 
 <body>
+     <footer>&copy; Tous droits réservés</footer>
+   <headerPharmacien:headerPharmacien />
 <div>
 
    <div id="top">Modifier un médicament</div>
@@ -21,7 +25,7 @@
  <form:form method="POST" action="updat" command="pharmacie_medicament">  <!-- e2/${id} -->
 
    
-   <table cellpadding="15px">
+   <table cellpadding="20px">
       <tr>
         <td class="champ">Nom du médicament</td>
         <td>          

@@ -11,7 +11,7 @@
 		<div class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header ">
-			      <a class="navbar-brand titre" href="<c:url value="/login"/>">GeoPharma GN</a>
+			      <a class="navbar-brand titre" href="<c:url value="/loginph"/>">GeoPharma GN</a>
 			    </div>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<c:url value="/pharmacien"/>"><span class="glyphicon glyphicon-off" aria-hidden="true" style="margin-right: 10px;"></span>Deconnexion</a></li>

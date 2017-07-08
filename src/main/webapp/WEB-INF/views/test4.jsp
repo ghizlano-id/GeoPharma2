@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+ <%@ taglib prefix="headerPharmacien" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
 <head> 
@@ -38,7 +39,7 @@
 			width:60%; 
 			height:80% ; 
 			margin-top: 10px ;
-			margin-left:10px ;  
+			margin-left:40px ;  
 		border:1px gray solid;
 border-radius:10px;
 -webkit-box-shadow:0 0 6px gray inset; 
@@ -54,10 +55,11 @@ border-radius:10px;
 	border:1px gray solid;
 border-radius:10px;
 -webkit-box-shadow:0 0 6px gray inset;
-    
+    margin-right:30px ; 
  
 		 
 		}
+		
 
 		#t{
 		  width:30%;
@@ -122,7 +124,8 @@ border-radius:5px;
 </style>
 </head> 
 <body > 
-<div id="div-top">GeoPharma GN</div>
+<headerPharmacien:headerPharmacien />
+<!-- <div id="div-top">GeoPharma GN</div> -->
 
    <div id="liv">
       	<input type="button" value="afficher l'itinéraire" id="b"/>
