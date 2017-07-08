@@ -1,11 +1,17 @@
 package com.ensa.gestionPharmacie.entity;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Commande {
@@ -13,6 +19,8 @@ public class Commande {
 	@GeneratedValue(strategy=GenerationType.AUTO)
     private int idCmd;
 	private int quantite;
+	@Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
 	private double longitude;
 	private double laltitude;
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -64,4 +72,13 @@ public class Commande {
 	public void setLaltitude(double laltitude) {
 		this.laltitude = laltitude;
 	}
+	public Date getDateTime() {
+		return dateTime;
+	}
+	public void setDateTime(Date dateTime) {
+		this.dateTime = dateTime;
+	}
+	
+	
+	
 }

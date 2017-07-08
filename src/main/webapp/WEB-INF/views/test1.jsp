@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
 <head> 
 <meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
@@ -106,6 +109,7 @@ border-radius:5px;
 </head> 
 <body> 
 <div id="div-top">GeoPharma GN</div>
+
    <div id="liv">
       	<input type="button" value="affihcer l'itinéraire" id="b"/>
       	<input type="button" value="affihcer l'itinéraire" id="m"/>
@@ -134,6 +138,18 @@ border-radius:5px;
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		
 	</script>
-	<div id="res"></div>
+	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie;" %>
+	<% Pharmacie ph =(Pharmacie)request.getSession().getAttribute("ph") ; 
+	    String x=Double.toString(ph.getX()) ; 
+	    String y=Double.toString(ph.getY()) ; 
+	%>
+    <input type="hidden" value="<%=x %>" id="x">
+    <input type="hidden" value="<%=y %>"  id="y">
+    <div id="r"></div>
+      <div id="res"></div>
+      <div id="kk"></div>
+      
+     
+    
 </body>
 </html>

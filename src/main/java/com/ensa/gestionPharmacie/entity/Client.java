@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Client  extends Personne{
-
+   
 	private String adresse ; 
 	private double x ;
 	private double y ;

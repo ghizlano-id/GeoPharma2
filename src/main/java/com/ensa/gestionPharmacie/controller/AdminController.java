@@ -2,6 +2,7 @@
 package com.ensa.gestionPharmacie.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -287,13 +288,6 @@ public class AdminController {
 
 		}
 
-		@RequestMapping("/test")
-		public ModelAndView logi(){
-			ModelAndView model=new ModelAndView();
-			model.setViewName("test");
-
-			return model;
-		}
 		
 		
 		@RequestMapping("/test1")

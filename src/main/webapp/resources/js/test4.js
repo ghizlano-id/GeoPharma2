@@ -1,18 +1,39 @@
 $(document).ready(function(){
  
-	
 
-	
+	//---------------------- passing b¡variable----------------
+//	   var b=new Array() ; 
+//		 b[0]="n" ; 
+//		 b[1]="a" ;  
+//	  window.location="http://localhost:8080/gestionPharmacie/test4?param="+b;
+	 
 	 var directionsService ;
       var x ; 
       var y ;
       var t="" ; 
 	   var directionsDisplay;
 	  var map,geocoder ;
+	 /* $(document).bind("load", function() {
+		
+		
+			$.ajax({
+					type: "GET",
+					url:"http://localhost:8080/gestionPharmacie/AllClient",
+					contentType: "application/json",
+					dataType: 'json',
+					cache: false,
+					success: function(response){},
+					error: function(){      
+						alert('Error while request..');
+					}
+				});
+		 });*/
+	  
+
 	window.initMap = function() {
 		
-
-		   
+ 
+		
 		  directionsService = new google.maps.DirectionsService();
 		    directionsDisplay = new google.maps.DirectionsRenderer();
 		  /*emplacement par défaut de la carte (j'ai mis Paris)*/
@@ -111,17 +132,28 @@ $('#b').on('click',function(){
 				t+=destinations[0]+"     " ;
 				
 				 var result =new Array() ;
+				// var map3= new Map() ; 
+				 //var map4= new Map() ; 
 				//Remplir la tab de destination depuis json
 				
 				for (var i = 0; i < response.length; i++) {
 					var lat = response[i].laltitude;
 					var lng = response[i].longitude;
+					var cin=response[i].client.cin;
 					var latLng = new google.maps.LatLng(lat,lng);
 					destinations[i+1]=latLng;
 					t+=destinations[i+1]+"   " ; 
-
+					/*  map3.set(latLng , cin) ; 
+                     	var geocoder  = new google.maps.Geocoder();             // create a geocoder object
+        				var location  = new google.maps.LatLng(lat,lng);    // turn coordinates into an object          
+        				geocoder.geocode({'latLng': location}, function (results, status) {
+        				if(status == google.maps.GeocoderStatus.OK) {           // if geocode success
+        				var add=results[0].formatted_address;         // if address found, pass to processing function
+        				map4.set(latLng , add) ;
+    				}} ) ;
+                       */
 				}
-				$('#r').html(t) ; 
+			
 				// le nombre de client n-1
 				 var n =destinations.length ;
 				//appel de la methode qui calcul de la distance
@@ -162,13 +194,7 @@ $('#b').on('click',function(){
 						
 						
 						
-						/* var res="" ; 
-						 
-						for(var i=0 ; i<coord.length;i++)
-							 res+="<span>"+coord[i]+"</span><br/>";
-						//$(_this).parents("div").html(res);
-						
-						   */
+				
 						
 						
 							var map = new Map();		
@@ -201,11 +227,10 @@ $('#b').on('click',function(){
 									 }
 							
 					}
-						for (var [key, value] of map2) 
-							res+="<span>"+key+"->"+value+"</span><br/>";
 						
 						
-							//$(_this).parents("div").html(res);	
+						
+							
 						
 						
 						// Pour calculer la distance min entre le pharmacien et les clients
@@ -240,11 +265,7 @@ $('#b').on('click',function(){
 							}
 						}
 						
-						//res=""; 
-						//for (var [key, value] of map) 
-							//res+="<span>"+key+"->"+value+"</span><br/>";
-						res+="<span> la valeur de "+m+"  est  "+result[0]+"</span><br/>" ; 
-						//$(_this).parents("div").html(res);
+						
 						 
 			var first=result[0].split("-")[0] ; 
 			var f=first ; 
@@ -310,9 +331,7 @@ $('#b').on('click',function(){
 						
 			}	
 				
-				for(var t=0 ; t<result.length;t++)
-					res+="<span>"+result[t]+" "+"</span>";  
-				//$(_this).parents("div").html(res);	
+			
 				
 			// stocker les adresses suivants le plus cours chemins
 				
@@ -324,16 +343,7 @@ $('#b').on('click',function(){
 				for(var j=1 ; j<result.length ; j++ )
 					fin[j+1]=destinations[parseInt(result[j].split("-")[1])] ; 
 				 
-				
-				res+="<br/>" ;
-				for(var t=0 ; t<fin.length;t++)
-					 
-					res+="<span>"+fin[t]+" "+"</span><br/>";
-				 $('#res').html(res) ;
-			
-				//$(_this).parents("div").html(res);
-				
-				
+
 				
 				
      ////////////////////////////////////////////////////////////////////////////////////////				
@@ -357,7 +367,7 @@ $('#b').on('click',function(){
 			       destination: fin[0] ,
 	             waypoints:waypts,
 
-			        travelMode:'WALKING'//google.maps.DirectionsTravelMode[choixMode]
+			        travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
 
 
 			    };
@@ -369,9 +379,7 @@ $('#b').on('click',function(){
 			    });
 
 	///////////////////////////////////////////////////////////////////////////////////////////			
-//				t=fin[0] ; 
 //				
-//				$('#res').html(t) ; 
 				
 				  
 					}
@@ -388,7 +396,7 @@ $('#b').on('click',function(){
 		});
 		
 		
-		//$('#res').html(t) ; 
+		
 	});
 
 

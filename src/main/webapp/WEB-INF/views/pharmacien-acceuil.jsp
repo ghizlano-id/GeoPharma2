@@ -20,7 +20,7 @@
 		
 		<section>
 			  <div id="div1">
-                     <a href="<c:url value="/add_med?id=${id}"/>">
+                     <a href="<c:url value="/add_med"/>">  <!-- ?id=${id} -->
                      <button type="button" class="btn" >
                       
 					<img src="<c:url value="/resources/img/ajouter.png"/>" width="70" height="90">
@@ -28,11 +28,11 @@
                        </button>  
                        </a>
 
-                   <a href="<c:url value="/update?id=${id}"/>">
+                   <a href="<c:url value="/update"/>">  <!-- ?id=${id} -->
 				<button type="button" class="btn" ><img src="<c:url value="/resources/img/ajouter-m.jpg"/>" width="70" height="90">
 				<p>Mettre à jour un médicament</p></button></a>
                    
-                   <a href="#">
+                   <a href="<c:url value="/AllClient"/>">
 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/supp.jpg"/>" width="70" height="90"><p>Supprimer un médicament</p></button>
 					</a>
                </div>
@@ -42,7 +42,7 @@
 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/ambulance.png"/>" width="70" height="90"><p>Livraison des médicament</p></button>
                      </a>
                     
-                    <a href="#">
+                    <a href="<c:url value="/All"/>">
 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/garde.jpg"/>" width="70" height="90"><p>Pharmacie en garde</p></button>
 					</a>
 					
@@ -54,5 +54,6 @@
 
 			
 		</section>
+
 	</body>
 </html>

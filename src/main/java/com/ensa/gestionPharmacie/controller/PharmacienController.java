@@ -1,6 +1,8 @@
 package com.ensa.gestionPharmacie.controller;
 
 import java.util.ArrayList;
+
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,14 +19,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ensa.gestionPharmacie.entity.Client;
+import com.ensa.gestionPharmacie.entity.Commande;
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
+import com.ensa.gestionPharmacie.service.CommandeService;
 import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
 import com.ensa.gestionPharmacie.service.Pharmacie_medicamentService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
+
 
 
 
@@ -35,8 +41,10 @@ public class PharmacienController {
 	
 	
 
+	@Autowired
+	private  PharmacienService pharmacienService; 
 @Autowired
-  private  PharmacienService pharmacienService; 
+private  CommandeService commandeService; 
 
    
 @Autowired
@@ -92,10 +100,56 @@ private PharmacieService pharmacieService ;
 
 
 
+	public CommandeService getCommandeService() {
+		return commandeService;
+	}
+
+
+
+	public void setCommandeService(CommandeService commandeService) {
+		this.commandeService = commandeService;
+	}
+
+
+
+	public Pharmacie_medicamentService getPmd() {
+		return pmd;
+	}
+
+
+
+	public void setPmd(Pharmacie_medicamentService pmd) {
+		this.pmd = pmd;
+	}
+
+
+
 	@RequestMapping("/pharmacien_acceuil")
 	public ModelAndView login2(){
 		ModelAndView model=new ModelAndView();
 		 	model.setViewName("pharmacien-acceuil");
+		 return model;
+	}
+    /// affihcer l itineraire entre deux point .... juste pour le teste
+	@RequestMapping("/test3")
+	public ModelAndView log2(){
+		ModelAndView model=new ModelAndView();
+		 	model.setViewName("test3");
+		 return model;
+	}
+	@RequestMapping("/test4")
+	public ModelAndView l2(){
+		ModelAndView model=new ModelAndView();
+		 	model.setViewName("test4");
+		 return model;
+	}
+
+	
+	// celui la est le meme que test1 qui afficher l itinaire de la livraison mais avec les valeur des distance 
+	@RequestMapping("/test")
+	public ModelAndView lo2(){
+		ModelAndView model=new ModelAndView();
+		 	model.setViewName("test3");
 		 return model;
 	}
 
@@ -147,15 +201,21 @@ private PharmacieService pharmacieService ;
 		ModelAndView model=new ModelAndView();
 		String id=pharmacienService.estPharmacien(pharmacien.getEmail(), pharmacien.getPassword()) ;
 		int pharmacie_id=0 ;
-		
+		HttpSession session = req.getSession()   ;
+		session.setAttribute("listcommande",null);
+		session.setAttribute("listAll",null);
+		session.setAttribute("lpm",null);
       if(id!="empty")
         
-      {   // HttpSession session = req.getSession()   ;
+      {   
                 
     	  pharmacie_id=pharmacieService.getId(id) ;
-    	    System.out.println(pharmacie_id);
-    	  //  session.setAttribute("idd", pharmacie_id);
-    	
+    	  Pharmacie ph=pharmacieService.getById(pharmacie_id) ; 
+    	//  System.out.println(ph.getName());
+    	  //  System.out.println(pharmacie_id);
+    	   session.setAttribute("ph", ph);
+    	   
+    	  
     	  model.addObject("id", pharmacie_id) ; 
 	 	model.setViewName("pharmacien-acceuil");
     	  
@@ -176,7 +236,9 @@ private PharmacieService pharmacieService ;
 	
 
 	//----------------------Ajouter medicament-----------------------
-	
+  /*	
+   * 
+   * si on utilise pas la session
 	@RequestMapping(value="/ajouter/{id}", method=RequestMethod.POST)
     public ModelAndView login4(@PathVariable("id") int id,@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
     {   
@@ -191,8 +253,25 @@ private PharmacieService pharmacieService ;
 	   return new ModelAndView("index"); }
 		else
 			return new ModelAndView("infos") ;
-    }
+    }*/
+	@RequestMapping(value="/ajout", method=RequestMethod.POST)
+    public ModelAndView log4(@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament, HttpServletRequest req) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
+    {   
+		Pharmacie p= new Pharmacie() ; 
+		HttpSession session = req.getSession();
+		Pharmacie p2=(Pharmacie)session.getAttribute("ph") ; 
+		
+		p.setIdPharma(p2.getIdPharma());
+		
+		pharmacie_medicament.setPharmacie(p);
 	
+		int i=pmd.Ajouter(pharmacie_medicament);
+		if(i==1)
+		{   System.out.println("ok");
+	   return new ModelAndView("index"); }
+		else
+			return new ModelAndView("infos") ;
+    }
 	//////////////////////////////////////////////////////////////////////////////
 	// en utilisant les sessions
 	
@@ -220,14 +299,14 @@ private PharmacieService pharmacieService ;
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)
-	public ModelAndView login5(int id){  //int id
+	public ModelAndView login5(){  //int id
 		
 		
 		// System.out.println(id);
 		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
 		 
       ModelAndView model=new ModelAndView("ajouter-medicament","command",pharmacie_medicament);
-		model.addObject("id", id) ;
+		//model.addObject("id", id) ;
 		List<Medicament> l=medicamentService.All() ; 
 		List<String> l2= new ArrayList<String>() ; 
 		for(Medicament m : l)
@@ -289,17 +368,24 @@ private PharmacieService pharmacieService ;
  //------------------------Update Medicament ------------------------------------
 	
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public ModelAndView update(int id){
-	
+	public ModelAndView update(HttpServletRequest req){
+	//int id
 		
-		 System.out.println(id);
+		 //System.out.println(id);
 		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
 		 
      ModelAndView model=new ModelAndView("update-medicament","command",pharmacie_medicament);
-     model.addObject("id", id) ;
+     //model.addObject("id", id) ;
+     // la liste des medicament de la pharmacie  
      
- 	List<Medicament> l=medicamentService.All() ; 
-	List<String> l2= new ArrayList<String>() ; 
+     
+     HttpSession session = req.getSession();
+		Pharmacie p2=(Pharmacie)session.getAttribute("ph") ;
+     
+ 	   List<Medicament> l=medicamentService.getMedByPharma(p2.getIdPharma()) ; 
+ 	  List<Pharmacie_medicament> lpm=medicamentService.getMedByPharma2(p2.getIdPharma()) ; 
+ 	 session.setAttribute("lpm",lpm) ;
+	   List<String> l2= new ArrayList<String>() ; 
 	for(Medicament m : l)
 	{
 		l2.add(m.getNom()) ; 
@@ -309,7 +395,9 @@ private PharmacieService pharmacieService ;
 		 	
 		 return model;
 	}
-	
+	/*
+	 * 
+	 * si on utilise pas la session dans ce cas l id de la pharmacie sera visible dans l'url
 	@RequestMapping(value="/update2/{id}", method=RequestMethod.POST)
     public ModelAndView update2(@PathVariable("id") int id,@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament)
     {   
@@ -321,7 +409,118 @@ private PharmacieService pharmacieService ;
      
       	 return new ModelAndView("index") ; 
 	    
+    }*/
+	
+	
+	@RequestMapping(value="/updat", method=RequestMethod.POST)
+    public ModelAndView update2(@ModelAttribute("Pharmacie_medicament") Pharmacie_medicament pharmacie_medicament,HttpServletRequest req)
+    {   
+		Pharmacie p= new Pharmacie() ; 
+		HttpSession session = req.getSession();
+		Pharmacie p2=(Pharmacie)session.getAttribute("ph") ; 
+		p.setIdPharma(p2.getIdPharma());
+		pharmacie_medicament.setPharmacie(p);
+		pmd.update(pharmacie_medicament);
+      System.out.println(pharmacie_medicament.getQuantite()+" "+pharmacie_medicament.getMedicament().getNom()+" "+pharmacie_medicament.getPharmacie().getIdPharma());
+     
+      	 return new ModelAndView("redirect:/update") ; 
+	    
     }
+	
+	
+	//--------------------------------Livraison------------------------------------------------------------------------------
+	
+	
+	@RequestMapping(value="/AllClient",method = RequestMethod.GET)
+	public  @ResponseBody List<Commande> getPharmacies(HttpServletRequest req, HttpServletResponse response){
+		
+		
+		Pharmacie ph =(Pharmacie)req.getSession().getAttribute("ph") ;
+		 
+		  System.out.println(ph.getIdPharma());
+	
+        List<Commande> list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
+       
+        Iterator<Commande> it1 = list.iterator();
+        Iterator<Commande> it2 = list.iterator();
+       
+     
+          List<Commande> res= new ArrayList<Commande>() ; 
+           res.add(list.get(0)) ; 
+          int j ; 
+       for(int i=1  ; i<list.size() ; i++)
+       {
+    	   
+    	   for( j=0  ;j<res.size()  ; j++)
+    	   
+    	       if(res.get(j).getLaltitude()==list.get(i).getLaltitude() && res.get(j).getLongitude()==list.get(i).getLongitude())
+    	    	      break ; 
+    	   
+    	   if(j==res.size())
+    		   res.add(list.get(i)) ; 
+    		   
+       }
+        
+        // pour recuperer les donnees de la commandes et les afficher dans un tableau dans la page jsp
+         req.getSession().setAttribute("listcommande", res);
+
+		return res;
+		/*Pharmacien harmacien=new Pharmacien();
+			pharmacien.setCIN("EE543");
+			pharmacien.setEmail("ghizo@mail.com");
+			pharmacien.setNom("ghizo");
+			pharmacien.setPassword("aaa");
+			
+			return pharmacien;*/
+
+	}
+	
+	//////////////////////////////////////////////////////////////////////
+	@RequestMapping(value="/All",method = RequestMethod.GET)
+	public  @ResponseBody ModelAndView get(HttpServletRequest req, HttpServletResponse response){
+		
+		
+		Pharmacie ph =(Pharmacie)req.getSession().getAttribute("ph") ;
+		 
+		  System.out.println(ph.getIdPharma());
+	
+        List<Commande> list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
+       
+        Iterator<Commande> it1 = list.iterator();
+        Iterator<Commande> it2 = list.iterator();
+       
+     
+          List<Commande> res= new ArrayList<Commande>() ; 
+           res.add(list.get(0)) ; 
+          int j ; 
+       for(int i=1  ; i<list.size() ; i++)
+       {
+    	   
+    	   for( j=0  ;j<res.size()  ; j++)
+    	   
+    	       if(res.get(j).getLaltitude()==list.get(i).getLaltitude() && res.get(j).getLongitude()==list.get(i).getLongitude())
+    	    	      break ; 
+    	   
+    	   if(j==res.size())
+    		   res.add(list.get(i)) ; 
+    		   
+       }
+        
+        // pour recuperer les donnees de la commandes et les afficher dans un tableau dans la page jsp
+         req.getSession().setAttribute("listcommande", res);
+        req.getSession().setAttribute("listAll", list);
+
+		return new ModelAndView("redirect:/test4");
+		/*Pharmacien harmacien=new Pharmacien();
+			pharmacien.setCIN("EE543");
+			pharmacien.setEmail("ghizo@mail.com");
+			pharmacien.setNom("ghizo");
+			pharmacien.setPassword("aaa");
+			
+			return pharmacien;*/
+
+	}
+	
 	
 	
 	

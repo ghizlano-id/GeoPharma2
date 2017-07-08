@@ -53,4 +53,10 @@ public class PharmacieServiceImpl implements PharmacieService{
 		return pharmacieDao.getPharmacie(x,y);
 		
 	}
+
+	@Override
+	public Pharmacie getById(int id) {
+		// TODO Auto-generated method stub
+		return pharmacieDao.getById(id);
+	}
 }

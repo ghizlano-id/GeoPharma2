@@ -18,7 +18,7 @@
 
        <div id="form"> 
 
- <form:form method="POST" action="update2/${id}" command="pharmacie_medicament"> 
+ <form:form method="POST" action="updat" command="pharmacie_medicament">  <!-- e2/${id} -->
 
    
    <table cellpadding="15px">
@@ -41,6 +41,28 @@
   
  </form:form>
  </div>
+ 
+ 
+ 
+ 
+      <div id="div-tab">
+	   <table id="table-tab">
+	     <tr>
+	     	<th class="tab">MEDICAMENT</th>
+	     	<th class="tab">QUANTITÉ</th>
+
+	     </tr>
+	     <c:forEach items="${lpm}" var="l">
+		      <tr class="tab">
+		     	<td class="tab"><c:out value="${l.medicament.nom}"/></td>
+		     	<td class="tab" ><c:out value="${l.quantite}"/></td>
+		     
+		     </tr>
+	     </c:forEach>
+	   </table>
+	 </div>
+ 
+ 
  </div>
 </body>
 </html>

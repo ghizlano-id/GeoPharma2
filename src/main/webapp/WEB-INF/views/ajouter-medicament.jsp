@@ -21,7 +21,7 @@
     <div id="top">Ajouter un nouveau médicament</div>
 
        <div id="form">                     
-<f:form action="ajouter/${id}" method="post" command="pharmacie_medicament"> 
+<f:form action="ajout" method="post" command="pharmacie_medicament"> 
   <table cellpadding="15px">
   	<tr>
   		<td class="champ">Nom de Médicament</td>
