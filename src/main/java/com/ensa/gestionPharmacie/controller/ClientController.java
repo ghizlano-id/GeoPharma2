@@ -65,12 +65,12 @@ public class ClientController {
 		getSession(request);
 		return new ModelAndView("PageAcceuil");
 	}
-	///page de commande
+	//page de commande
 		@RequestMapping("/monPanier2")
 		public ModelAndView panier2(HttpServletRequest request){
 			getSession(request);
 			
-			//pharmacie plus proches
+			///pharmacie plus proches
 			HttpSession session =request.getSession(true);
 			List<Pharmacie> prochesPharmacies=new ArrayList<Pharmacie>();//***
 			session.setAttribute("prochesPharmacies",prochesPharmacies);
@@ -170,9 +170,9 @@ public class ClientController {
 			Commande commande =new Commande();
 
 			
-			//Ajouter Client
+			///Ajouter Client
 					clientService.ajouterClient(client);
-			//ajouter les commandes
+			///ajouter les commandes
 			 ListIterator<Medicament> med2 = medicaments.listIterator();
 			 ListIterator<Pharmacie> pharm = prochesPharmacies.listIterator();
 			
@@ -192,6 +192,11 @@ public class ClientController {
 			 
 					return model;
 			}
+		}
+		// Pharmacies de garde
+		@RequestMapping(value="/PharmaciesGarde")
+		public ModelAndView pharmacices(){
+			return new  ModelAndView("pharmacies-garde") ;
 		}
 		
 		

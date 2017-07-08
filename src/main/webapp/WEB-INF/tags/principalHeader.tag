@@ -21,7 +21,7 @@
 		        <ul class="dropdown-menu">
 		          <li><a href="#">Pharmacies</a></li>
 		          <li class="divider"></li>
-		          <li><a href="#">Pharmacie de garde</a></li>
+		          <li><a href="<c:url value="/PharmaciesGarde"/>">Pharmacie de garde</a></li>
 		        </ul>
 		      </li>
 		    </ul>

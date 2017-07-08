@@ -168,13 +168,6 @@ public class AdminController {
 		List<Pharmacie> list=pharmacieService.allPharmacie();
 
 		return list;
-		/*Pharmacien pharmacien=new Pharmacien();
-			pharmacien.setCIN("EE543");
-			pharmacien.setEmail("ghizo@mail.com");
-			pharmacien.setNom("ghizo");
-			pharmacien.setPassword("aaa");
-			
-			return pharmacien;*/
 
 	}
 
