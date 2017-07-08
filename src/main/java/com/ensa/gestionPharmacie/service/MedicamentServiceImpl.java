@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ensa.gestionPharmacie.dao.MedicamentDao;
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 
 
 
@@ -47,6 +48,18 @@ public class MedicamentServiceImpl implements MedicamentService {
 	public Set<Medicament> AllMedicamentDisp() {
 		
 		return medicamentDao.AllMedicamentDisp();
+	}
+
+	@Override
+	public List<Medicament> getMedByPharma(int idPharma) {
+		// TODO Auto-generated method stub
+		return medicamentDao.getMedByPharma(idPharma);
+	}
+
+	@Override
+	public List<Pharmacie_medicament> getMedByPharma2(int idPharma) {
+		// TODO Auto-generated method stub
+		return medicamentDao.getMedByPharma2(idPharma);
 	}
 	
 }

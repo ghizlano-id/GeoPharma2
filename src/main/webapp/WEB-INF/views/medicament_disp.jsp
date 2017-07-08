@@ -1,17 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="f" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html> 
-<head> 
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> 
-<!--importation de l'API google MAP Version 3-->
-  	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
-		
-	</script>
- <script src="resources/js/jquery.min.js"></script>
-  <script src="resources/js/test.js"></script>
-  <style>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<style>
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 		#div-top {
@@ -28,7 +23,7 @@
 			width: 100%;
 		}
 		
-		#divMap {
+		#map {
 			height: 508px;
 			width: 1068px;
 			display: inline-block;
@@ -43,7 +38,13 @@ border-radius:10px;
 			
 		}
 		
-
+		#menu {
+			height: 508px;
+			width:200px;
+			background-color: red;
+			display: inline-block;
+			
+		}
 		#divRoute{
 		   float:right;
 		   width:30%;
@@ -56,7 +57,11 @@ border-radius:10px;
  
 		 
 		}
-
+		#f{
+		 width:100%  ; 
+		 height:100px ; 
+		
+		}
 		#t{
 		  width:30%;
 		   height:7% ; 
@@ -68,37 +73,44 @@ border-radius:10px;
 		
 		}
 		
-
+		#op{
+		
+			border:1px gray solid;
+border-radius:5px;
+-webkit-box-shadow:0 0 6px gray inset;
+  width:100px ; 
+  height:30px ; 
+  font-size:15px ; 
+		
+		}
 		
 	#b{
 	
 				border:1px gray solid;
 border-radius:5px;
 -webkit-box-shadow:0 0 6px gray inset;
-  width:150px ; 
+  width:100px ; 
   height:30px ; 
   font-size:15px ; 
 	
 	}
-			
-	#m{
+	
+ #afficher{
 	
 				border:1px gray solid;
-border-radius:5px;
--webkit-box-shadow:0 0 6px gray inset;
-  width:150px ; 
-  height:30px ; 
-  font-size:15px ; 
-	margin-left:100px ; 
-	}
+                border-radius:5px;
+               -webkit-box-shadow:0 0 6px gray inset;
+               width:140px ; 
+                 height:30px ; 
+                    font-size:15px ; 
 	
-#liv{
- margin-top:45px ;  
- width:30%; 
-  margin-left:350px ; 
- height:70px ; 
-
-}
+	}		
+		.champ{
+		
+		 font-size:25px ; 
+		 font-color : #001f3f  ;
+		
+		}
 		/* Optional: Makes the sample page fill the window. */
 		html, body {
 			height: 100%;
@@ -106,24 +118,53 @@ border-radius:5px;
 			padding: 0;
 		}
 </style>
-</head> 
-<body> 
-<div id="div-top">GeoPharma GN</div>
+<title>Insert title here</title>
+</head>
+<script src="resources/js/jquery.min.js"></script>
+<script src="resources/js/med_disp.js"></script>
+<body>
 
-   <div id="liv">
-      	<input type="button" value="affihcer l'itinéraire" id="b"/>
-      	<input type="button" value="affihcer l'itinéraire" id="m"/>
+	<div id="div-top">GeoPharma GN</div>
+	<div id="f">
+		<form action="" > 
+  <table cellpadding="15px">
+  	<tr>
+  		<td class="champ">Nom de Médicament</td>
+
+      <td>
+  
+   <select id="op">
+   <c:forEach items="${listmed}" var="v">
+   <option >${v}</option>
+</c:forEach>
+    
+    </select>
       	
-      </div>
+      </td>
+       <td>
+      	<input type="button" value="chercher" id="b"/>
       
+      </td>
+       <td>
+      	<input type="button" value="afficher l'itinéraire" id="afficher"/>
+      
+      </td>
+  	</tr>
 
+
+
+
+  </table>	
+
+
+</form>
 		
 </div>
 		
 	
 	<div id="div-center">
 	  
-		<div id="divMap" ></div> 
+		<div id="map" ></div> 
 		
 		 <div id="t">
 		  L'itinéraire
@@ -138,18 +179,6 @@ border-radius:5px;
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		
 	</script>
-	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie;" %>
-	<% Pharmacie ph =(Pharmacie)request.getSession().getAttribute("ph") ; 
-	    String x=Double.toString(ph.getX()) ; 
-	    String y=Double.toString(ph.getY()) ; 
-	%>
-    <input type="hidden" value="<%=x %>" id="x">
-    <input type="hidden" value="<%=y %>"  id="y">
-    <div id="r"></div>
-      <div id="res"></div>
-      <div id="kk"></div>
-      
-     
-    
+	<div id="res"></div>
 </body>
 </html>

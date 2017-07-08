@@ -1,9 +1,9 @@
 @CHARSET "ISO-8859-1";
 body {
    background-size: 50% 950px;
-     background-color: #eee ;
+    // background-color: #eee ;
 background-position: 100% 0%  ;
- background-image: url("../img/pharmacy.jpg") ; 
+ //background-image: url("../img/pharmacy.jpg") ; 
  background-repeat:repeat-x;
  
 
@@ -14,8 +14,8 @@ background-position: 100% 0%  ;
 font-weight: bold;
 font-size: 20px ; 
 color: #609f6b ;  
-padding:15px  ;
- padding-left:10px ;  
+ padding:15px  ;
+ padding-left:10px ;   
 width: 100% ; 
 
 }
@@ -23,7 +23,7 @@ width: 100% ;
 	  width: 100% ; 
 	  height:100px ; 
 	font : sans-serif;
-	color :  #78AB46  ; /* #73a343*/
+	color : #73a343 ; 
 	font-size: 70px ; 
 	text-align: center;
 	
@@ -39,16 +39,29 @@ width: 100% ;
  border-radius: 6px ;
 
 background-color: #eee ; 
-
+display:inline-block ; 
 margin-top: 90px ; 
-margin-left: 540px  ;
+margin-left: 300px  ;
 
 }
+		#table-tab,.tab{
+		    border: 2px solid grey;
+		     padding: 10px;
+		    border-collapse: collapse;
+		}
+		.tab{
+			background-color:#f6f6f6;
+		}
+				#div-tab{
+		margin-left:200px; 
+		margin-top: 90px;
+		display:inline-block ; 
+		}
 
 footer{
 	width:100%;
 	height:80px;
-	background-color:  #548426 !important;
+	background-color:#78AB46;
 	color:white;
 	font:10pt verdana;
 	text-align: center;
@@ -75,12 +88,23 @@ color: white;
 	background-color:white ; 
 	border-color:black ; 
 	 font-style: normal;
-	  margin-right:25px ; 
-    
+	 margin-right:25px ; 
+   
 	
 }
 select:active, select:hover {
    outline:none ; 
 }
 
+footer{
+	width:100%;
+	height:80px;
+	background-color:  #548426 !important;
+	color:white;
+	font:10pt verdana;
+	text-align: center;
+	position:fixed;
+	left:0;
+	bottom:0;      
 
+}

@@ -15,5 +15,5 @@ public interface PharmacieService {
 	public void supprimer(int idPharma);
 	public int getId(String id) ; 
 	public Pharmacie getPharmacie(double x,double y);
-
+	Pharmacie getById(int id);
 }

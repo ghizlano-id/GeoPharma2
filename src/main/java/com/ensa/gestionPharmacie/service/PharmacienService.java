@@ -2,6 +2,7 @@ package com.ensa.gestionPharmacie.service;
 
 
 
+import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 public interface PharmacienService {

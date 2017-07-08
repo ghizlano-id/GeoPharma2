@@ -10,7 +10,7 @@
 		
 	</script>
  <script src="resources/js/jquery.min.js"></script>
-  <script src="resources/js/test.js"></script>
+  <script src="resources/js/test1.js"></script>
   <style>
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -111,8 +111,8 @@ border-radius:5px;
 <div id="div-top">GeoPharma GN</div>
 
    <div id="liv">
-      	<input type="button" value="affihcer l'itinéraire" id="b"/>
-      	<input type="button" value="affihcer l'itinéraire" id="m"/>
+      
+      	<input type="button" value="affihcer l'itinéraire" id="chercher"/>
       	
       </div>
       
@@ -138,16 +138,7 @@ border-radius:5px;
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		
 	</script>
-	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie;" %>
-	<% Pharmacie ph =(Pharmacie)request.getSession().getAttribute("ph") ; 
-	    String x=Double.toString(ph.getX()) ; 
-	    String y=Double.toString(ph.getY()) ; 
-	%>
-    <input type="hidden" value="<%=x %>" id="x">
-    <input type="hidden" value="<%=y %>"  id="y">
-    <div id="r"></div>
-      <div id="res"></div>
-      <div id="kk"></div>
+
       
      
     

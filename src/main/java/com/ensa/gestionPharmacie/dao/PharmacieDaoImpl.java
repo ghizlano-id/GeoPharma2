@@ -63,5 +63,10 @@ public class PharmacieDaoImpl implements PharmacieDao{
 		List<Pharmacie> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie as p where p.x="+x+" and p.y="+y).list();
 		return list.get(0);
 	}
+	@Transactional
+	public Pharmacie getById(int id) {
+		Pharmacie pharmacie=(Pharmacie) getSessionFactory().getCurrentSession().get(Pharmacie.class,id);
+		return pharmacie;
+	}
 
 }

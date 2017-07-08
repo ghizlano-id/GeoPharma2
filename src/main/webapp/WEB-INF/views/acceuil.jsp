@@ -39,8 +39,8 @@
 			<table border="0" cellspacing="30" cellpadding="3">
 				<tr class="line" >
 					<td class="care"><a href="<c:url value="/pharmacies-de-garde"/>">Pharmacie de garde</a></td>
-					<td class="care"><a href="#">Pharmacies</a></td>
-					<td class="care"><a href="#">Pharmacie à priximité </a></td>
+					<td class="care"><a href="<c:url value="/medicament-disponible"/>">Chercher un medicament</a></td>
+					<td class="care"><a href="#">Pharmacie à proximité </a></td>
 
 				</tr>
 				<tr class="line">

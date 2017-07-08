@@ -1,6 +1,8 @@
 
 package com.ensa.gestionPharmacie.controller;
 
+import java.util.ArrayList;
+
 import java.util.List;
 
 
@@ -20,10 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ensa.gestionPharmacie.entity.Admin;
+import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.service.AdminService;
+import com.ensa.gestionPharmacie.service.MedicamentService;
 import com.ensa.gestionPharmacie.service.PharmacieService;
+import com.ensa.gestionPharmacie.service.Pharmacie_medicamentService;
 import com.ensa.gestionPharmacie.service.PharmacienService;
 
 @Controller
@@ -35,6 +41,10 @@ public class AdminController {
 	private PharmacienService pharmacienService;
 	@Autowired
 	private PharmacieService pharmacieService;
+	@Autowired
+	private Pharmacie_medicamentService pms;
+	@Autowired
+	 private MedicamentService medicamentService ; 
 
 
 
@@ -171,7 +181,81 @@ public class AdminController {
 
 	}
 
+     //-------------------------------- Medicament disponibles --------------------------------------------
+	
+	@RequestMapping(value="/chercher", method=RequestMethod.POST)
+    public ModelAndView login5(@ModelAttribute("medicament") Medicament medicament) //,@ModelAttribute("Pharmacie") Pharmacie pharmacies
+    {   
+		
+		System.out.println(medicament.getNom());
+	
+		/*if(i==1)
+		{   System.out.println("ok");
+	   return new ModelAndView("index"); }
+		else
+			return new ModelAndView("infos") ;*/
+		return new ModelAndView("index");
+    }
 
+		@RequestMapping(value="/medicament-disponible")
+		public ModelAndView afficher_pharm(){
+			
+			ModelAndView model=new ModelAndView();
+			model.setViewName("medicament_disp");
+			List<Medicament> l=medicamentService.All() ; 
+			List<String> l2= new ArrayList<String>() ; 
+			for(Medicament m : l)
+			{
+				l2.add(m.getNom()) ; 
+			}
+			model.addObject("listmed", l2) ;
+
+			return model;
+
+		}
+
+		
+		@RequestMapping(value="/medicament-disp/{NomMed}",method = RequestMethod.GET)
+		public  @ResponseBody List<Pharmacie> getPharm_med(@PathVariable("NomMed") String NomMed,HttpServletRequest request, HttpServletResponse response){
+
+			List<Pharmacie> list=pms.getPharm_med(NomMed);
+
+			return list ; 
+
+
+		}
+
+	/*
+		@RequestMapping(value="/disp",method = RequestMethod.GET)
+		public  ModelAndView getPharm(HttpServletRequest request, HttpServletResponse response){
+
+			List<Pharmacie> list=pms.getPharm_med("nas");
+
+			ModelAndView model=new ModelAndView();
+			model.setViewName("test3");
+			
+			List<String> l2= new ArrayList<String>() ; 
+			for(Pharmacie m : list)
+			{
+				l2.add(m.getName()) ; 
+				System.out.println(m.getName());
+				System.out.println(m.getAdresse());
+				System.out.println(m.getX());
+				System.out.println(m.getY());
+			}
+			model.addObject("listph", l2) ;
+
+			return model;
+
+		}
+
+	
+	*/
+	
+	
+	
+	
+	//-------------------------------------------------------------------------------------------------------
 	
 	
 	
@@ -197,13 +281,6 @@ public class AdminController {
 
 		}
 
-		@RequestMapping("/test")
-		public ModelAndView logi(){
-			ModelAndView model=new ModelAndView();
-			model.setViewName("test");
-
-			return model;
-		}
 		
 		
 		@RequestMapping("/test1")
@@ -238,4 +315,24 @@ public class AdminController {
 	public void setPharmacieService(PharmacieService pharmacieService) {
 		this.pharmacieService = pharmacieService;
 	}
+
+	public MedicamentService getMedicamentService() {
+		return medicamentService;
+	}
+
+	public void setMedicamentService(MedicamentService medicamentService) {
+		this.medicamentService = medicamentService;
+	}
+
+	public Pharmacie_medicamentService getPms() {
+		return pms;
+	}
+
+	public void setPms(Pharmacie_medicamentService pms) {
+		this.pms = pms;
+	}
+	
+	
+	
+	
 }

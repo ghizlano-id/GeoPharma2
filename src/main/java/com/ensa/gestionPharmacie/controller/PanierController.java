@@ -2,6 +2,8 @@ package com.ensa.gestionPharmacie.controller;
 
 
 
+import java.util.Date;
+
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -122,7 +124,7 @@ public class PanierController {
 		Set<Medicament> medicaments = (Set<Medicament>)session.getAttribute("medicaments");
 	    
 		Commande commande =new Commande();
-		
+		 Date now = new Date()  ; 
 		//Ajouter Client
 		clientService.ajouterClient(client);
 		
@@ -136,6 +138,8 @@ public class PanierController {
 			commande.setQuantite(1);
 			commande.setMedicament(med.next());
 			commande.setPharmacie(pharm.next());
+			commande.setDateTime(now);
+			
 			//Ajouter commande
 		    commandeServie.ajouter(commande);
 //			i++;

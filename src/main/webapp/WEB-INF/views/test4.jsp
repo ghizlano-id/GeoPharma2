@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+ <%@ taglib prefix="headerPharmacien" tagdir="/WEB-INF/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
 <head> 
@@ -10,7 +13,7 @@
 		
 	</script>
  <script src="resources/js/jquery.min.js"></script>
-  <script src="resources/js/test.js"></script>
+  <script src="resources/js/test4.js"></script>
   <style>
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -36,7 +39,7 @@
 			width:60%; 
 			height:80% ; 
 			margin-top: 10px ;
-			margin-left:10px ;  
+			margin-left:40px ;  
 		border:1px gray solid;
 border-radius:10px;
 -webkit-box-shadow:0 0 6px gray inset; 
@@ -52,10 +55,11 @@ border-radius:10px;
 	border:1px gray solid;
 border-radius:10px;
 -webkit-box-shadow:0 0 6px gray inset;
-    
+    margin-right:30px ; 
  
 		 
 		}
+		
 
 		#t{
 		  width:30%;
@@ -105,14 +109,27 @@ border-radius:5px;
 			margin: 0;
 			padding: 0;
 		}
+			#div-client{
+		margin-left:60px; 
+		margin-bottom: 60px;
+		}
+				#table-client,.client{
+		    border: 2px solid grey;
+		     padding: 10px;
+		    border-collapse: collapse;
+		}
+		.client{
+			background-color:#f6f6f6;
+		}
 </style>
 </head> 
-<body> 
-<div id="div-top">GeoPharma GN</div>
+<body > 
+<headerPharmacien:headerPharmacien />
+<!-- <div id="div-top">GeoPharma GN</div> -->
 
    <div id="liv">
-      	<input type="button" value="affihcer l'itinéraire" id="b"/>
-      	<input type="button" value="affihcer l'itinéraire" id="m"/>
+      	<input type="button" value="afficher l'itinéraire" id="b"/>
+      	<input type="button" value="afficher l'itinéraire" id="m"/>
       	
       </div>
       
@@ -138,18 +155,67 @@ border-radius:5px;
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
 		
 	</script>
-	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie;" %>
+	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie"%>
+	<%@ page  import="com.ensa.gestionPharmacie.entity.Commande"%>
+	<%@ page  import="java.util.List"%>
+	
+
 	<% Pharmacie ph =(Pharmacie)request.getSession().getAttribute("ph") ; 
 	    String x=Double.toString(ph.getX()) ; 
 	    String y=Double.toString(ph.getY()) ; 
+	  
+	    
+	    
 	%>
     <input type="hidden" value="<%=x %>" id="x">
     <input type="hidden" value="<%=y %>"  id="y">
-    <div id="r"></div>
-      <div id="res"></div>
-      <div id="kk"></div>
+    
+
+    
+      <div id="div-client">
+	   <table id="table-client">
+	     <tr>
+	     	
+	     	<th class="client">Client CIN</th>
+	     
+	     	<th class="client">Médicaments commandés</th>
+	     	<th class="client">Date de la commande</th>
+	     </tr>
+	  <c:set var="myVar" value="" />
+	  <c:set var="virgule" value="," />
+	  <c:set var="espace" value="" />
+	     <c:forEach items="${listcommande}" var="commande">
+		      <tr class="client">
+		      
+		     	<td class="client"><c:out value="${commande.client.CIN}"/></td>
+		 	<c:forEach items="${listAll}" var="list">
+		     	
+		     	<c:if test="${commande.client.CIN eq list.client.CIN}">
+		     	      <c:if test="${myVar ne espace}">            
+		     	    <c:set var="myVar" value="${myVar} ${virgule}  ${list.medicament.nom}" />
+                      </c:if>
+                      
+                       <c:if test="${myVar eq espace}">            
+		     	    <c:set var="myVar" value="${list.medicament.nom}" />
+                      </c:if>
+                      
+                      
+                  </c:if>
+		     	
+		     	</c:forEach>
+		     	
+		     	<td class="client"><c:out value="${myVar}"/></td>
+		     	<td class="client"><c:out value="${commande.dateTime}"/></td>
+		     	
+		     	<c:set var="myVar" value="" />
+		     	
+		     	
+		     </tr>
+	     </c:forEach>
+	   </table>
+	 </div>
       
-     
+
+    
     
 </body>
-</html>

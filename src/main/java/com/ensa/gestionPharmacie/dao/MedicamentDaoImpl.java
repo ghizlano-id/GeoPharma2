@@ -1,8 +1,11 @@
 package com.ensa.gestionPharmacie.dao;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacie;
+import com.ensa.gestionPharmacie.entity.Pharmacie_medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 
 
@@ -62,5 +66,25 @@ public class MedicamentDaoImpl implements MedicamentDao{
 		medicaments.addAll(liste);
 		return medicaments;
 	}
+	@Transactional
+	public List<Medicament> getMedByPharma(int idPharma) {
+		List<Pharmacie_medicament> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie_medicament as p where p.pharmacie.idPharma="+idPharma).list();
+		List<Medicament> l= new ArrayList<Medicament>() ; 
+		for(Pharmacie_medicament p : list)
+			l.add(p.getMedicament()) ; 
+		
+		
+		return l;
+	}
+	
+	@Transactional
+	public List<Pharmacie_medicament> getMedByPharma2(int idPharma) {
+		List<Pharmacie_medicament> list=getSessionFactory().getCurrentSession().createQuery("from Pharmacie_medicament as p where p.pharmacie.idPharma="+idPharma).list();
+
+		
+		return list;
+	}
+	
+	
 	
 }

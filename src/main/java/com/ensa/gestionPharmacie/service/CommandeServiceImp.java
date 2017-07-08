@@ -1,9 +1,12 @@
 package com.ensa.gestionPharmacie.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ensa.gestionPharmacie.dao.CommandeDao;
+import com.ensa.gestionPharmacie.entity.Client;
 import com.ensa.gestionPharmacie.entity.Commande;
 
 @Service
@@ -24,6 +27,12 @@ public class CommandeServiceImp implements CommandeService{
 
 		public void setCommandeDao(CommandeDao commandeDao) {
 			this.commandeDao = commandeDao;
+		}
+
+		@Override
+		public List<Commande>  getByIdPharma(int id) {
+			// TODO Auto-generated method stub
+			return commandeDao. getByIdPharma(id) ; 
 		}
 
 		
