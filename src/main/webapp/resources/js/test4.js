@@ -11,6 +11,7 @@ $(document).ready(function(){
       var x ; 
       var y ;
       var t="" ; 
+     
 	   var directionsDisplay;
 	  var map,geocoder ;
 	 /* $(document).bind("load", function() {
@@ -110,8 +111,8 @@ $(document).ready(function(){
 	
 	var outputDiv = document.getElementById('s');
 $('#b').on('click',function(){ 
-    
-	
+
+	 
 	    x=$('#x').val() ; 
 		   
 		   y=$('#y').val() ; 
@@ -126,16 +127,19 @@ $('#b').on('click',function(){
 			dataType: 'json',
 			cache: false,
 			success: function(response){
+			
 				var original = new google.maps.LatLng(x,y);
 				var destinations = new Array();
 				destinations[0]=original;
 				t+=destinations[0]+"     " ;
-				
+				 if(response.length==0)
+				  alert("ya pas de commande a livrer") ; 
 				 var result =new Array() ;
 				// var map3= new Map() ; 
 				 //var map4= new Map() ; 
 				//Remplir la tab de destination depuis json
-				
+					
+				 
 				for (var i = 0; i < response.length; i++) {
 					var lat = response[i].laltitude;
 					var lng = response[i].longitude;
@@ -153,6 +157,7 @@ $('#b').on('click',function(){
     				}} ) ;
                        */
 				}
+				
 			
 				// le nombre de client n-1
 				 var n =destinations.length ;
@@ -384,17 +389,20 @@ $('#b').on('click',function(){
 				  
 					}
 					else{
+						// si ya la liste des commande est vide  
+						
 						alert('Error was: ' + status);
 					}
 				}
 
-
+                            
 			},
-			error: function(){      
+			error: function(){ 
+			
+					
 				alert('Error while request..');
 			}
 		});
-		
 		
 		
 	});

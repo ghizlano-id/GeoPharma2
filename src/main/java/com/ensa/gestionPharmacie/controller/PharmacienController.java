@@ -454,11 +454,10 @@ private PharmacieService pharmacieService ;
 	
         List<Commande> list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
        
-        Iterator<Commande> it1 = list.iterator();
-        Iterator<Commande> it2 = list.iterator();
-       
+     
      
           List<Commande> res= new ArrayList<Commande>() ; 
+          if(list.size()!=0){
            res.add(list.get(0)) ; 
           int j ; 
        for(int i=1  ; i<list.size() ; i++)
@@ -472,7 +471,7 @@ private PharmacieService pharmacieService ;
     	   if(j==res.size())
     		   res.add(list.get(i)) ; 
     		   
-       }
+       }}
         
         // pour recuperer les donnees de la commandes et les afficher dans un tableau dans la page jsp
          req.getSession().setAttribute("listcommande", res);
@@ -504,6 +503,8 @@ private PharmacieService pharmacieService ;
        
      
           List<Commande> res= new ArrayList<Commande>() ; 
+          //la condition ajouter au cas ou la pharmacie n as pas de livraison
+          if(list.size()!=0){
            res.add(list.get(0)) ; 
           int j ; 
        for(int i=1  ; i<list.size() ; i++)
@@ -517,7 +518,7 @@ private PharmacieService pharmacieService ;
     	   if(j==res.size())
     		   res.add(list.get(i)) ; 
     		   
-       }
+       }}
         
         // pour recuperer les donnees de la commandes et les afficher dans un tableau dans la page jsp
          req.getSession().setAttribute("listcommande", res);

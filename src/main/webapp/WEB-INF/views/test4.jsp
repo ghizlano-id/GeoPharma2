@@ -182,6 +182,7 @@ border-radius:5px;
 	     	<th class="client">Date de la commande</th>
 	     </tr>
 	  <c:set var="myVar" value="" />
+	  <c:set var="myVar2" value="" />
 	  <c:set var="virgule" value="," />
 	  <c:set var="espace" value="" />
 	     <c:forEach items="${listcommande}" var="commande">
@@ -200,14 +201,27 @@ border-radius:5px;
                       </c:if>
                       
                       
+                      
+                        <c:if test="${myVar2 ne espace}">            
+		     	    <c:set var="myVar2" value="${myVar2} ${virgule}  ${list.dateTime}" />
+                      </c:if>
+                      
+                       <c:if test="${myVar2 eq espace}">            
+		     	    <c:set var="myVar2" value="${list.dateTime}" />
+                      </c:if>
+                      
+                      
                   </c:if>
 		     	
 		     	</c:forEach>
 		     	
 		     	<td class="client"><c:out value="${myVar}"/></td>
-		     	<td class="client"><c:out value="${commande.dateTime}"/></td>
+		     	
+		     	
+		     	<td class="client"><c:out value="${myVar2}"/></td>
 		     	
 		     	<c:set var="myVar" value="" />
+		     	<c:set var="myVar2" value="" />
 		     	
 		     	
 		     </tr>

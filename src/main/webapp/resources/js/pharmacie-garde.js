@@ -4,14 +4,35 @@ $(document).ready(function(){
 	var mapos  ;
 	var k ; 
 	var t="" ; 
+
+	 var directionsService ;
+
+	   var directionsDisplay;
 	var tab =new Array()  ; 
-	window.initMap = function() {
+	window.onload = function() {
+		// t="" ;  
+		init() ;
+		};
+	
+	function init()
+	{
 		// console.log("test1");
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: new google.maps.LatLng(31.635444,-8.070279),
 		});
 		var infoWindowo = new google.maps.InfoWindow({map: map});
+		
+
+		  directionsService = new google.maps.DirectionsService();
+		    directionsDisplay = new google.maps.DirectionsRenderer();
+		
+		  /*connexion de la map + le panneau de l'itinéraire*/
+		    directionsDisplay.setMap(map);
+		    directionsDisplay.setPanel(document.getElementById("divRoute"));
+		  /*intialise le geocoder pour localiser les adresses */
+		  geocoder = new google.maps.Geocoder();
+		
 
         // Try HTML5 geolocation.
         if (navigator.geolocation) {
@@ -37,6 +58,11 @@ $(document).ready(function(){
 		
         // add markers (calling function getData())
 		getData();
+	}
+	
+	window.initMap = function() {
+		
+		init() ; 
 	}
 	 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	        infoWindow.setPosition(pos);
@@ -165,7 +191,7 @@ $(document).ready(function(){
 						//iti(mapos, tab[k]) ; 
 						
 						
-						
+					
 							
 							}	
 						
@@ -200,8 +226,29 @@ $(document).ready(function(){
 			  {
 
 
+	    var request = {
+	       origin: mapos,
+	       destination: tab[k] ,
+         
 
-		iti(mapos, tab[k]) ; 
+	        travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
+
+
+	    };
+		/*appel à l'API pour tracer l'itinéraire*/
+	    directionsService.route(request, function(response, status) {
+	      if (status == google.maps.DirectionsStatus.OK) {
+	        directionsDisplay.setDirections(response);
+	      }
+	    });
+
+
+
+
+
+	  
+
+		//iti(mapos, tab[k]) ; 
 					
 				  });
 	
@@ -211,9 +258,8 @@ $(document).ready(function(){
 			  {
 				  /*test si les variables sont bien initialisés */
 				
-		directionsService = new google.maps.DirectionsService();
-		directionsDisplay = new google.maps.DirectionsRenderer();
-		directionsDisplay.setMap(map);
+
+	
 				    var request = {
 				       origin: or,
 				       destination: dest ,
