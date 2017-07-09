@@ -27,11 +27,15 @@
 				<button  id="afficher" type="button" class="btn  medica">Afficher l'itinéraire</button>
 			</div>
 			<div class="col-sm-12" style="margin-top:20px;">
-				<div class="col-sm-8">
-				   <div  id="map" style="height:400px;border:1px solid gray;"></div>
-				</div>
+				
+				 <div  class="col-sm-8 map-chercher" id="map" ></div>
+				
 				<div class="col-sm-4">
-				  <div  id="divRoute" style="overflow-y:auto;height:400px; border:1px solid black;border-radius:10px;"></div>
+<!-- 				  <div  id="divRoute" style="overflow-y:auto;height:400px; border:1px solid black;border-radius:10px;"></div> -->
+		    	  <div class="panel panel-default itineraire" >
+					  <div class="panel-heading">L'itineraire</div>
+					  <div class="panel-body" id="divRoute"></div>
+				  </div>
 		    	</div>
 		    </div>
 		  </div>

@@ -161,6 +161,7 @@ section {
 	background-color: #548426;
     border-color: #548426;
     outline:none !important;
+    font-weight: bolder;
 }
 .medica:hover{
 	background-color: #548426;
@@ -168,4 +169,19 @@ section {
 }
 .thumbnail{
 	background-color: #e5e3e3;
+}
+.itineraire .panel-body{
+	overflow-y:auto;
+	height:400px;
+}
+.itineraire .panel-heading{
+	color: #548426;
+	text-align: center;
+	font-weight: bolder;
+}
+.map-chercher{
+	height:440px; 
+	border-radius: 5px;
+	border:1px solid #548426;
+	
 }

@@ -8,12 +8,12 @@ $(document).ready(function(){
 	window.initMap = function() {
        init () ; 
    	$('#afficher').hide(); 
+   	$('.itineraire').hide();
 	}
 	
 	function init() 
 	{
-		
-		// console.log("test1");
+		$('.itineraire').hide();
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: new google.maps.LatLng(31.635444,-8.070279),
@@ -42,8 +42,6 @@ $(document).ready(function(){
           handleLocationError(false, infoWindowo, map.getCenter());
         }
 		
-        // add markers (calling function getData())
-		//getData();
 		
 	}
 	
@@ -65,13 +63,10 @@ $(document).ready(function(){
 			dataType: 'json',
 			cache: false,  
 			success: function(response){
-				//console.log(response);
-//				$('#result').html("");
-//				$('#result').html("CIN:- " + response.cin +"</br>"+"First Name:- " + response.nom);
+				
 			var infoWindow = new google.maps.InfoWindow;
 			var infowincontent = new Array();
 			var marker = new Array();
-			//var tab = new Array()  ; 
 			 t="" ; 
 			
 				for (var i = 0; i < response.length; i++) {
@@ -193,13 +188,6 @@ $(document).ready(function(){
 				///////////////////////////////////////////////////////////////
 				
 				
-				
-				
-				//document.getElementById("res").innerHTML=t ; 
-			
-				
-				//$(this).parents("div-center").html(t);
-
 			},
 			error: function(){      
 				alert('Error while request..');
@@ -223,7 +211,7 @@ $(document).ready(function(){
 	
 	$('#afficher').on('click',function()
 			  {
-
+		$('.itineraire').show();
 		$('#afficher').hide(); 
 		
    $("#divRoute").html("") ;

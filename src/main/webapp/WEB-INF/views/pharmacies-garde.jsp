@@ -14,7 +14,7 @@
 	<script src="resources/js/map.js"></script>
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 	<script type="text/javascript" src="resources/js/jquery.min.js"></script>
-	<script type="text/javascript"  src="resources/js/map.js"></script>
+	<script src="resources/js/pharmacie-garde.js"></script>	
 
 
 </head>
@@ -28,14 +28,14 @@
 			<div class="container " style="margin:80px 0;">
 			  <div class="col-sm-12">
 				<div class="col-sm-8">
-					<div id="map" style="width:100%;height:500px;">hello</div>
+					<div id="map" class="map-chercher" style="width:100%;height:500px;"></div>
 				</div >
 				
 				<div class="col-sm-4">
-					<button type="button" class="btn btn-info btn-block btn-lg medica"> Pharmacie à proximité <span class="glyphicon glyphicon-map-marker fa-fw"></span></button>
-					<div class="panel panel-default"  style="margin-top:10px;">
-					  <div class="panel-heading">Panel Heading</div>
-					  <div class="panel-body">Panel Content</div>
+					<button type="button" class="btn  btn-block btn-lg medica" id="b"> Pharmacie à proximité <span class="glyphicon glyphicon-map-marker fa-fw"></span></button>
+					<div class="panel panel-default itineraire"  style="margin-top:10px;">
+					  <div class="panel-heading">L'itineraire</div>
+					  <div class="panel-body" id="divRoute"></div>
 					</div>
 				</div>
 			  </div>
