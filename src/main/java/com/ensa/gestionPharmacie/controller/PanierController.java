@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,12 +50,7 @@ public class PanierController {
 	private CommandeService commandeServie;
 
 	
-	/*@RequestMapping(value="/info",method = RequestMethod.GET)
-	public ModelAndView go(){
-		ModelAndView model=new ModelAndView("go-to-panier");
-		List<String> list=new ArrayList<String>();
-		return model;
-	}*/
+	
 	@RequestMapping(value="/monPanier",method = RequestMethod.GET)
 	public ModelAndView panier(HttpServletRequest req){
 		
@@ -82,20 +78,42 @@ public class PanierController {
 		return model;
 		
 	}
-	@RequestMapping(value="/annuler") //!!!!!!!
-	public ModelAndView annuler(@RequestParam("nom") String nomM,HttpServletRequest req){
-		
-		HttpSession session =req.getSession();
-		@SuppressWarnings("unchecked")
-		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
-		
-		System.out.println(nomM);
-		idMeds.remove(nomM);
-		System.out.println("done !");
-
-		return new ModelAndView("redirect:/monPanier");
-		
-	}
+//	//************ghizlane**********
+//	@RequestMapping("/monPanier2")
+//	public ModelAndView panier2(HttpServletRequest request){
+//		getSession(request);
+//		Client client=new Client();
+//		ModelAndView model=new ModelAndView("monPanier","command",client);
+//		 
+//		return model;
+//	}
+//	//****
+	
+	
+//	@RequestMapping(value="/ajouter",method = RequestMethod.POST)
+//	public ModelAndView Ajouter(@ModelAttribute("client")Client client,double x,double y){
+//		ModelAndView model=new ModelAndView("PageAcceuil");
+//		//Ajouter Client
+//				clientService.ajouterClient(client);
+//				
+//				return model;
+//	}
+	
+	//***************************************
+//	@RequestMapping(value="/annuler") //!!!!!!!
+//	public ModelAndView annuler(@RequestParam("nom") String nomM,HttpServletRequest req){
+//		
+//		HttpSession session =req.getSession();
+//		@SuppressWarnings("unchecked")
+//		Set<String> idMeds=(Set<String>)session.getAttribute("idMeds") ;
+//		
+//		System.out.println(nomM);
+//		idMeds.remove(nomM);
+//		System.out.println("done !");
+//
+//		return new ModelAndView("redirect:/monPanier2");
+//		
+//	}
 	@RequestMapping(value="/ajouterClient",method = RequestMethod.POST)
 	public ModelAndView AjouterClient(@ModelAttribute("client")Client client,double x,double y,HttpServletRequest req){
 		
@@ -137,9 +155,22 @@ public class PanierController {
 		return new ModelAndView("distance");
 		
 	}
-	//***********Verifier l'affichage de list of Pharmacie_medicament
+	
+	
+	
+	
+	//******(la suite)*****Verifier l'affichage de list of Pharmacie_medicament
 	@RequestMapping(value="/pharmacies-madicament/{idMedica}",method = RequestMethod.GET)
 	public  @ResponseBody List<Pharmacie> getPharmacies(@PathVariable("idMedica") String idMedica,HttpServletRequest request, HttpServletResponse response){
+		 //Placer le idMeds a dans la fin de la liste de idMeds
+		
+		HttpSession session=request.getSession(true);
+		@SuppressWarnings("unchecked")
+		List<String> idMeds = (List<String>)session.getAttribute("idMeds");
+		
+		 int n=idMeds.size()-1;
+		 idMeds.remove(idMedica);
+		 idMeds.add(n, idMedica);
 		
 		//String idMedica
 		List<Pharmacie_medicament> list=pmDao.getPharmacies_medicament(idMedica);
@@ -153,9 +184,10 @@ public class PanierController {
 		Pharmacie pharmacie=pharmacieService.getPharmacie((double)x,(double)y);
 		HttpSession session =req.getSession();
 		@SuppressWarnings("unchecked")
-		Set<Pharmacie> prochesPharmacies=(Set<Pharmacie>)session.getAttribute("prochesPharmacies") ;
+		List<Pharmacie> prochesPharmacies=(List<Pharmacie>)session.getAttribute("prochesPharmacies") ;
 		prochesPharmacies.add(pharmacie) ;
-		Iterator<Pharmacie> pharma = prochesPharmacies.iterator();
+		//*******l'affichage*******
+		ListIterator<Pharmacie> pharma = prochesPharmacies.listIterator();
 		System.out.println("******New*******");
 	    while(pharma.hasNext()){
 	    	System.out.println(pharma.next().getName());
@@ -163,9 +195,15 @@ public class PanierController {
     	System.out.println("*************");
 
 		System.out.println(x+" "+y);
+		//**********************
 		
 	}
 	
+	
+	
+	
+	
+	//**********************************************************
 	/*@RequestMapping(value="/coordonnees",method = RequestMethod.POST)
 	public @ResponseBody List<Pharmacie> coordonnes(){
 		

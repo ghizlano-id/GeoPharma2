@@ -12,5 +12,6 @@ public interface Pharmacie_medicamentService {
 	int Ajouter(Pharmacie_medicament pm) ; 
  public void update(Pharmacie_medicament pm)  ; 
  public List<Pharmacie> getPharm_med(String med) ; 	
+ void updateQantite(String idMed,int idPharma);
 	
 }

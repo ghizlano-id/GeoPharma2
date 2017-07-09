@@ -5,18 +5,20 @@ $(document).ready(function(){
 	var k ; 
 	var t="" ; 
 
-	 var directionsService ;
+	var directionsService ;
 
-	   var directionsDisplay;
+	var directionsDisplay;
 	var tab =new Array()  ; 
 	window.onload = function() {
-		// t="" ;  
+		
 		init() ;
+		
 		};
 	
-	function init()
-	{
-		// console.log("test1");
+	function init(){
+		
+		$('.itineraire').hide();
+		
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: new google.maps.LatLng(31.635444,-8.070279),
@@ -80,9 +82,7 @@ $(document).ready(function(){
 			dataType: 'json',
 			cache: false,  
 			success: function(response){
-				//console.log(response);
-//				$('#result').html("");
-//				$('#result').html("CIN:- " + response.cin +"</br>"+"First Name:- " + response.nom);
+				
 			var infoWindow = new google.maps.InfoWindow;
 			var infowincontent = new Array();
 			var marker = new Array();
@@ -136,15 +136,9 @@ $(document).ready(function(){
 				},callback) ; 
 				
 				
-			
-
 				function callback(response, status) {
-					
-
-//					
-					 var mapp = new Map() ; 
-
-//						
+			
+					   var mapp = new Map() ; 	
 						var originList = response.originAddresses;
 						var destinationList = response.destinationAddresses;
 						var distances=new Array();
@@ -165,53 +159,22 @@ $(document).ready(function(){
 							 
 						}
    
-						//document.getElementById("res").innerHTML=t ; 
 						
 						var tab2 =new Array() ;
 						var i=0 ; 
 						for (var [key, value] of mapp) 
 							{
-							
-								tab2[i]=parseFloat(value) ;
+							   tab2[i]=parseFloat(value) ;
 							   i++ ;
 							   
 							}
 						
-						
-						
 						var m=min(tab2) ;
-						
-						
-						
-						 k=getKey(m,mapp) ;
+						k=getKey(m,mapp) ;
 						
 						t+="<span>"+m+" ---->"+k+"-----"+mapp.get(k)+" </span><br/>";
-						//document.getElementById("res").innerHTML=t ; 
+						}	
 						
-						//iti(mapos, tab[k]) ; 
-						
-						
-					
-							
-							}	
-						
-				
-					
-				
-				
-				
-				
-				
-				///////////////////////////////////////////////////////////////
-				
-				
-				
-				
-				//document.getElementById("res").innerHTML=t ; 
-			
-				
-				//$(this).parents("div-center").html(t);
-
 			},
 			error: function(){      
 				alert('Error while request..');
@@ -222,16 +185,14 @@ $(document).ready(function(){
 	
 	//////////////////////////////////////////////////////////////////////////////
 	
-	$('#b').on('click',function()
-			  {
-
+	$('#b').on('click',function(){
+		
+		$('.itineraire').show();
 
 	    var request = {
 	       origin: mapos,
 	       destination: tab[k] ,
-         
-
-	        travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
+	       travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
 
 
 	    };
@@ -242,13 +203,6 @@ $(document).ready(function(){
 	      }
 	    });
 
-
-
-
-
-	  
-
-		//iti(mapos, tab[k]) ; 
 					
 				  });
 	
@@ -257,18 +211,12 @@ $(document).ready(function(){
 	function iti(or , dest)
 			  {
 				  /*test si les variables sont bien initialisés */
-				
-
-	
-				    var request = {
+			var request = {
 				       origin: or,
 				       destination: dest ,
-		             
+		               travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
 
-				        travelMode:'DRIVING'//google.maps.DirectionsTravelMode[choixMode]
-
-
-				    };
+					};
 					/*appel à l'API pour tracer l'itinéraire*/
 				    directionsService.route(request, function(response, status) {
 				      if (status == google.maps.DirectionsStatus.OK) {
@@ -276,19 +224,9 @@ $(document).ready(function(){
 				      }
 				    });
 
+			  	}
+	
 
-
-
-
-				  
-					
-				  }
-	
-	
-	
-	
-	
-	
 	////////////////////////////////////////////////////////////////////////////////
 	
 	
@@ -298,7 +236,7 @@ $(document).ready(function(){
 		for(var iter=0; iter<distances.length; iter++){
 			if(distances[iter]<mind){
 				mind=distances[iter];
-				ind=iter; //probleme !!!!!
+				ind=iter;
 			}
 		}
 		return mind;
@@ -311,8 +249,6 @@ $(document).ready(function(){
 		 {
 			 if(value==val)
 				 return key ; 
-			
-			 
 		 }
 	 }
 	

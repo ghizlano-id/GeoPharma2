@@ -41,22 +41,19 @@ import com.ensa.gestionPharmacie.service.PharmacienService;
 @Controller
 public class PharmacienController {
 	
-	
-
 	@Autowired
 	private  PharmacienService pharmacienService; 
-@Autowired
-private  CommandeService commandeService; 
-
-   
-@Autowired
-private  Pharmacie_medicamentService pmd; 
-
-@Autowired
- private MedicamentService medicamentService ; 
-
-@Autowired
-private PharmacieService pharmacieService ; 
+	@Autowired
+	private  CommandeService commandeService; 
+	
+	@Autowired
+	private  Pharmacie_medicamentService pmd; 
+	
+	@Autowired
+	 private MedicamentService medicamentService ; 
+	
+	@Autowired
+	private PharmacieService pharmacieService ; 
 	
   //------------------getters & setters ---------------
 
@@ -139,10 +136,10 @@ private PharmacieService pharmacieService ;
 		 	model.setViewName("test3");
 		 return model;
 	}
-	@RequestMapping("/test4")
+	@RequestMapping("/livraison")
 	public ModelAndView l2(){
 		ModelAndView model=new ModelAndView();
-		 	model.setViewName("test4");
+		 	model.setViewName("livraison-pharmacien");
 		 return model;
 	}
 
@@ -282,7 +279,7 @@ private PharmacieService pharmacieService ;
 		int i=pmd.Ajouter(pharmacie_medicament);
 		if(i==1)
 		{   System.out.println("ok");
-	   return new ModelAndView("index"); }
+	   return new ModelAndView("ajouter-medicament"); }
 		else
 			return new ModelAndView("infos") ;
     }
@@ -569,7 +566,7 @@ private PharmacieService pharmacieService ;
          req.getSession().setAttribute("listcommande", res);
         req.getSession().setAttribute("listAll", list);
 
-		return new ModelAndView("redirect:/test4");
+		return new ModelAndView("redirect:/livraison");
 		/*Pharmacien harmacien=new Pharmacien();
 			pharmacien.setCIN("EE543");
 			pharmacien.setEmail("ghizo@mail.com");

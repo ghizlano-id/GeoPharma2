@@ -15,18 +15,18 @@
 		    </div>
 		    <ul class="nav navbar-nav">
 		      <li class="active"><a href="<c:url value="/"/>">Home</a></li>
-		      <li><a href="<c:url value="/listeMedicaments"/>">Médicaments</a></li>
+		      <li><a href="<c:url value="/PharmaciesGarde"/>">Pharmacies</a></li>
 		      <li class="dropdown">
-		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pharmacies<span class="caret"></span></a>
+		        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Médicaments<span class="caret"></span></a>
 		        <ul class="dropdown-menu">
-		          <li><a href="#">Pharmacies</a></li>
+		          <li><a href="<c:url value="/listeMedicaments"/>">Acheter un médicament</a></li>
 		          <li class="divider"></li>
-		          <li><a href="#">Pharmacie de garde</a></li>
+		          <li><a href="<c:url value="/chercherMedicament"/>">Chercher un médicament</a></li>
 		        </ul>
 		      </li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
-		      <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>  Mon panier</a></li>
+		      <li><a href="<c:url value="/monPanier2"/>"><span class="glyphicon glyphicon-shopping-cart"></span>  Mon panier</a></li>
 		    </ul>
 		  </div>
 		</nav>

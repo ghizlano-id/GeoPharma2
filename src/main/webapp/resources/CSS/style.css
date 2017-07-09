@@ -95,6 +95,25 @@ section {
 .choix span{
 	margin-left: 5%;
 }
+#pharmacien-body{
+	background-color: #eee;
+	text-align:center;
+}
+.container-pharmacien{
+	padding-top: 70px;
+}
+.pharmacien-acc{
+	height:80px;
+	color:#78AB46;
+}
+.pharmacien-acc img{
+	width:100%;
+	height:130px;
+}
+.pharmacien-acc span{
+	padding-top:50px;
+	font-weight: bolder;
+}
 .header-admin .navbar-right a:hover {
 	color:#fff;
 }
@@ -156,4 +175,46 @@ section {
 .pre-cost{
 	text-decoration: underline; 
 	color: #428bca;
+}
+.medica{
+	background-color: #548426;
+    border-color: #548426;
+    outline:none !important;
+    font-weight: bolder;
+}
+.medica:hover{
+	background-color: #548426;
+    border-color: white;
+}
+.thumbnail{
+	background-color: #e5e3e3;
+}
+.itineraire .panel-body{
+	overflow-y:auto;
+	height:400px;
+}
+.itineraire .panel-heading{
+	color: #548426;
+	text-align: center;
+	font-weight: bolder;
+}
+.map-chercher{
+	height:440px; 
+	border-radius: 5px;
+	border:1px solid #548426;
+	
+}
+.livraison{
+	text-align:center;
+	margin-bottom: 60px;
+}
+.livraison .btn{
+	background-color: #696969;
+	border-color:#696969;
+	color:white;
+	outline:none !important;
+	
+}
+.livraison-pharmacien{
+	margin-bottom:60px;
 }

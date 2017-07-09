@@ -2,7 +2,6 @@ $(document).ready(function(){
 
 	var map;
 	window.initMap = function() {
-		// console.log("test1");
 		map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 15,
 			center: new google.maps.LatLng(31.635444,-8.070279),

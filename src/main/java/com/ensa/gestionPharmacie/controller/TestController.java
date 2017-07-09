@@ -15,6 +15,7 @@ import com.ensa.gestionPharmacie.entity.Medicament;
 import com.ensa.gestionPharmacie.entity.Pharmacien;
 import com.ensa.gestionPharmacie.entity.TestFils;
 import com.ensa.gestionPharmacie.service.MedicamentService;
+import com.ensa.gestionPharmacie.service.Pharmacie_medicamentService;
 import com.ensa.gestionPharmacie.service.TestService;
 
 
@@ -25,9 +26,19 @@ public class TestController {
 	private TestService testService;
 	@Autowired
 	private MedicamentService ms;
+	@Autowired
+	private Pharmacie_medicamentService pms;
 
 
 	
+	public Pharmacie_medicamentService getPms() {
+		return pms;
+	}
+
+	public void setPms(Pharmacie_medicamentService pms) {
+		this.pms = pms;
+	}
+
 	public TestService getTestService() {
 		return testService;
 	}
@@ -48,6 +59,9 @@ public class TestController {
 	public ModelAndView index2(){
 		
 		ModelAndView model =new ModelAndView();
+		
+		/*pms.updateQantite("doliprane", 7);
+		System.out.println("done !");*/
 		
 		TestFils test=new TestFils();
 		test.setName("zineb");
