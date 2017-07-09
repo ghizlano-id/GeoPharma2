@@ -18,18 +18,36 @@
 			width: 100%;
 		}
 		
-		#map {
+	#map {
 			height: 508px;
 			width: 1068px;
 			display: inline-block;
+			float:left;
+			width:60%; 
+			height:80% ; 
+			margin-top: 10px ;
+			margin-left:40px ;  
+		border:1px gray solid;
+border-radius:10px;
+-webkit-box-shadow:0 0 6px gray inset; 
+			
 		}
 		
-		#menu {
-			height: 508px;
-			width:200px;
-			background-color: red;
-			display: inline-block;
+
+		#divRoute{
+		   float:right;
+		   width:30%;
+		   height:73% ; 
+		   margin-top: 10px ;
+		   overflow-y: auto;
+	border:1px gray solid;
+border-radius:10px;
+-webkit-box-shadow:0 0 6px gray inset;
+    margin-right:30px ; 
+ 
+		 
 		}
+
 		/* Optional: Makes the sample page fill the window. */
 		html, body {
 			height: 100%;
@@ -38,7 +56,7 @@
 		}
 </style>
 <script src="resources/js/jquery.min.js"></script>
-<script src="resources/js/map2.js"></script>
+<script src="resources/js/pharmacie-garde.js"></script>
 </head>
 <body>
 
@@ -49,6 +67,7 @@
 
 		</div>
 		<div id="map"></div>
+		<div id="divRoute"></div>
 		<div id="res">	<button id="b">afficher l'itineraire de la pharmacie la plus proche</button></div>
 	
 		
