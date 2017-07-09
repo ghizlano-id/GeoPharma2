@@ -83,5 +83,49 @@ public class CommandeDaoImpl implements CommandeDao{
 		     else 
 		return   res;
 	}
+    //-------------------------------livraison apres midi------------------------------------------------------------
+	@Transactional
+	public List<Commande> getByIdPharma2(int id)  {
+		
+		//---------------- date-----------------------------------
+		   Date date= new Date() ; 
+		   // la date d'ajourd'hui a 12h.00.00
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+  
+
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 12);
+        calendar.set(Calendar.AM_PM, Calendar.AM);
+
+ 
+        // la date d'hier a 18h.0.0
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(date);
+      
+
+        calendar2.set(Calendar.SECOND, 0);
+        calendar2.set(Calendar.MINUTE, 0);
+        calendar2.set(Calendar.HOUR, 18);
+        calendar2.set(Calendar.AM_PM, Calendar.AM);
+
+         Timestamp t1 = new Timestamp(calendar.getTimeInMillis()) ;
+         Timestamp t2 = new Timestamp(calendar2.getTimeInMillis()) ;
+       
+        System.out.println(calendar.getTimeInMillis());
+
+        Query query = (Query) getSessionFactory().getCurrentSession().createQuery("from Commande as p where p.pharmacie.idPharma='"+id+"' and p.dateTime <= :from  and p.dateTime >= :to");
+        ((org.hibernate.Query) query).setParameter("from", t2);
+        ((org.hibernate.Query) query).setParameter("to", t1);
+		List<Commande> list=getSessionFactory().getCurrentSession().createQuery("from Commande as p where p.pharmacie.idPharma='"+id+"'").list();
+	   
+		List<Commande> res=(List<Commande>) ((org.hibernate.Query) query).list() ; 
+		     if(res==null)
+		    	 return new  ArrayList<Commande>() ; 
+		    			 
+		     else 
+		return   res;
+	}
 
 } 

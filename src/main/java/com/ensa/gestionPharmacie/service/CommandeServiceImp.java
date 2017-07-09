@@ -30,10 +30,16 @@ public class CommandeServiceImp implements CommandeService{
 		}
 
 		
+		/////////////////////////////////
+		
+		
 		public List<Commande>  getByIdPharma(int id) {
-			// TODO Auto-generated method stub
 			return commandeDao. getByIdPharma(id) ; 
 		}
 
+		
+		public List<Commande>  getByIdPharma2(int id) {
+			return commandeDao. getByIdPharma2(id) ; 
+		}
 		
 }

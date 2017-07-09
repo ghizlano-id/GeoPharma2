@@ -7,55 +7,78 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link href="<c:url value="/resources/CSS/pharmacien-acceuil.css" />" rel="stylesheet">
+	
 	</head>
-	<body>
-<%-- 		<header>  --%>
+	<body id="pharmacien-body">
 
-<!-- 		<div id="ph">ParmaGeo GN</div> -->
-<!-- 		<a href="http://www.google.com"> -->
-<!--          <button type="button" class="bttn" >Déconnexion</button> -->
-<!--              </a> -->
-<%-- 		</header> --%>
 		<headerPharmacien:headerPharmacien />
-		<footer>&copy; Tous droits réservés</footer>
 		
-		<section id="sec">
-			  <div id="div1">
-                     <a href="<c:url value="/add_med"/>">  <!-- ?id=${id} -->
-                     <button type="button" class="btn" >
+		
+		
+		 <div class="container container-pharmacien">
+			<div class="col-md-3 pharmacien-acc">
+			 <div class="panel panel-success ">
+				<div class="panel-body ">
+				  <a href="<c:url value="/add_med"/>"><img alt="ajouter" src="resources/img/ajouter.png"></a>
+				  <span >Ajouter un médicament</span>
+				</div>
+			 </div>
+		  </div>
+		  <div class="col-md-3 pharmacien-acc">
+			 <div class="panel panel-success ">
+				<div class="panel-body ">
+				  <a href="<c:url value="/update"/>"><img alt="ajouter" src="resources/img/ajouter-m.jpg"></a>
+				  <span >Modifier un médicament</span>
+				</div>
+			 </div>
+		  </div>
+		  <div class="col-md-3 pharmacien-acc">
+			 <div class="panel panel-success ">
+				<div class="panel-body ">
+				  <a href="<c:url value="/All"/>"><img alt="ajouter" src="resources/img/ambulance.png"></a>
+				  <span >Livraison des médicaments</span>
+				</div>
+			 </div>
+		  </div>
+		  <div class="col-md-3 pharmacien-acc">
+			 <div class="panel panel-success ">
+				<div class="panel-body ">
+				  <a href="#"><img alt="ajouter" src="resources/img/garde.jpg"></a>
+				  <span >Pharmacie en garde</span>
+				</div>
+			 </div>
+		  </div>
+		 </div>
+		 
+<!-- 			  <div id="div1"> -->
+<%--                      <a href="<c:url value="/add_med"/>">  <!-- ?id=${id} --> --%>
+<!--                      <button type="button" class="btn" > -->
                       
-					<img src="<c:url value="/resources/img/ajouter.png"/>" width="70" height="90">
-              <p>Ajouter un médicament</p>
-                       </button>  
-                       </a>
+<%-- 					<img src="<c:url value="/resources/img/ajouter.png"/>" width="70" height="90"> --%>
+<!--               <p>Ajouter un médicament</p> -->
+<!--                        </button>   -->
+<!--                        </a> -->
 
-                   <a href="<c:url value="/update"/>">  <!-- ?id=${id} -->
-				<button type="button" class="btn" ><img src="<c:url value="/resources/img/ajouter-m.jpg"/>" width="70" height="90">
-				<p>Mettre à jour un médicament</p></button></a>
+<%--                    <a href="<c:url value="/update"/>">  <!-- ?id=${id} --> --%>
+<%-- 				<button type="button" class="btn" ><img src="<c:url value="/resources/img/ajouter-m.jpg"/>" width="70" height="90"> --%>
+<!-- 				<p>Mettre à jour un médicament</p></button></a> -->
                    
-                   <a href="<c:url value="/AllClient"/>">
-					<button type="button" class="btn" ><img src="<c:url value="/resources/img/supp.jpg"/>" width="70" height="90"><p>Supprimer un médicament</p></button>
-					</a>
-               </div>
+<%--                    <a href="<c:url value="/AllClient"/>"> --%>
+<%-- 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/supp.jpg"/>" width="70" height="90"><p>Supprimer un médicament</p></button> --%>
+<!-- 					</a> -->
+<!--                </div> -->
 				
-                   <div id="div2">
-                   <a href="<c:url value="/test1?id=${id}"/>">
-					<button type="button" class="btn" ><img src="<c:url value="/resources/img/ambulance.png"/>" width="70" height="90"><p>Livraison des médicament</p></button>
-                     </a>
+<!--                    <div id="div2"> -->
+<%--                    <a href="<c:url value="/test1?id=${id}"/>"> --%>
+<%-- 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/ambulance.png"/>" width="70" height="90"><p>Livraison des médicament</p></button> --%>
+<!--                      </a> -->
                     
-                    <a href="<c:url value="/All"/>">
-					<button type="button" class="btn" ><img src="<c:url value="/resources/img/garde.jpg"/>" width="70" height="90"><p>Pharmacie en garde</p></button>
-					</a>
-					
-
-			</div>
-
-
-
-
-			
-		</section>
+<%--                     <a href="<c:url value="/All"/>"> --%>
+<%-- 					<button type="button" class="btn" ><img src="<c:url value="/resources/img/garde.jpg"/>" width="70" height="90"><p>Pharmacie en garde</p></button> --%>
+<!-- 					</a> -->
+<!-- 			</div> -->
+	
+		
 
 	</body>
 </html>

@@ -14,147 +14,45 @@
 	</script>
  <script src="resources/js/jquery.min.js"></script>
   <script src="resources/js/test4.js"></script>
-  <style>
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-		#div-top {
-			height: 15%;
-			width: 100%;
-			background-color: #78AB46;
-			font-weight: bolder;
-			font-size: 24pt;
-			color: White;
-		}
-		
-		#div-center {
-			height: 85%;
-			width: 100%;
-		}
-		
-		#divMap {
-			height: 508px;
-			width: 1068px;
-			display: inline-block;
-			float:left;
-			width:60%; 
-			height:80% ; 
-			margin-top: 10px ;
-			margin-left:40px ;  
-		border:1px gray solid;
-border-radius:10px;
--webkit-box-shadow:0 0 6px gray inset; 
-			
-		}
-		
-
-		#divRoute{
-		   float:right;
-		   width:30%;
-		   height:73% ; 
-		   overflow-y: auto;
-	border:1px gray solid;
-border-radius:10px;
--webkit-box-shadow:0 0 6px gray inset;
-    margin-right:30px ; 
- 
-		 
-		}
-		
-
-		#t{
-		  width:30%;
-		   height:7% ; 
-		   float:right ; 
-		   text-align:center ; 
-		   font-size:30px ; 
-		   font-family:sans serif ; 
-		   color : blue ; 
-		
-		}
-		
-
-		
-	#b{
-	
-				border:1px gray solid;
-border-radius:5px;
--webkit-box-shadow:0 0 6px gray inset;
-  width:150px ; 
-  height:30px ; 
-  font-size:15px ; 
-	
-	}
-			
-	#m{
-	
-				border:1px gray solid;
-border-radius:5px;
--webkit-box-shadow:0 0 6px gray inset;
-  width:150px ; 
-  height:30px ; 
-  font-size:15px ; 
-	margin-left:100px ; 
-	}
-	
-#liv{
- margin-top:45px ;  
- width:30%; 
-  margin-left:350px ; 
- height:70px ; 
-
-}
-		/* Optional: Makes the sample page fill the window. */
-		html, body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-			#div-client{
-		margin-left:60px; 
-		margin-bottom: 60px;
-		}
-				#table-client,.client{
-		    border: 2px solid grey;
-		     padding: 10px;
-		    border-collapse: collapse;
-		}
-		.client{
-			background-color:#f6f6f6;
-		}
-</style>
+  
 </head> 
 <body > 
 <headerPharmacien:headerPharmacien />
-<!-- <div id="div-top">GeoPharma GN</div> -->
 
-   <div id="liv">
-      	<input type="button" value="afficher l'itinéraire" id="b"/>
-      	<input type="button" value="afficher l'itinéraire" id="m"/>
-      	
+    <div class="container">
+       <div class="col-sm-8 livraison">
+    	<button class="btn  btn-lg " id="b">Livraison a 12H</button>
+    	<button class="btn  btn-lg " id="m">Livraison a 18H</button>
       </div>
+    </div>
       
 
 		
-</div>
-		
 	
-	<div id="div-center">
-	  
-		<div id="divMap" ></div> 
-		
-		 <div id="t">
-		  L'itinéraire
-		 </div>
-		<div id="divRoute"></div> 
-
-		
+	<div class="container livraison-pharmacien">
+	  <div class="col-sm-12">
+	     <div class="col-sm-8">
+			<div id="divMap" class="map-chercher" style="width:100%;height:500px;"></div>
+		 </div >
+				
+		<div class="col-sm-4">
+			<div class="panel panel-default itineraire">
+			  <div class="panel-heading">L'itineraire</div>
+			  <div class="panel-body" id="divRoute"></div>
+			</div>
+		</div>
+<!-- 	    <div class=""> -->
+<!-- 	   		<div id="divMap" ></div> -->
+<!-- 	   </div>  -->
+<!-- 		<div id="t"> L'itinéraire</div> -->
+<!-- 		<div id="divRoute"></div>  -->
+	   </div>
 	</div>
 	
 	
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDDkeI-kIm4S1_WR2xFykRqK6XE7HIL_ew&callback=initMap">
-		
-	</script>
+	</script> 
 	<%@ page  import="com.ensa.gestionPharmacie.entity.Pharmacie"%>
 	<%@ page  import="com.ensa.gestionPharmacie.entity.Commande"%>
 	<%@ page  import="java.util.List"%>
@@ -172,23 +70,22 @@ border-radius:5px;
     
 
     
-      <div id="div-client">
-	   <table id="table-client">
+      <div class="container livraison-pharmacien" id="div-client">
+        <h3> Les livraison</h3>
+	   <table class="table table-striped">
 	     <tr>
-	     	
-	     	<th class="client">Client CIN</th>
-	     
-	     	<th class="client">Médicaments commandés</th>
-	     	<th class="client">Date de la commande</th>
+	     	<th>Client CIN</th>
+	     	<th >Médicaments commandés</th>
+	     	<th >Date de la commande</th>
 	     </tr>
 	  <c:set var="myVar" value="" />
 	  <c:set var="myVar2" value="" />
 	  <c:set var="virgule" value="," />
 	  <c:set var="espace" value="" />
 	     <c:forEach items="${listcommande}" var="commande">
-		      <tr class="client">
+		      <tr >
 		      
-		     	<td class="client"><c:out value="${commande.client.CIN}"/></td>
+		     	<td ><c:out value="${commande.client.CIN}"/></td>
 		 	<c:forEach items="${listAll}" var="list">
 		     	
 		     	<c:if test="${commande.client.CIN eq list.client.CIN}">
@@ -215,10 +112,10 @@ border-radius:5px;
 		     	
 		     	</c:forEach>
 		     	
-		     	<td class="client"><c:out value="${myVar}"/></td>
+		     	<td ><c:out value="${myVar}"/></td>
 		     	
 		     	
-		     	<td class="client"><c:out value="${myVar2}"/></td>
+		     	<td ><c:out value="${myVar2}"/></td>
 		     	
 		     	<c:set var="myVar" value="" />
 		     	<c:set var="myVar2" value="" />

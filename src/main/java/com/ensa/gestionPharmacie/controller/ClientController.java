@@ -2,6 +2,7 @@ package com.ensa.gestionPharmacie.controller;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 
 import java.util.Iterator;
@@ -211,6 +212,7 @@ public class ClientController {
 					commande.setQuantite(1);
 					commande.setMedicament(med2.next());
 					commande.setPharmacie(pharm.next());
+					commande.setDateTime(new Date());
 				    commandeServie.ajouter(commande);
 				    //PharmacieMedicamentService.updateQantite(med2.next().getNom(), pharm.next().getIdPharma());
 				}

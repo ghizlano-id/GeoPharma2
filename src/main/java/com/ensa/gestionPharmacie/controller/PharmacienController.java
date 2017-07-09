@@ -1,7 +1,8 @@
 package com.ensa.gestionPharmacie.controller;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,22 +41,19 @@ import com.ensa.gestionPharmacie.service.PharmacienService;
 @Controller
 public class PharmacienController {
 	
-	
-
 	@Autowired
 	private  PharmacienService pharmacienService; 
-@Autowired
-private  CommandeService commandeService; 
-
-   
-@Autowired
-private  Pharmacie_medicamentService pmd; 
-
-@Autowired
- private MedicamentService medicamentService ; 
-
-@Autowired
-private PharmacieService pharmacieService ; 
+	@Autowired
+	private  CommandeService commandeService; 
+	
+	@Autowired
+	private  Pharmacie_medicamentService pmd; 
+	
+	@Autowired
+	 private MedicamentService medicamentService ; 
+	
+	@Autowired
+	private PharmacieService pharmacieService ; 
 	
   //------------------getters & setters ---------------
 
@@ -138,10 +136,10 @@ private PharmacieService pharmacieService ;
 		 	model.setViewName("test3");
 		 return model;
 	}
-	@RequestMapping("/test4")
+	@RequestMapping("/livraison")
 	public ModelAndView l2(){
 		ModelAndView model=new ModelAndView();
-		 	model.setViewName("test4");
+		 	model.setViewName("livraison-pharmacien");
 		 return model;
 	}
 
@@ -281,7 +279,7 @@ private PharmacieService pharmacieService ;
 		int i=pmd.Ajouter(pharmacie_medicament);
 		if(i==1)
 		{   System.out.println("ok");
-	   return new ModelAndView("index"); }
+	   return new ModelAndView("ajouter-medicament"); }
 		else
 			return new ModelAndView("infos") ;
     }
@@ -444,17 +442,22 @@ private PharmacieService pharmacieService ;
 	//--------------------------------Livraison------------------------------------------------------------------------------
 	
 	
-	@RequestMapping(value="/AllClient",method = RequestMethod.GET)
-	public  @ResponseBody List<Commande> getPharmacies(HttpServletRequest req, HttpServletResponse response){
+	@RequestMapping(value="/AllClient/{boutton}",method = RequestMethod.GET)
+	public  @ResponseBody List<Commande> getPharmacies(@PathVariable("boutton") String bouton,HttpServletRequest req, HttpServletResponse response){
 		
 		
 		Pharmacie ph =(Pharmacie)req.getSession().getAttribute("ph") ;
-		 
+		 List<Commande> list= new ArrayList<Commande>() ; 
 		  System.out.println(ph.getIdPharma());
-	
-        List<Commande> list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
-       
-     
+		  System.out.println("le bouton clique est ----->  "+bouton);
+	           if(bouton.equals("b"))
+	           { list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
+                       
+	           }  
+	           if(bouton.equals("m"))
+	           { list=commandeService. getByIdPharma2(ph.getIdPharma()) ; 
+                       
+	           }  
      
           List<Commande> res= new ArrayList<Commande>() ; 
           if(list.size()!=0){
@@ -492,14 +495,33 @@ private PharmacieService pharmacieService ;
 	public  @ResponseBody ModelAndView get(HttpServletRequest req, HttpServletResponse response){
 		
 		
+		   Date date= new Date() ; 
+		   // la date d'ajourd'hui a 12h.00.00
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+  
+
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR, 12);
+        calendar.set(Calendar.AM_PM, Calendar.AM);
+        //
+        Calendar now = Calendar.getInstance();
+        now.setTime(date);
+        
+        
+		
+		
+		
 		Pharmacie ph =(Pharmacie)req.getSession().getAttribute("ph") ;
 		 
 		  System.out.println(ph.getIdPharma());
-	
-        List<Commande> list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
-       
-        Iterator<Commande> it1 = list.iterator();
-        Iterator<Commande> it2 = list.iterator();
+		  List<Commande> list= new ArrayList<Commande>() ; 
+	  if(now.getTimeInMillis()<calendar.getTimeInMillis())
+        list=commandeService. getByIdPharma(ph.getIdPharma()) ; 
+	  else 
+	  list=commandeService.getByIdPharma2(ph.getIdPharma()) ; 
+     
        
      
           List<Commande> res= new ArrayList<Commande>() ; 
@@ -524,7 +546,7 @@ private PharmacieService pharmacieService ;
          req.getSession().setAttribute("listcommande", res);
         req.getSession().setAttribute("listAll", list);
 
-		return new ModelAndView("redirect:/test4");
+		return new ModelAndView("redirect:/livraison");
 		/*Pharmacien harmacien=new Pharmacien();
 			pharmacien.setCIN("EE543");
 			pharmacien.setEmail("ghizo@mail.com");

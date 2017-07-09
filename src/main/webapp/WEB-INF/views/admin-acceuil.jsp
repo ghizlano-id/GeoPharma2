@@ -9,7 +9,7 @@
 <title>Page acceuil</title>
 		<link href="<c:url value="/resources/CSS/style.css" />" rel="stylesheet">
 </head>
-<body>
+<body id="pharmacien-body">
 	<header:header />
 	<section >
 		<div class="col-md-3 ">
