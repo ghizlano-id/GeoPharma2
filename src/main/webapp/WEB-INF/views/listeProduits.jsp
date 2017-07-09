@@ -23,7 +23,7 @@
       <c:forEach items="${listemedicament}" var="medicament">
         <div class="col-md-4">
               <div class="thumbnail">
-                <img src="http://tech.firstpost.com/wp-content/uploads/2014/09/Apple_iPhone6_Reuters.jpg" alt="" class="img-responsive">
+                <img src="resources/img-medicament/${medicament.nom}.jpg" alt="image" class="img-responsive" style="width:100%;min-height:80px;height:200px;">
                 <div class="caption">
                   <h4 class="pull-right">${medicament.prix} DH</h4>
                   <h4 class="pre-cost">${medicament.nom}</h4>

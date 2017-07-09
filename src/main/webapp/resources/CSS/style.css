@@ -157,3 +157,15 @@ section {
 	text-decoration: underline; 
 	color: #428bca;
 }
+.medica{
+	background-color: #548426;
+    border-color: #548426;
+    outline:none !important;
+}
+.medica:hover{
+	background-color: #548426;
+    border-color: white;
+}
+.thumbnail{
+	background-color: #e5e3e3;
+}

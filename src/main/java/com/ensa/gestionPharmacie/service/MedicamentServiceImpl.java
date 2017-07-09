@@ -50,13 +50,13 @@ public class MedicamentServiceImpl implements MedicamentService {
 		return medicamentDao.AllMedicamentDisp();
 	}
 
-	@Override
+	
 	public List<Medicament> getMedByPharma(int idPharma) {
 		// TODO Auto-generated method stub
 		return medicamentDao.getMedByPharma(idPharma);
 	}
 
-	@Override
+	
 	public List<Pharmacie_medicament> getMedByPharma2(int idPharma) {
 		// TODO Auto-generated method stub
 		return medicamentDao.getMedByPharma2(idPharma);

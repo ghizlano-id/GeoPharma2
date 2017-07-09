@@ -53,7 +53,28 @@
   						
   					});   					
   			}
-  			
+  	 //---------------verifier la confirmation des methode----
+  			/*function verifier(){
+  				$.ajax({
+  					type: "POST",
+  					url: "http://localhost:8080/gestionPharmacie/verifier",
+  					contentType: "application/json",
+  					dataType: 'json',
+  					cache: false,
+  					success: function(response){
+  						if(response[0].n==0){
+  							alert(response[0].n);
+  							//$('#verifier').html("Panier vide");
+  						}
+  						else
+  							$('#verifier').html("Success");
+  					},
+  					error:function(){
+  						alert("error");
+  					}
+  					
+  				});
+  			}*/
   	//-------------confirmer une commande--------------	
   	
 

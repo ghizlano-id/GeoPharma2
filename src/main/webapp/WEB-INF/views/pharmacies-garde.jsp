@@ -32,7 +32,7 @@
 				</div >
 				
 				<div class="col-sm-4">
-					<button type="button" class="btn btn-info btn-block btn-lg"><span class="glyphicon glyphicon-map-marker"></span> Pharmacie à proximité </button>
+					<button type="button" class="btn btn-info btn-block btn-lg medica"> Pharmacie à proximité <span class="glyphicon glyphicon-map-marker fa-fw"></span></button>
 					<div class="panel panel-default"  style="margin-top:10px;">
 					  <div class="panel-heading">Panel Heading</div>
 					  <div class="panel-body">Panel Content</div>

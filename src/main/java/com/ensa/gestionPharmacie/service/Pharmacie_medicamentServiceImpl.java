@@ -42,8 +42,12 @@ public class Pharmacie_medicamentServiceImpl  implements Pharmacie_medicamentSer
 
 
 	public List<Pharmacie> getPharm_med(String med) {
-		// TODO Auto-generated method stub
 		return pmd.getPharm_med(med) ; 
+	}
+
+	public void updateQantite(String idMed, int idPharma) {
+		pmd.updateQantite(idMed, idPharma);
+		
 	}
 	
 	

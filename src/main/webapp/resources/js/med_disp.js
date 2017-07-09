@@ -116,7 +116,7 @@ $(document).ready(function(){
 				service.getDistanceMatrix({
 					origins : [mapos], 
 					destinations:tab, 
-					travelMode: 'DRIVING',
+					travelMode: 'WALKING',
 					unitSystem: google.maps.UnitSystem.METRIC
 					//avoidHighways:Boolean, 
 					//avoidTolls:Boolean, 

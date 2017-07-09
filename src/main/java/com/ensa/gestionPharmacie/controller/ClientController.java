@@ -29,6 +29,7 @@ import com.ensa.gestionPharmacie.entity.Pharmacie;
 import com.ensa.gestionPharmacie.service.ClientService;
 import com.ensa.gestionPharmacie.service.CommandeService;
 import com.ensa.gestionPharmacie.service.MedicamentService;
+import com.ensa.gestionPharmacie.service.Pharmacie_medicamentService;
 
 
 
@@ -41,8 +42,16 @@ public class ClientController {
 	private ClientService clientService;
 	@Autowired
 	private CommandeService commandeServie;
+	@Autowired
+	private Pharmacie_medicamentService PharmacieMedicamentService;
 
 
+	public Pharmacie_medicamentService getPharmacieMedicamentService() {
+		return PharmacieMedicamentService;
+	}
+	public void setPharmacieMedicamentService(Pharmacie_medicamentService pharmacieMedicamentService) {
+		PharmacieMedicamentService = pharmacieMedicamentService;
+	}
 	public MedicamentService getMedicamentService() {
 		return medicamentService;
 	}
@@ -132,14 +141,27 @@ public class ClientController {
 			@SuppressWarnings("unchecked")
 			List<String> idMeds=(List<String>)session.getAttribute("idMeds") ;
 			
-			System.out.println(nomM);
 			idMeds.remove(nomM);
-			System.out.println("done !");
 
 			return new ModelAndView("redirect:/monPanier2");
 			
 		}
-	
+	// Verifier la confirmation des commandes
+		@RequestMapping(value="/verifier",method = RequestMethod.POST)
+		public  @ResponseBody int verifier(HttpServletRequest request){
+			int n=1;
+			HttpSession session=request.getSession();
+			@SuppressWarnings("unchecked")
+			List<Pharmacie> prochesPharmacies=(List<Pharmacie>) session.getAttribute("prochesPharmacies");
+			@SuppressWarnings("unchecked")
+			List<String> idMeds = (List<String>)session.getAttribute("idMeds");
+			
+			if(idMeds.size()==0|| prochesPharmacies.size()==0){
+				n=0;
+			}
+			return n;
+			
+		} // ?????????????
 		//****ajouter les commandes*********
 		@RequestMapping(value="/ajouter",method = RequestMethod.POST)
 		public ModelAndView AjouterCommande(@ModelAttribute("client")Client client,double x,double y,HttpServletRequest request){
@@ -151,11 +173,17 @@ public class ClientController {
 			@SuppressWarnings("unchecked")
 			List<String> idMeds = (List<String>)session.getAttribute("idMeds");
 			
-			if(idMeds.size()==0|| prochesPharmacies.size()==0){
+			if(idMeds.size()==0){
 				model=new ModelAndView("monPanier","command",client);
 				model.addObject("erreur","le panier est vide");
 				return model;
 			}
+			else if(idMeds.size()!=prochesPharmacies.size()){
+				model=new ModelAndView("monPanier","command",client);
+				model.addObject("erreur","Veuillez confirmer tous les médicaments ajoutés au panier");
+				return model;
+			}
+				
 			else{
 			Medicament medicament=new Medicament();
 			List<Medicament> medicaments= new ArrayList<Medicament>() ;
@@ -184,7 +212,14 @@ public class ClientController {
 					commande.setMedicament(med2.next());
 					commande.setPharmacie(pharm.next());
 				    commandeServie.ajouter(commande);
+				    //PharmacieMedicamentService.updateQantite(med2.next().getNom(), pharm.next().getIdPharma());
 				}
+			 ListIterator<Medicament> med3 = medicaments.listIterator();
+			 ListIterator<Pharmacie> pharm3 = prochesPharmacies.listIterator();
+			 while(med3.hasNext()){
+				    PharmacieMedicamentService.updateQantite(med3.next().getNom(), pharm3.next().getIdPharma());
+				}
+			 
 			 session.setAttribute("idMeds", null);
 			 session.setAttribute("prochesPharmacies", null);
 			  
@@ -197,6 +232,15 @@ public class ClientController {
 		@RequestMapping(value="/PharmaciesGarde")
 		public ModelAndView pharmacices(){
 			return new  ModelAndView("pharmacies-garde") ;
+		}
+		// Chercher un medicment
+		@RequestMapping(value="/chercherMedicament")
+		public ModelAndView medicamentsDisp(){
+			ModelAndView model=new  ModelAndView("chercher-medicament");
+			List<Medicament> list=medicamentService.All() ;
+			model.addObject("medicaments", list);
+			
+			return  model;
 		}
 		
 		

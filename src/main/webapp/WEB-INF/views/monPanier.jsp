@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="principalHeader" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="principalFooter" tagdir="/WEB-INF/tags" %>
-
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -25,11 +24,11 @@
         <div class="col-sm-12">
             <legend>Acheter medicaments:</legend>
         </div>
-        <c:if test="${erreur ne null }" >
-	        <div class="col-sm-12 alert alert-danger"">
-	             panier vide !
+           <c:if test="${erreur ne null }" >
+	        <div class="col-sm-12 alert alert-danger " id="verifier">
+	             <strong>${erreur}</strong>
 	        </div>
-        </c:if>
+		      </c:if>
         
         <!-- formulaire -->
         <div class="col-sm-5">
@@ -39,50 +38,50 @@
                 
                 <form:form action="ajouter" command="client">
                     <div class="form-group">
-                        <label for="concept" class="col-sm-3 control-label">Nom :</label>
+                        <label for="concept" class="col-sm-3 control-label" >Nom :</label>
                         <div class="col-sm-9">
-                            <form:input type="text" class="form-control"  path="nom"/>
+                            <form:input type="text" class="form-control"  path="nom" required="required"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Prenom :</label>
                         <div class="col-sm-9">
-                            <form:input type="text" class="form-control" path="prenom"/>
+                            <form:input type="text" class="form-control" path="prenom" required="required"/>
                         </div>
                     </div>   
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">CIN :</label>
                         <div class="col-sm-9">
-                            <form:input type="text" class="form-control"  path="CIN"/>
+                            <form:input type="text" class="form-control"  path="CIN" required="required"/>
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="description" class="col-sm-3 control-label">Tel :</label>
                         <div class="col-sm-9">
-                            <form:input type="text" class="form-control"  path="tel"/>
+                            <form:input type="text" class="form-control"  path="tel" required="required"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Email :</label>
+                        <label  class="col-sm-3 control-label">Email :</label>
                         <div class="col-sm-9">
-                            <form:input type="text" class="form-control"  path="email"/>
+                            <form:input type="email" class="form-control"  path="email"/>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Laltitude:</label>
+                        <label  class="col-sm-3 control-label">Laltitude:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="lat" name="x"  />
+                            <input type="text" class="form-control" id="lat" name="x" readonly="readonly" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="description" class="col-sm-3 control-label">Longitude:</label>
+                        <label class="col-sm-3 control-label">Longitude:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="lng" name="y" />
+                            <input type="text" class="form-control" id="lng" name="y" readonly="readonly"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-12 text-right">
-                            <button type="submit" class="btn btn-default preview-add-button">
+                            <button type="submit" class="btn btn-default preview-add-button medica" onClick="verifier()">
                                 <span class="glyphicon glyphicon-plus"></span> Acheter
                             </button>
                         </div>

@@ -13,6 +13,7 @@ public interface Pharmacie_medicamentDao {
 	void update(Pharmacie_medicament pm) ; 
 	List<Pharmacie_medicament>  getPharmacies_medicament(String idMedica);
 	public List<Pharmacie> getPharm_med(String med) ; 	
+	void updateQantite(String idMed,int idPharma);
 	
 	
 	

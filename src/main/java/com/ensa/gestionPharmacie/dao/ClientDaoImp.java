@@ -16,7 +16,7 @@ public class ClientDaoImp implements ClientDao{
 
 	@Transactional
 	public void ajouterClient(Client client) {
-		getSessionFactory().getCurrentSession().save(client);
+		getSessionFactory().getCurrentSession().saveOrUpdate(client);
 
 	}
 	@Transactional

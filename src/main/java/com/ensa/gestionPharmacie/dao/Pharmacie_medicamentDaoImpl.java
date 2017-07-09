@@ -1,6 +1,7 @@
 package com.ensa.gestionPharmacie.dao;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.hibernate.Session;
@@ -85,6 +86,26 @@ public class Pharmacie_medicamentDaoImpl implements Pharmacie_medicamentDao  {
 			
 			
 			return l;
+		}
+		
+		@Transactional
+		public void updateQantite(String idMed, int idPharma) {
+			key2 key=new key2();
+			Pharmacie p=new Pharmacie();
+			Medicament m=new Medicament();
+			double n=0;
+			 	
+			   p.setIdPharma(idPharma);
+				m.setNom(idMed);
+			
+				key.setMedicament(m);
+				key.setPharmacie(p);
+				
+			//String q="form Pharmacie_medicament as pm where pm.medicament.nom='"+idMed+"' and pm.pharmacie.idPharma="+idPharma;
+		    Pharmacie_medicament pm=(Pharmacie_medicament) getSessionFactory().getCurrentSession().get(Pharmacie_medicament.class,key);
+
+			n=pm.getQuantite();
+			pm.setQuantite(n-1);
 		}
 		
 		
