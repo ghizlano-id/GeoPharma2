@@ -313,21 +313,41 @@ private PharmacieService pharmacieService ;
 	//////////////////////////////////////////////////////////////////////////////////////
 	
 	@RequestMapping(value="/add_med",method=RequestMethod.GET)
-	public ModelAndView login5(){  //int id
+	public ModelAndView login5(HttpServletRequest req){  //int id
 		
 		
 		// System.out.println(id);
 		 Pharmacie_medicament pharmacie_medicament= new Pharmacie_medicament() ; 
+			HttpSession session = req.getSession();
+			Pharmacie p2=(Pharmacie)session.getAttribute("ph")  ; 
 		 
       ModelAndView model=new ModelAndView("ajouter-medicament","command",pharmacie_medicament);
 		//model.addObject("id", id) ;
 		List<Medicament> l=medicamentService.All() ; 
-		List<String> l2= new ArrayList<String>() ; 
+		List<Medicament> l3=medicamentService.getMedByPharma(p2.getIdPharma()) ;
+		
+		
+		List<String> l4= new ArrayList<String>() ; 
 		for(Medicament m : l)
 		{
-			l2.add(m.getNom()) ; 
+			l4.add(m.getNom()) ; 
 		}
-		model.addObject("listmed", l2) ;
+		
+		List<String> l5= new ArrayList<String>() ; 
+		for(Medicament m : l3)
+		{
+			l5.add(m.getNom()) ; 
+		}
+		
+		l4.removeAll(l5) ; 
+		
+		for(String m : l4)
+		{
+			System.out.println(m);
+		}
+		
+           
+		model.addObject("listmed", l4) ;
 		 	
 		 return model;
 	}
