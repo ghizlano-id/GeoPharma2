@@ -10,4 +10,5 @@ public interface CommandeService {
 	public void ajouter(Commande commande);
 
 	public List<Commande> getByIdPharma(int id) ; 
+	public List<Commande> getByIdPharma2(int id)   ; 
 }

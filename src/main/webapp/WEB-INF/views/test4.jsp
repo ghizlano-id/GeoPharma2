@@ -128,8 +128,8 @@ border-radius:5px;
 <!-- <div id="div-top">GeoPharma GN</div> -->
 
    <div id="liv">
-      	<input type="button" value="afficher l'itinéraire" id="b"/>
-      	<input type="button" value="afficher l'itinéraire" id="m"/>
+      	<input type="button" value="Livraison a 12H" id="b"/>
+      	<input type="button" value="Livraison a 18H" id="m"/>
       	
       </div>
       
