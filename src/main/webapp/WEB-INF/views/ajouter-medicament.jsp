@@ -31,7 +31,7 @@
 		    <legend><h1>Pharmacien</h1></legend> 
 		    
 		     <div  class="form-group row">
-		      <label class="col-md-offset-1 col-md-2 control-label"  required="required">Quantité :</label>
+		      <label class="col-md-offset-1 col-md-2 control-label"  required="required">Nom de médicament:</label>
 		      <div class="col-md-6">
 		        <form:select path="medicament.nom" class="form-control">
 						   <form:options items="${listmed}"></form:options>

@@ -149,7 +149,11 @@ section {
 	margin-bottom: 60px;
     margin-top: 60px;
 }
-
+.control-label{
+	
+	width:190px ; 
+	
+}
 .page div h3{
 	color:#548426
 }
